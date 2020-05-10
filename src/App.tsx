@@ -11,9 +11,10 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import HomePage from './pages/HomePage';
+import TransactionsPage from './pages/TransactionsPage';
+import BudgetPage from './pages/BudgetPage';
+import AnalysisPage from './pages/AnalysisPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,23 +40,27 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/transactions" component={TransactionsPage} exact={true} />
+          <Route path="/analysis" component={AnalysisPage} exact={true} />
+          <Route path="/budget" component={BudgetPage} exact={true} />
+          <Route path="/" component={HomePage} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
+          <IonTabButton tab="home" href="/home">
             <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+            <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
+          <IonTabButton tab="transactions" href="/transactions">
             <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonLabel>Transactions</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+          <IonTabButton tab="analysis" href="/analysis">
             <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonLabel>Analysis</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="budget" href="/budget">
+            <IonIcon icon={square} />
+            <IonLabel>Set Budget</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
