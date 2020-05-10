@@ -35,37 +35,70 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/transactions" component={TransactionsPage} exact={true} />
-          <Route path="/analysis" component={AnalysisPage} exact={true} />
-          <Route path="/budget" component={BudgetPage} exact={true} />
-          <Route path="/" component={HomePage} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={triangle} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="transactions" href="/transactions">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Transactions</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="analysis" href="/analysis">
-            <IonIcon icon={square} />
-            <IonLabel>Analysis</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="budget" href="/budget">
-            <IonIcon icon={square} />
-            <IonLabel>Set Budget</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+/* mobx global state */
+import { useLocalStore, useObserver } from 'mobx-react'
+
+
+interface contextInterface {
+  transactions: string[],
+  budget: { income: number, reoccuringExpenses: number, savingPercentage: number }
+}
+
+const defaultContext: contextInterface = {
+  transactions: ['rest'],
+  budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0 }
+}
+
+export const StoreContext = React.createContext(defaultContext);
+
+const StoreProvider = ({ children }: any) => {
+  const store = useLocalStore(() => ({
+    transactions: ['adsfasdf'],
+    budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0 }
+  }))
+
+  return (
+    <StoreContext.Provider value={store}> {children}</StoreContext.Provider >
+  )
+}
+
+
+const App: React.FC = () => {
+  return (
+    <StoreProvider>
+      <IonApp>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route path="/transactions" component={TransactionsPage} exact={true} />
+              <Route path="/analysis" component={AnalysisPage} exact={true} />
+              <Route path="/budget" component={BudgetPage} exact={true} />
+              <Route path="/" component={HomePage} />
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="home" href="/home">
+                <IonIcon icon={triangle} />
+                <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="transactions" href="/transactions">
+                <IonIcon icon={ellipse} />
+                <IonLabel>Transactions</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="analysis" href="/analysis">
+                <IonIcon icon={square} />
+                <IonLabel>Analysis</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="budget" href="/budget">
+                <IonIcon icon={square} />
+                <IonLabel>Set Budget</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </IonApp>
+    </StoreProvider>
+
+  )
+};
 
 export default App;
