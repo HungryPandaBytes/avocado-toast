@@ -1,0 +1,7 @@
+{
+  "name": "avocado-toast",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
