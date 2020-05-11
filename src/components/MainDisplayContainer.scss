@@ -1,10 +1,13 @@
 #main-display-container{
+ 
+ h1{
+  margin: 0 0 1% 5%;
+  display: inline;
+ }
+
   margin-top: 5%;
   font-size: 16px;
 
-  h1{
-    margin: 0 0 0 5%;
-  }
 
   .display-container{
     height: 225px;
@@ -17,13 +20,11 @@
   }
 
   .display-container--positive{
-    // color: var(--ion-color-primary)
+    
   }
   
   .display-container--negative{
-    h1{
-      color: #654321; 
-    }
+     
   }
   
   .mascot-wrapper{
@@ -39,13 +40,10 @@
     width: 100%;
     position: absolute;
     bottom:40%;
-
     h1{
       color: white;
-      margin: 0 0 1% 5%;
-      display: inline;
+     
     }
-
     p{
       text-align: right;
       margin: 1% 5% 0 0;
