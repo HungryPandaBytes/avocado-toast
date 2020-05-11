@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonList } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonList, IonButton } from '@ionic/react';
 import './HomePage.scss';
 import { StoreContext } from '../App'
 
@@ -28,9 +28,11 @@ const HomePage: React.FC = () => {
               <h2>Daily</h2>
               <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.</p>
             </div>
+
             <IonList>
-              {store.transactions.map(transaction => <li>{transaction}</li>)}
+              {/* {store.transactions.map(transaction => <li>{transaction}</li>)} */}
             </IonList>
+
           </IonSlide>
           <IonSlide>
             <div style={{ textAlign: "left", alignSelf: "flex-start" }}>
