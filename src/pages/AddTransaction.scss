@@ -41,7 +41,6 @@
     background: whitesmoke;
     box-shadow: 0px 0 10px rgba(0, 0, 0, 0.4);
     min-height: 100px;
-    bottom: 10%;
     padding: 10px 10px 0 10px;;
     width:100%;
     border-top-left-radius: 25px;
@@ -51,7 +50,7 @@
   .category-picker-container{
     background: whitesmoke;
     color: var(--ion-color-primary);
-    font-size: 0.6em;
+    font-size: 0.7em;
     width: 100%
   }
   .input-container{
@@ -87,7 +86,7 @@
   display: block;
   width:100%;
   background: none;
-  color: white;
+  color: var(--ion-color-primary);
   padding: 0;
   text-align: center;
  }

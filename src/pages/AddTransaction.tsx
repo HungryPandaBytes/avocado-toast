@@ -141,8 +141,8 @@ const AddTransaction = () => {
                                 <IonSelectOption value="Leisure">Leisure</IonSelectOption>
                             </IonSelect>
                         </IonItem>
-                        <div className='expense-typepad-container'>
-                            <div>
+                        <div className='expense-typepad-container '>
+                            <div >
                                 <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">1</IonButton>
                             </div>
                             <div>
