@@ -1,0 +1,9 @@
+.display-container--positive{
+  height: 20%;
+  width: 100%;
+  background: var(--ion-color-secondary);
+}
+
+.display-container{
+
+}
