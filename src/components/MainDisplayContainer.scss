@@ -5,24 +5,24 @@
     margin: 0 0 0 5%;
   }
 
-  .display-container--positive{
+  .display-container{
     height: 225px;
     width: 100%;
     margin-top: 10%;
     border-radius: 25px;
-    background: var(--ion-color-secondary);
-    color: white;
     position: relative;
+    background: var(--ion-color-secondary);
+  }
+
+  .display-container--positive{
+    color: var(--ion-color-primary)
   }
   
   .display-container--negative{
-    height: 225px;
-    width: 100%;
-    margin-top: 10%;
-    border-radius: 25px;
-    background: var(--ion-color-secondary);
-    color: white;
-    position: relative;
+    h1{
+      color: #654321; 
+    }
+    color: #654321
   }
   
   .mascot-wrapper{
@@ -61,6 +61,13 @@
 
   .progress-bar-green{
     background: var(--ion-color-primary);
+    border-radius: 8px;
+    height:24px;
+    width:60%
+  }
+
+  .progress-bar-brown{
+    background: #654321;
     border-radius: 8px;
     height:24px;
     width:60%
