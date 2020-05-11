@@ -17,26 +17,21 @@ const HomePage: React.FC = () => {
   return (
     <IonPage id="home-page">
       <IonContent>
-        <IonSlides pager={true} options={slideOpts} style={{ height: "100%", margin: "6%" }}>
-          <IonSlide>
-            <div style={{ textAlign: "left", alignSelf: "flex-start" }}>
-              <h2>Monthly</h2>
-              <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.</p>
-            </div>
-          </IonSlide>
+        <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
           <IonSlide>
             <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <MainDisplayContainer period="Weekly" balance={234} />
             </div>
+          </IonSlide>
+          <IonSlide>
+            <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+              <MainDisplayContainer period="Daily" balance={234} />
+            </div>
 
           </IonSlide>
           <IonSlide>
-            <div style={{ textAlign: "left", alignSelf: "flex-start" }}>
-              <h2>Daily</h2>
-              <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.</p>
-              <IonList>
-                {store.transactions.map(transaction => <li>{transaction}</li>)}
-              </IonList>
+            <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+              <MainDisplayContainer period="Monthly" balance={234} />
             </div>
           </IonSlide>
         </IonSlides>
