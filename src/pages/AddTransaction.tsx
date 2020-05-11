@@ -113,7 +113,7 @@ const AddTransaction = () => {
             <IonContent className='expense-view'>
                 <div className='expense-view'>
                     <div className='expense-amount'>{amount && <h2>{balance}</h2>}
-                        {(amount && checked) && <div className='distribution-amount'> <h5>${distributionAmt}/day over 30 days</h5></div>}
+                        {(amount && checked) && <div className='distribution-amount'> <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day over 30 days</h5></div>}
                     </div>
 
                     <div className='distribution-toggle'>
