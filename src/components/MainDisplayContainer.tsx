@@ -12,8 +12,8 @@ interface MainDisplayContainerProps {
 const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, balance, spent }) => {
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
   const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-brown"
-  const mascot = balance > 0 ? avocadoLogo : burntToastLogo
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
+  const mascot = balance > 0 ? avocadoLogo : burntToastLogo
 
 
   return (
