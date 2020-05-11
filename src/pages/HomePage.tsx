@@ -6,7 +6,7 @@ import MainDisplayContainer from '../components/MainDisplayContainer'
 
 
 const slideOpts = {
-  initialSlide: 1,
+  initialSlide: 0,
   loop: true,
   speed: 200
 };
@@ -20,14 +20,13 @@ const HomePage: React.FC = () => {
         <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
           <IonSlide>
             <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
-              <MainDisplayContainer period="Weekly" balance={234} />
+              <MainDisplayContainer period="Daily" balance={234} />
             </div>
           </IonSlide>
           <IonSlide>
             <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
-              <MainDisplayContainer period="Daily" balance={234} />
+              <MainDisplayContainer period="Weekly" balance={234} />
             </div>
-
           </IonSlide>
           <IonSlide>
             <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>

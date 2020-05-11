@@ -37,6 +37,11 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* Global css */
+import './theme/global.css';
+
+
+
 const App: React.FC = () => {
   return (
     <StoreProvider>

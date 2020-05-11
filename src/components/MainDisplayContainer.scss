@@ -1,0 +1,37 @@
+#main-display-container{
+
+  h1{
+    margin-left: 5%;
+  }
+  .display-container--positive{
+    height: 200px;
+    width: 100%;
+    margin-top: 10%;
+    border-radius: 25px;
+    background: var(--ion-color-secondary);
+    color: white;
+    position: relative;
+  }
+  
+  .display-container--negative{
+    height: 20%;
+    width: 100%;
+    background: var(--ion-color-secondary);
+  }
+  
+  .mascot-wrapper{
+    position: absolute;
+    top: -20%;
+    right: 5%;
+    height: 180px;
+    width:180px;
+  }
+  
+  .chart-wrapper{
+    position: absolute;
+    bottom:20%;
+  }
+  
+}
+
+
