@@ -1,10 +1,11 @@
 #main-display-container{
 
   h1{
-    margin-left: 5%;
+    margin: 0 0 0 5%;
   }
+
   .display-container--positive{
-    height: 200px;
+    height: 225px;
     width: 100%;
     margin-top: 10%;
     border-radius: 25px;
@@ -14,23 +15,58 @@
   }
   
   .display-container--negative{
-    height: 20%;
+    height: 225px;
     width: 100%;
+    margin-top: 10%;
+    border-radius: 25px;
     background: var(--ion-color-secondary);
+    color: white;
+    position: relative;
   }
   
   .mascot-wrapper{
     position: absolute;
-    top: -20%;
-    right: 5%;
-    height: 180px;
-    width:180px;
+    top: -30%;
+    right: 0;
+    height: 200px;
+    width: 200px;
+  }
+
+  .progress-bar-wrapper{
+    height:24px;
+    width: 100%;
+    position: absolute;
+    bottom:40%;
+
+    h1{
+      margin: 0 0 1% 5%;
+      display: inline;
+    }
+
+    p{
+      font-size: 18px;
+      text-align: right;
+      margin: 1% 5% 0 0;
+    }
+  }
+
+  .progress-bar-light-grey{
+    margin-left: 5%;
+    background: whitesmoke;
+    border-radius: 8px;
+    height:24px;
+    width:90%
+  }
+
+  .progress-bar-green{
+    background: var(--ion-color-primary);
+    border-radius: 8px;
+    height:24px;
+    width:60%
   }
   
-  .chart-wrapper{
-    position: absolute;
-    bottom:20%;
-  }
+
+
   
 }
 

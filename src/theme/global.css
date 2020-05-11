@@ -2,3 +2,8 @@ h1{
     font-size: 45px;
     color:var(--ion-color-primary);
   }
+
+
+h3{
+    font-size: 30px;
+  }
