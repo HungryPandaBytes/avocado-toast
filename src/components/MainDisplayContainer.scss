@@ -12,17 +12,17 @@
     border-radius: 25px;
     position: relative;
     background: var(--ion-color-secondary);
+    color: white;
   }
 
   .display-container--positive{
-    color: var(--ion-color-primary)
+    // color: var(--ion-color-primary)
   }
   
   .display-container--negative{
     h1{
       color: #654321; 
     }
-    color: #654321
   }
   
   .mascot-wrapper{
@@ -63,14 +63,12 @@
     background: var(--ion-color-primary);
     border-radius: 8px;
     height:24px;
-    width:60%
   }
 
   .progress-bar-brown{
     background: #654321;
     border-radius: 8px;
     height:24px;
-    width:60%
   }
   
 

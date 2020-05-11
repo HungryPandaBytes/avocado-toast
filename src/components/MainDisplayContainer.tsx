@@ -13,6 +13,9 @@ const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, bal
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
   const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-brown"
   const mascot = balance > 0 ? avocadoLogo : burntToastLogo
+  const progressBarPercentage = spent / (balance + spent)
+
+  console.log(progressBarPercentage)
 
   return (
     <div id="main-display-container">
@@ -24,7 +27,7 @@ const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, bal
         <div className='progress-bar-wrapper'>
           <h1>${spent}</h1><p style={{ display: "inline" }}> spent</p>
           <div className='progress-bar-light-grey'>
-            <div className={progressbarStyling}></div>
+            <div className={progressbarStyling} style={{ width: `${progressBarPercentage * 100}%` }}></div>
           </div>
           <p>${balance} left</p>
         </div>
