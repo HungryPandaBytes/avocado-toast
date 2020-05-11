@@ -3,7 +3,10 @@ h1{
     color:var(--ion-color-primary);
   }
 
-
 h3{
     font-size: 30px;
   }
+
+p {
+  font-size: 16px;
+}
