@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonContent, IonPage, IonSlides, IonSlide, IonList, IonButton } from '@ionic/react';
 import './HomePage.scss';
-import { StoreContext } from '../App'
+import { StoreContext } from '../store'
 
 
 const slideOpts = {
@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
             </div>
 
             <IonList>
-              {/* {store.transactions.map(transaction => <li>{transaction}</li>)} */}
+              {store.transactions.map(transaction => <li>{transaction}</li>)}
             </IonList>
 
           </IonSlide>

@@ -11,6 +11,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
+import { StoreProvider } from './store';
 import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
 import BudgetPage from './pages/BudgetPage';
@@ -35,34 +36,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
-/* mobx global state */
-import { useLocalStore, useObserver } from 'mobx-react'
-
-
-interface contextInterface {
-  transactions: string[],
-  budget: { income: number, reoccuringExpenses: number, savingPercentage: number }
-}
-
-const defaultContext: contextInterface = {
-  transactions: ['rest'],
-  budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0 }
-}
-
-export const StoreContext = React.createContext(defaultContext);
-
-const StoreProvider = ({ children }: any) => {
-  const store = useLocalStore(() => ({
-    transactions: ['adsfasdf'],
-    budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0 }
-  }))
-
-  return (
-    <StoreContext.Provider value={store}> {children}</StoreContext.Provider >
-  )
-}
-
 
 const App: React.FC = () => {
   return (
