@@ -24,7 +24,6 @@ const AddTransaction = () => {
     }
 
     function numpadClickHandler(event: MouseEvent<HTMLIonButtonElement>) {
-        console.log(event)
         const numStr: string = event.currentTarget.innerText
         displayAmount(numStr)
     }
@@ -49,11 +48,10 @@ const AddTransaction = () => {
     function deleteClickHandler() {
         const lastIdx = amount.length - 1
         const tempAmount = amount.slice(0, lastIdx)
-        // takes care of delete after toggle distribution to true
         setChecked(false)
         setdistributionAmt("")
         setAmount(tempAmount)
-        setDisplayBalance(`$ ${tempAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+        setDisplayBalance(parseInt(tempAmount).toLocaleString(navigator.language, { minimumFractionDigits: 0 }) + "")
     }
 
     function saveClickHandler(event: MouseEvent<HTMLIonButtonElement>, callback: any) {
@@ -71,7 +69,6 @@ const AddTransaction = () => {
             iconName: "basket-outline"
         }
         event.preventDefault();
-        // createTransaction(newTransaction)
         setAmount("");
         setDisplayBalance("");
         setdistributionAmt("")
@@ -186,7 +183,6 @@ const AddTransaction = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </IonContent>
         </IonPage >
