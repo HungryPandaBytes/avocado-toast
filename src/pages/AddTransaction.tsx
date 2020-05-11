@@ -10,7 +10,7 @@ const AddTransaction = () => {
 
     const todayTimeStamp = new Date().toISOString();
 
-    const [balance, setBalanceWithComma] = useState("");
+    const [displayBalance, setDisplayBalance] = useState("");
     const [amount, setAmount] = useState("");
     const [distributionAmt, setdistributionAmt] = useState("");
     const [category, setCategory] = useState("General");
@@ -30,15 +30,15 @@ const AddTransaction = () => {
     }
 
     function displayAmount(numStr: string) {
+
         let tempAmount: string;
-        // ignore if the first num is zero & ignore if the amount is more than 9 digits 
         if (amount.length < 12 && !(amount.length === 0 && numStr === "0")) {
             tempAmount = amount + numStr
         } else {
             tempAmount = amount
         }
         setAmount(tempAmount)
-        setBalanceWithComma(`$ ${tempAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+        setDisplayBalance(parseInt(tempAmount).toLocaleString(navigator.language, { minimumFractionDigits: 0 }) + "")
     }
 
     function distributionHandler() {
@@ -53,7 +53,7 @@ const AddTransaction = () => {
         setChecked(false)
         setdistributionAmt("")
         setAmount(tempAmount)
-        setBalanceWithComma(`$ ${tempAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
+        setDisplayBalance(`$ ${tempAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
     }
 
     function saveClickHandler(event: MouseEvent<HTMLIonButtonElement>, callback: any) {
@@ -73,7 +73,7 @@ const AddTransaction = () => {
         event.preventDefault();
         // createTransaction(newTransaction)
         setAmount("");
-        setBalanceWithComma("");
+        setDisplayBalance("");
         setdistributionAmt("")
         callback();
     }
@@ -112,7 +112,7 @@ const AddTransaction = () => {
 
             <IonContent className='expense-view'>
                 <div className='expense-view'>
-                    <div className='expense-amount'>{amount && <h2>{balance}</h2>}
+                    <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
                         {(amount && checked) && <div className='distribution-amount'> <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day over 30 days</h5></div>}
                     </div>
 
