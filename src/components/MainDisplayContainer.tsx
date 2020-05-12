@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainDisplayContainer.scss';
-import avocadoLogo from '../theme/avocado.png'
+import avocadoLogo from '../theme/ketnip.png'
 import burntToastLogo from '../theme/burnt-toast.png'
 
 interface MainDisplayContainerProps {
