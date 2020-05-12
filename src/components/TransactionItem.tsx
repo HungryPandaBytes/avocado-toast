@@ -42,7 +42,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           icon={getIcon(transaction.iconName)}
           key={transaction.id}
         ></IonIcon>
-        <IonLabel style={{ "border-left": "2px", "padding-left": "4%" }}
+        <IonLabel style={{ borderLeft: "2px", paddingLeft: "4%" }}
         >
           <h2 style={{ color: 'var(--ion-color-primary)' }} >{transaction.description}</h2>
           <IonNote>
