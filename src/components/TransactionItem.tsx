@@ -36,8 +36,10 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   return (
 
     <IonItemSliding ref={ionItemSlidingRef} key={transaction.id}>
-      <IonItem lines="none" style={{ "border-left": "2px", "padding-left": "2%" }}>
-        <IonIcon
+      <IonItem lines="none" style={{
+        borderLeft: "2px", paddingLeft: "2%"
+      }}>
+        < IonIcon
           color={transactionIconColor}
           icon={getIcon(transaction.iconName)}
           key={transaction.id}
@@ -58,7 +60,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
             minimumFractionDigits: 0,
           })}
         </IonLabel>
-      </IonItem>
+      </IonItem >
       <IonItemOptions>
         <IonItemOption
           onClick={ignoreHandler}
