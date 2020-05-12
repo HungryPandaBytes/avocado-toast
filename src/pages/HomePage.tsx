@@ -5,6 +5,7 @@ import { StoreContext } from '../store'
 import MainDisplayContainer from '../components/MainDisplayContainer'
 import { chevronUpOutline } from 'ionicons/icons';
 import TransactionItem from '../components/TransactionItem';
+import PreviewTransactions from '../components/PreviewTransactions';
 
 const transactions = [{ id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }]
 
@@ -17,10 +18,6 @@ const slideOpts = {
 
 const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
-  const headerRef = useRef<HTMLIonListHeaderElement>(null);
-  const transactionListRef = useRef<HTMLIonListElement>(null);
-  const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
-  const [showTransactionListModal, setShowTransactionListModal] = useState(false);
 
   return (
     <IonPage id="home-page">
@@ -29,6 +26,7 @@ const HomePage: React.FC = () => {
           <IonSlide>
             <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <MainDisplayContainer period="Daily" balance={123} spent={233} />
+              <PreviewTransactions transactions={transactions} />
             </div>
           </IonSlide>
           <IonSlide>
@@ -41,41 +39,7 @@ const HomePage: React.FC = () => {
               <MainDisplayContainer period="Monthly" balance={234} spent={233} />
             </div>
           </IonSlide>
-
         </IonSlides>
-        <IonList ref={transactionListRef} lines="full">
-          <IonListHeader
-            ref={headerRef}
-            onClick={() => setShowTransactionListModal(true)}
-            id="transactionListHeader"
-            style={{ borderRadius: "10px 10px 0 0" }}
-          >
-            <h4 style={{ width: "85%" }}>Today</h4>
-            <span style={{ width: "15%" }}>
-              <IonIcon
-                icon={chevronUpOutline}
-                style={{ verticalAlign: "super" }}
-                color="medium"
-              />
-            </span>
-          </IonListHeader>
-
-          {transactions.length > 0 &&
-            transactions
-              .slice(0, 3)
-              .map((transaction, index) => (
-                <TransactionItem
-                  transaction={transaction}
-                  key={index}
-                />
-              ))}
-
-          {transactions.length === 0 && (
-            <IonItem>
-              <IonLabel>Add a transaction</IonLabel>
-            </IonItem>
-          )}
-        </IonList>
 
 
       </IonContent>
