@@ -1,7 +1,6 @@
 import React from 'react';
 import avocado from '../theme/ketnip.png'
 import { StoreContext } from '../store'
-import './AnalysisCalendar.scss';
 import { IonIcon } from '@ionic/react';
 import { waterOutline } from 'ionicons/icons';
 
