@@ -22,7 +22,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
       </div>
       <span >
         <IonIcon
-          size="medium"
+          size="large"
           icon={informationCircle}
           color="medium"
         />
