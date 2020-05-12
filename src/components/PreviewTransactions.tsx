@@ -13,6 +13,7 @@ import {
   carOutline,
   cafeOutline,
   chevronUpOutline,
+  chevronDownOutline,
 } from "ionicons/icons";
 import TransactionItem from "./TransactionItem";
 
@@ -27,16 +28,16 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
   const transactionListRef = useRef<HTMLIonListElement>(null);
 
   return (
-    <IonList ref={transactionListRef} lines="full">
+    <IonList ref={transactionListRef} lines="full" style={{ marginTop: '15%' }}>
       <IonListHeader
         ref={headerRef}
         id="transactionListHeader"
         style={{ borderRadius: "10px 10px 0 0" }}
       >
-        <h4 style={{ width: "85%" }}>Today</h4>
-        <span style={{ width: "15%" }}>
+        <h4 style={{ width: "50%", textAlign: "right" }}>Today</h4>
+        <span style={{ width: "50%", textAlign: "left" }}>
           <IonIcon
-            icon={chevronUpOutline}
+            icon={chevronDownOutline}
             style={{ verticalAlign: "super" }}
             color="medium"
           />

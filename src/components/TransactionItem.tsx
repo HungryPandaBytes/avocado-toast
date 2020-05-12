@@ -37,7 +37,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   return (
 
     <IonItemSliding ref={ionItemSlidingRef} key={transaction.id}>
-      <IonItem lines="inset">
+      <IonItem lines="none">
         <IonIcon
           color={transactionIconColor}
           icon={getIcon(transaction.iconName)}

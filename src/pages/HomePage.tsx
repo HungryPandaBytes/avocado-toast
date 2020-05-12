@@ -9,7 +9,6 @@ import PreviewTransactions from '../components/PreviewTransactions';
 
 const transactions = [{ id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }]
 
-
 const slideOpts = {
   initialSlide: 0,
   loop: true,
@@ -40,8 +39,6 @@ const HomePage: React.FC = () => {
             </div>
           </IonSlide>
         </IonSlides>
-
-
       </IonContent>
     </IonPage >
   );
