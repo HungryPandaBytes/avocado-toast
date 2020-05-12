@@ -1,7 +1,8 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './AnalysisPage.scss';
+import './AnalysisPage.scss'
+import AnalysisHero from '../components/AnalysisHero'
 
 const AnalysisPage: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const AnalysisPage: React.FC = () => {
             <h1>May</h1>
           </IonToolbar>
         </IonHeader>
-
+        <AnalysisHero />
       </IonContent>
     </IonPage>
   );

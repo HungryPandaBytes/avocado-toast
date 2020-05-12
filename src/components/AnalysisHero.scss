@@ -1,0 +1,24 @@
+#analysis-hero{
+  color: var(--ion-color-tertiary);
+  height: 100%;
+  display: flex; 
+  justify-content: center; 
+
+  .hero--wrapper{
+    margin-top: 3%;
+    height: 30%;
+    width: 60%;
+    border-radius: 45%;
+    background: lightsteelblue;
+    display: flex; 
+    justify-content: center; 
+  }
+  .image--wrapper{
+    height: 160px;
+    width: 130px;
+    align-self: center;
+  }
+
+ 
+
+}
