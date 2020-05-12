@@ -6,18 +6,18 @@ import './AnalysisPage.scss';
 const AnalysisPage: React.FC = () => {
   return (
     <IonPage id="analysis-page">
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>May</IonTitle>
+      <IonHeader className="ion-no-border">
+        <IonToolbar >
+          <IonTitle>Analysis</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Set Analysis</IonTitle>
+        <IonHeader collapse="condense" className="ion-no-border">
+          <IonToolbar >
+            <IonTitle size="large">May</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Set Analysis page" />
+
       </IonContent>
     </IonPage>
   );
