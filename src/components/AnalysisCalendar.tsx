@@ -1,15 +1,15 @@
 import React from 'react';
 import avocado from '../theme/ketnip.png'
 import { StoreContext } from '../store'
-import './AnalysisHero.scss';
+import './AnalysisCalendar.scss';
 import { IonIcon } from '@ionic/react';
-import { waterOutline, informationCircle, information, informationOutline } from 'ionicons/icons';
+import { waterOutline } from 'ionicons/icons';
 
-interface AnalysisHeroProps {
+interface AnalysisCalendarProps {
 
 }
 
-const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
+const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
@@ -23,7 +23,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
       <span >
         <IonIcon
           size="medium"
-          icon={informationCircle}
+          icon={waterOutline}
           color="medium"
         />
       </span>
@@ -31,4 +31,4 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   )
 }
 
-export default AnalysisHero;
+export default AnalysisCalendar;

@@ -7,9 +7,10 @@
   .hero--wrapper{
     margin-top: 3%;
     height: 30%;
-    width: 60%;
+    width: 55%;
     border-radius: 45%;
-    background: lightsteelblue;
+    background:var(--ion-color-tertiary);
+    overflow: hidden;
     display: flex; 
     justify-content: center; 
   }
@@ -18,7 +19,5 @@
     width: 130px;
     align-self: center;
   }
-
- 
 
 }

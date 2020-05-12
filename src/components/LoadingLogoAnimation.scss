@@ -1,0 +1,40 @@
+.hero--wrapper{
+  margin-top: 3%;
+  height: 8rem;
+  width: 8rem;
+  background: white;
+  border: solid grey;
+  outline: 0;
+  overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+}
+.hero--wrapper::before{
+  content: url(../theme/avocado.svg);
+  transform: scale(.15);
+  height: 100%;
+  width: 100%;
+  display: flex; 
+  justify-content: center; 
+}
+
+.hero--wrapper::after{
+  content: "";
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  background: white;
+  left: 20%;
+  top: 5%;
+  border-radius: 45%;
+  animation: spin 6s ease-in-out infinite
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(0) rotate(0deg)
+  }
+  100%{
+    transform: translateY(-100%) rotate(500deg)
+  }
+}

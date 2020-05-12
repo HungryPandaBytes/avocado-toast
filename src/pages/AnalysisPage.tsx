@@ -3,6 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import ExploreContainer from '../components/ExploreContainer';
 import './AnalysisPage.scss'
 import AnalysisHero from '../components/AnalysisHero'
+import AnalysisCalendar from '../components/AnalysisCalendar';
 
 const AnalysisPage: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const AnalysisPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <AnalysisHero />
+        <AnalysisCalendar />
       </IonContent>
     </IonPage>
   );
