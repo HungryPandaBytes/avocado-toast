@@ -23,18 +23,18 @@ const HomePage: React.FC = () => {
       <IonContent>
         <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
           <IonSlide>
-            <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <MainDisplayContainer period="Daily" balance={123} spent={233} />
               <PreviewTransactions transactions={transactions} />
             </div>
           </IonSlide>
           <IonSlide>
-            <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <MainDisplayContainer period="Weekly" balance={-234} spent={233} />
             </div>
           </IonSlide>
           <IonSlide>
-            <div style={{ width: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <MainDisplayContainer period="Monthly" balance={234} spent={233} />
             </div>
           </IonSlide>
