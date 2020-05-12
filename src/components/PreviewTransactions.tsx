@@ -46,7 +46,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
       {transactions.length > 0 &&
         transactions
-          .slice(0, 3)
+          .slice(0, 5)
           .map((transaction: any, index: number) => (
             <TransactionItem
               transaction={transaction}

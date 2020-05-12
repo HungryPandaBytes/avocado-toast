@@ -7,7 +7,7 @@ import { chevronUpOutline } from 'ionicons/icons';
 import TransactionItem from '../components/TransactionItem';
 import PreviewTransactions from '../components/PreviewTransactions';
 
-const transactions = [{ id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 23, description: "Restaurant", iconName: "logo-amazon", transaction_time: new Date() }]
+const transactions = [{ id: 1, amount: 125, description: "Omakase", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 2500, description: "Gigantic Pea", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 2, description: "Supreme", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 210, description: "Grocery", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 4, description: "Silly String", iconName: "logo-amazon", transaction_time: new Date() }]
 
 const slideOpts = {
   initialSlide: 0,
