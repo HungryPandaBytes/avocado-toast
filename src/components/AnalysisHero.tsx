@@ -1,19 +1,16 @@
 import React from 'react';
-import './MainDisplayContainer.scss';
 import avocadoLogo from '../theme/ketnip.png'
-import burntToastLogo from '../theme/burnt-toast.png'
 
-interface MainDisplayContainerProps {
+interface AnalysisHeroProps {
   period: string;
   balance: number;
   spent: number;
 }
 
-const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, balance, spent }) => {
+const AnalysisHero: React.FC<AnalysisHeroProps> = ({ period, balance, spent }) => {
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
   const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-brown"
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
-  const mascot = balance > 0 ? avocadoLogo : burntToastLogo
 
 
   return (
@@ -21,7 +18,7 @@ const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, bal
       <h1>{period}</h1>
       <div className={displayStyling}>
         <div className='mascot-wrapper'>
-          <img src={mascot} alt="Logo" />
+          <img src={avocadoLogo} alt="Logo" />
         </div>
         <div className='progress-bar-wrapper'>
           <h1>${spent}</h1><p style={{ display: "inline" }}> spent</p>
@@ -35,4 +32,4 @@ const MainDisplayContainer: React.FC<MainDisplayContainerProps> = ({ period, bal
   )
 }
 
-export default MainDisplayContainer;
+export default AnalysisHero;

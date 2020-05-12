@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { IonContent, IonPage, IonSlides, IonSlide, IonList, IonButton, IonListHeader, IonIcon, IonItem, IonLabel } from '@ionic/react';
 import './HomePage.scss';
 import { StoreContext } from '../store'
-import MainDisplayContainer from '../components/MainDisplayContainer'
-import { chevronUpOutline } from 'ionicons/icons';
-import TransactionItem from '../components/TransactionItem';
+import MainDisplayContainer from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 
 const transactions = [{ id: 1, amount: 125, description: "Omakase", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 2500, description: "Gigantic Pea", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 2, description: "Supreme", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 210, description: "Grocery", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 4, description: "Silly String", iconName: "logo-amazon", transaction_time: new Date() }]
