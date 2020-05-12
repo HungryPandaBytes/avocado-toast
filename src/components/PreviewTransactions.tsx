@@ -34,7 +34,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
         id="transactionListHeader"
         style={{ borderRadius: "10px 10px 0 0" }}
       >
-        <h4 style={{ width: "50%", textAlign: "right" }}>Today</h4>
+        <h4 style={{ width: "50%", textAlign: "right", color: 'var(--ion-color-primary)' }}>Today</h4>
         <span style={{ width: "50%", textAlign: "left" }}>
           <IonIcon
             icon={chevronDownOutline}

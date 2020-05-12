@@ -8,8 +8,7 @@ import {
   IonNote,
   IonItemSliding,
   IonItemOptions,
-  IonItemOption,
-  IonModal,
+  IonItemOption
 } from "@ionic/react";
 import {
   basketOutline,
@@ -37,22 +36,22 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   return (
 
     <IonItemSliding ref={ionItemSlidingRef} key={transaction.id}>
-      <IonItem lines="none">
+      <IonItem lines="none" style={{ "border-left": "2px", "padding-left": "2%" }}>
         <IonIcon
           color={transactionIconColor}
           icon={getIcon(transaction.iconName)}
           key={transaction.id}
         ></IonIcon>
-        <IonLabel style={{ "border-left": "2px", "padding-left": "10px" }} color={transactionColor}
+        <IonLabel style={{ "border-left": "2px", "padding-left": "3%" }} 
         >
-          <h3>{transaction.description}</h3>
+          <h2 style={{ color: 'var(--ion-color-primary)' }} >{transaction.description}</h2>
           <IonNote>
             <p>
               <Moment fromNow>{transaction.transaction_time}</Moment>
             </p>
           </IonNote>
         </IonLabel>
-        <IonLabel class="ion-text-right" style={{ marginRight: "30px" }} color={transactionColor}
+        <IonLabel class="ion-text-right" style={{ marginRight: "10%" }} color='medium'
         >
           -$
           {parseInt(transaction.amount).toLocaleString(navigator.language, {
