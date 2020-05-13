@@ -13,7 +13,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
-  const may = ["overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", 'underbudget', 'underbudget', 'underbudget', 'overbudget', 'overbudget', 'overbudget', "overbudget", "overbudget", "overbudget", 'overbudget', 'overbudget', 'overbudget', 'overbudget', 'overbudget']
+  const may = ["overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", 'underbudget', 'underbudget', 'today', 'future', 'future', 'future', "future", "future", "future", 'future', 'future', 'future', 'future', 'future']
 
   return (
 
@@ -30,13 +30,23 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
                 />
               </span>
             )
+          } else if (day === 'today') {
+            return (
+              <span className="today-wrapper">
+                <IonIcon
+                  size="large"
+                  icon={waterOutline}
+                  color="tertiary"
+                />
+              </span>
+            )
           } else {
             return (
               <span style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
                   icon={waterOutline}
-                  color="tertiary"
+                  style={{ color: 'var(--ion-color-light-shade)' }}
                 />
               </span>
             )
