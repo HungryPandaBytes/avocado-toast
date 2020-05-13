@@ -4,10 +4,9 @@
   }
  
   .today-wrapper{
-    height: 70px;
-    width: 100%;
-    border: solid 1px var(--ion-color-tertiary);
-    border-radius: 50%;
+    display: inline;
+    border: dotted 2px var(--ion-color-tertiary);
+    border-radius: 80%;
     margin: 0 2% 0 2%; 
   }
 }
