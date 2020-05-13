@@ -17,8 +17,8 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
   const [recurringExpenses, setRecurringExpenses] = useState(0);
 
 
-  const budgetPerDay = Math.ceil((income - (income * savingPercentage / 100)) / 365)
-  const savingsPerDay = Math.floor((income * savingPercentage / 100) / 365)
+  const budgetPerDay = Math.ceil((income - ((income * savingPercentage / 100)) / 30))
+  const savingsPerDay = Math.floor((income - recurringExpenses) * savingPercentage / 100 / 30)
 
   function saveBudgetClickHandler() {
     const budget = {
@@ -33,46 +33,55 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
   }
 
   return (
-    <div id="budget-input" style={{ position: 'relative' }}>
+    <div id="budget-input" style={{ position: 'relative', width: '100%' }}>
 
       <IonItem lines='none'>
-        <IonLabel color='medium'>Monthly Income</IonLabel>
+        <IonLabel color='medium' slot='start'>Income</IonLabel>
+        <IonLabel color='primary' slot='end'>${Math.ceil(income / 30).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day</IonLabel>
       </IonItem >
-      <IonItem color='light' lines='none' style={{ width: '40%', marginLeft: '5%' }}>
-        <IonInput color='medium' type="number" value={income} placeholder="Income" onIonChange={e => {
+      <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
+        <IonInput style={{ maxWidth: '50%', color: 'grey' }} color='primary' type="number" value={income} placeholder="Income" max='50000' onIonChange={e => {
           if (e.detail.value! === "") {
             setIncome(0)
           } else {
             setIncome(parseInt(e.detail.value!, 10))
           }
         }} clearInput></IonInput>
+        <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
       </IonItem>
-      <div style={{ textAlign: 'right' }}>{Math.ceil(income / 30)}/day</div>
 
 
       <IonItem lines='none'>
-        <IonLabel color='medium'>Recurring Expenses</IonLabel>
+        <IonLabel color='medium' slot='start'>Recurring Expenses</IonLabel>
+        <IonLabel color='primary' slot='end'>${Math.ceil(recurringExpenses / 30)}/day</IonLabel>
       </IonItem >
-      <IonItem color='light' lines='none' style={{ width: '40%', marginLeft: '5%' }}>
-        <IonInput color='medium' className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Utilities etc." onIonChange={e => {
+      <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
+        <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Utilities etc." onIonChange={e => {
           if (e.detail.value! === "") {
             setRecurringExpenses(0)
           } else {
             setRecurringExpenses(parseInt(e.detail.value!, 10))
           }
         }} clearInput></IonInput>
+        <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
       </IonItem>
-      <div style={{ textAlign: 'right' }}>{Math.ceil(recurringExpenses / 30)}/day</div>
 
       <IonItem lines='none'>
-        <IonLabel color='medium'>Savings: {savingPercentage}%</IonLabel>
+        <IonLabel color='medium' slot='start'>Savings {savingPercentage}%</IonLabel>
+        <IonLabel color='primary' slot='end'>${savingsPerDay}/day</IonLabel>
       </IonItem>
-      <IonItem color='light' lines='none' style={{ width: '60%', marginLeft: '5%' }}>
-        <IonRange color='primary' pin={true} value={savingPercentage} onIonChange={e => {
+      <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
+        <IonRange style={{ maxWidth: '50%', marginLeft: '0%' }} color='primary' pin={true} value={savingPercentage} onIonChange={e => {
           setSavingPercentage(e.detail.value as number)
         }} />
+        <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
+      </IonItem >
+
+
+      <IonItem lines='none'>
+        <IonLabel color='medium' slot='start'>Daily Budget </IonLabel>
+        <IonLabel color='primary' slot='end'>${budgetPerDay}/day</IonLabel>
       </IonItem>
-      <div style={{ textAlign: 'right' }}>{Math.ceil(savingsPerDay)}/day</div>
 
       <div className="ion-text-center">
         <IonButton style={{ margin: '5%' }} expand='block' fill='solid' onClick={saveBudgetClickHandler} className="expense-button" >SAVE</IonButton>
@@ -80,5 +89,4 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
     </div >
   )
 }
-
 export default BudgetInput;

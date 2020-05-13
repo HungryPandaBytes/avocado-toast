@@ -6,9 +6,17 @@
     height: 50px;
     width: 90%;
     border: solid 2px green;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
     background: var(--ion-color-light-shade);
+  }
+
+  .budget-label--wrapper{
+    max-width: 30%;
+    overflow: visibile;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
