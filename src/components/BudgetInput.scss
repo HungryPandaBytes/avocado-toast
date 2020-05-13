@@ -1,3 +1,14 @@
 #budget-input{
   color:var(--ion-color-primary);
+
+  .input--wrapper{
+    margin: 5% 0 5% 0;
+    height: 50px;
+    width: 90%;
+    border: solid 2px green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: var(--ion-color-light-shade);
+  }
 }
