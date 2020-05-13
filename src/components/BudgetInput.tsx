@@ -34,10 +34,10 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
   return (
     <div id="budget-input">
       <IonItem lines='none'>
-        <IonLabel>Income</IonLabel>
+        <IonLabel color='primary'>Income</IonLabel>
       </IonItem >
       <IonItem style={{ width: '40%' }}>
-        <IonInput type="number" value={income} placeholder="Income" onIonChange={e => {
+        <IonInput color='primary' type="number" value={income} placeholder="Income" onIonChange={e => {
           if (e.detail.value! === "") {
             setIncome(0)
           } else {
@@ -47,10 +47,10 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
       </IonItem>
 
       <IonItem lines='none'>
-        <IonLabel>Recurring Expenses</IonLabel>
+        <IonLabel color='primary'>Recurring Expenses</IonLabel>
       </IonItem >
       <IonItem style={{ width: '40%' }}>
-        <IonInput className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Util etc." onIonChange={e => {
+        <IonInput color='primary' className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Util etc." onIonChange={e => {
           if (e.detail.value! === "") {
             setRecurringExpenses(0)
           } else {
@@ -60,7 +60,7 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
       </IonItem>
 
       <IonItem lines='none'>
-        <IonLabel>Savings: {savingPercentage}%</IonLabel>
+        <IonLabel color='primary'>Savings: {savingPercentage}%</IonLabel>
       </IonItem>
       <IonItem lines='none' style={{ width: '70%' }}>
         <IonRange pin={true} value={savingPercentage} onIonChange={e => {
