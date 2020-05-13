@@ -2,6 +2,7 @@ import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import BudgetHero from '../components/BudgetHero';
 import './BudgetPage.scss';
+import BudgetInput from '../components/BudgetInput';
 
 const BudgetPage: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const BudgetPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <BudgetHero />
+        <BudgetInput />
       </IonContent>
     </IonPage>
   );
