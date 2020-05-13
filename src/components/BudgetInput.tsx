@@ -50,7 +50,7 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
         <IonLabel color='primary'>Recurring Expenses</IonLabel>
       </IonItem >
       <IonItem style={{ width: '40%' }}>
-        <IonInput color='primary' className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Util etc." onIonChange={e => {
+        <IonInput color='primary' className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Utilities etc." onIonChange={e => {
           if (e.detail.value! === "") {
             setRecurringExpenses(0)
           } else {
@@ -68,7 +68,7 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
         }} />
       </IonItem>
       <div className="ion-text-center">
-        <IonButton size="large" fill='solid' onClick={saveBudgetClickHandler} className="expense-button" >SAVE BUDGET</IonButton>
+        <IonButton style={{ margin: '5%'}} expand='block' fill='solid' onClick={saveBudgetClickHandler} className="expense-button" >SAVE</IonButton>
       </div>
     </div >
   )
