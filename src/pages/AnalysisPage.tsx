@@ -26,7 +26,7 @@ const AnalysisPage: React.FC = () => {
             margin: '0 2% 0 2%',
             alignSelf: "center",
             textAlign: 'center'
-          }}>You're growing your avocado! You spent $543 and saved $245 so far this month.</p>
+          }}>Good job on growing your avocado! You spent less than what you budgeted on most days and saved $245 so far this month.</p>
         </div>
       </IonContent>
     </IonPage>

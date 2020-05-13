@@ -13,10 +13,10 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
-  const may = ["overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget']
+  const may = ["overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", 'underbudget', 'underbudget', 'underbudget', 'overbudget', 'overbudget', 'overbudget', "overbudget", "overbudget", "overbudget", 'overbudget', 'overbudget', 'overbudget', 'overbudget', 'overbudget']
 
   return (
-  
+
     <div id="analysis-calendar">
       <div className="calendar--wrapper">
         {may.map(day => {
@@ -25,7 +25,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
               <span style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
-                  icon={waterOutline}
+                  icon={water}
                   color="tertiary"
                 />
               </span>
@@ -35,7 +35,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
               <span style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
-                  icon={water}
+                  icon={waterOutline}
                   color="tertiary"
                 />
               </span>
