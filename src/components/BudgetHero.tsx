@@ -1,40 +1,25 @@
 import React from 'react';
-import avocado from '../theme/ketnip.png'
+import avocado from '../theme/avocado.png'
 import { StoreContext } from '../store'
-import './AnalysisHero.scss';
-import { IonIcon } from '@ionic/react';
-import { waterOutline, informationCircle, information, informationOutline } from 'ionicons/icons';
+import './BudgetHero.scss';
 
-interface AnalysisHeroProps {
+interface BudgetHeroProps {
 
 }
 
-const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
+const BudgetHero: React.FC<BudgetHeroProps> = () => {
 
   const store = React.useContext(StoreContext);
 
-
   return (
-    <div id="analysis-hero">
+    <div id="budget-hero">
       <div className='hero--wrapper'>
-        <img className='image--wrapper' src={avocado} alt="Logo" />
-
+        <p>Daily Budget</p>
+        <h3>$35/day</h3>
       </div>
-      <span >
-        <IonIcon
-          size="large"
-          icon={informationCircle}
-          color="medium"
-        />
-      </span>
-      <div className='progress-bar-wrapper'>
-        <h1 style={{ display: "inline" }}>$245</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved</p>
-        <div className='progress-bar-light-grey'>
-          <div className='progress-bar-green' style={{ width: `65%`, color: 'white', textAlign: 'right' }}>10 days left </div>
-        </div>
-      </div>
+      <img className='image--wrapper' src={avocado} alt="Logo" />
     </div>
   )
 }
 
-export default AnalysisHero;
+export default BudgetHero;
