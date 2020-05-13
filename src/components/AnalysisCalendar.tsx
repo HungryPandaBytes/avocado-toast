@@ -32,13 +32,13 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
             )
           } else if (day === 'today') {
             return (
-              <div className="today-wrapper">
+              <span style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
                   icon={waterOutline}
                   color="tertiary"
                 />
-              </div>
+              </span>
             )
           } else {
             return (
