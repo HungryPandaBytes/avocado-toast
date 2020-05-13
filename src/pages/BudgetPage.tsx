@@ -1,23 +1,23 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import BudgetHero from '../components/BudgetHero';
 import './BudgetPage.scss';
 
 const BudgetPage: React.FC = () => {
   return (
     <IonPage id="budget-page">
-      <IonHeader>
-        <IonToolbar>
+      <IonHeader className="ion-no-border">
+        <IonToolbar >
           <IonTitle>Set Budget</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Set Budget</IonTitle>
+        <IonHeader collapse="condense" className="ion-no-border">
+          <IonToolbar >
+            <h1>Set Budget</h1>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Set Budget page" />
+        <BudgetHero />
       </IonContent>
     </IonPage>
   );
