@@ -18,10 +18,8 @@ const BudgetPage: React.FC = () => {
             <h1>Set Budget</h1>
           </IonToolbar>
         </IonHeader>
-
         <BudgetHero />
         <BudgetInput />
-
       </IonContent>
     </IonPage>
   );

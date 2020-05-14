@@ -11,7 +11,7 @@ interface HomePageHeroProps {
 
 const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) => {
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
-  const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-brown"
+  const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-red"
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
   const mascot = balance > 0 ? avocadoLogo : burntToastLogo
 
@@ -28,7 +28,8 @@ const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) =
           <div className='progress-bar-light-grey'>
             <div className={progressbarStyling} style={{ width: `${progressBarPercentage}%` }}></div>
           </div>
-          <p>${balance} left</p>
+          {(balance > 0) && <p>${balance} left</p>}
+          {(balance < 0) && <p>${balance * -1} over</p>}
         </div>
       </div>
     </div>
