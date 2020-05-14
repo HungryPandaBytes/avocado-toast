@@ -2,11 +2,14 @@ import React, { useState, MouseEvent } from 'react';
 import {
   IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonRippleEffect, IonPage
 } from '@ionic/react';
-import './AddTransaction.scss';
+import './AddTransactionModal.scss';
 import { calendar } from 'ionicons/icons';
 
+interface AddTransactionModalProps {
+  onClose: any
+}
 
-const AddTransaction = () => {
+const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
 
   const todayTimeStamp = new Date().toISOString();
 
@@ -78,11 +81,11 @@ const AddTransaction = () => {
 
 
   return (
-    <IonPage>
+    <>
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton >Cancel</IonButton>
+            <IonButton onClick={onClose}>Cancel</IonButton>
           </IonButtons>
           <IonChip slot="end">
             <IonIcon icon={calendar} color="primary" />
@@ -186,9 +189,9 @@ const AddTransaction = () => {
           </div>
         </div>
       </IonContent>
-    </IonPage >
+    </>
   )
 };
 
 
-export default AddTransaction;
+export default AddTransactionModal;

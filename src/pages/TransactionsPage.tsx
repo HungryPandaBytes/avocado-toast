@@ -18,6 +18,7 @@ const TransactionsPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Transactions" />
+
       </IonContent>
     </IonPage>
   );
