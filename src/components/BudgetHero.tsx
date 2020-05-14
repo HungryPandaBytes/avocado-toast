@@ -4,7 +4,6 @@ import { StoreContext } from '../store'
 import './BudgetHero.scss';
 
 interface BudgetHeroProps {
-
 }
 
 const BudgetHero: React.FC<BudgetHeroProps> = () => {
@@ -14,7 +13,7 @@ const BudgetHero: React.FC<BudgetHeroProps> = () => {
   return (
     <div id="budget-hero">
       <div className='hero--wrapper'>
-        <p>Daily Budget</p>
+        <p>OK to spend</p>
         <h3>$189/day</h3>
       </div>
       <img className='image--wrapper' src={avocado} alt="Logo" />

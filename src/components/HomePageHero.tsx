@@ -24,12 +24,14 @@ const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) =
           <img src={mascot} alt="Logo" />
         </div>
         <div className='progress-bar-wrapper'>
-          <h1>${spent}</h1><p style={{ display: "inline" }}> spent</p>
+          <h1>${spent}</h1>
+          {(period === 'Daily') && <p style={{ display: "inline" }}> in my pocket</p>}
+          {(period === 'Weekly' || period === 'Monthly') && <p style={{ display: "inline" }}> left</p>}
           <div className='progress-bar-light-grey'>
             <div className={progressbarStyling} style={{ width: `${progressBarPercentage}%` }}></div>
           </div>
-          {(balance > 0) && <p>${balance} left</p>}
-          {(balance < 0) && <p>${balance * -1} over</p>}
+          {(balance > 0) && <p>${balance} spent</p>}
+          {(balance < 0) && <p>${balance * -1} overspent</p>}
         </div>
       </div>
     </div>

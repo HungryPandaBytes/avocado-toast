@@ -18,7 +18,6 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
     <div id="analysis-hero">
       <div className='hero--wrapper'>
         <img className='image--wrapper' src={avocado} alt="Logo" />
-
       </div>
       <span >
         <IonIcon

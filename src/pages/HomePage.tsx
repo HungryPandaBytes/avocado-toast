@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
       >
         <AddTransactionModal onClose={() => setShowAddTransactionModal(false)} />
       </IonModal>
-      <IonButton style={{ margin: '0 5% 0 5%' }} onClick={() => setShowAddTransactionModal(true)}>Add Transaction</IonButton>
+      <IonButton fill='outline' color='medium' style={{ margin: '0 5% 0 5%' }} onClick={() => setShowAddTransactionModal(true)}>Add Transaction</IonButton>
     </IonPage >
   );
 };

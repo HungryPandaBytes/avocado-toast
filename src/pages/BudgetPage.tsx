@@ -9,13 +9,13 @@ const BudgetPage: React.FC = () => {
     <IonPage id="budget-page">
       <IonHeader className="ion-no-border">
         <IonToolbar >
-          <IonTitle>Set Budget</IonTitle>
+          <IonTitle>Budget</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonHeader collapse="condense" className="ion-no-border">
           <IonToolbar >
-            <h1>Set Budget</h1>
+            <h1>Budget</h1>
           </IonToolbar>
         </IonHeader>
         <BudgetHero />
