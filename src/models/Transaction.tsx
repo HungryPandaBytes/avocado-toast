@@ -7,6 +7,7 @@ export interface Transaction {
   category_name: string;
   description: string;
   category_id: string;
-  split: string;
+  split: boolean;
   ignore: boolean;
+  transaction_type: string
 }

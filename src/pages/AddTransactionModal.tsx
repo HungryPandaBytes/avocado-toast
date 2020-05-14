@@ -4,12 +4,14 @@ import {
 } from '@ionic/react';
 import './AddTransactionModal.scss';
 import { calendar } from 'ionicons/icons';
+import { StoreContext } from '../store';
 
 interface AddTransactionModalProps {
   onClose: any
 }
 
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
+  const store = React.useContext(StoreContext);
 
   const todayTimeStamp = new Date().toISOString();
 
@@ -65,13 +67,17 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       amount: amount,
       transaction_time: date,
       description: category,
-      category_name: "shopping",
+      category_name: category,
+      category_id: '2',
       ignore: false,
-      category_id: "1",
+      split: checked,
       transaction_type: transactionType,
-      iconName: "basket-outline"
     }
     event.preventDefault();
+    store.addTransaction(newTransaction)
+    console.log(store.addTransaction(newTransaction))
+    console.log(store.transactions, 'after saving')
+
     setAmount("");
     setDisplayBalance("");
     setdistributionAmt("")
@@ -183,7 +189,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">0</IonButton>
               </div>
               <div>
-                <IonButton size="large" fill="clear" className="expense-button">Save</IonButton>
+                <IonButton size="large" fill="clear" className="expense-button" onClick={(e) => saveClickHandler(e, onClose)}>Save</IonButton>
               </div>
             </div>
           </div>
