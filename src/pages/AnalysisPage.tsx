@@ -15,7 +15,7 @@ const AnalysisPage: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonHeader collapse="condense" className="ion-no-border">
-          <IonToolbar >
+          <IonToolbar>
             <h1>May</h1>
           </IonToolbar>
         </IonHeader>

@@ -7,6 +7,11 @@ import BudgetInput from '../components/BudgetInput';
 const BudgetPage: React.FC = () => {
   return (
     <IonPage id="budget-page">
+      <IonHeader className="ion-no-border">
+        <IonToolbar >
+          <IonTitle>Set Budget</IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
         <IonHeader collapse="condense" className="ion-no-border">
           <IonToolbar >
