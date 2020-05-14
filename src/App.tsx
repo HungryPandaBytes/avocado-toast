@@ -10,7 +10,7 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, square, triangle, pricetagOutline } from 'ionicons/icons';
 import { StoreProvider } from './store';
 import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
@@ -69,8 +69,8 @@ const App: React.FC = () => {
                 <IonLabel>Analysis</IonLabel>
               </IonTabButton>
               <IonTabButton tab="budget" href="/budget">
-                <IonIcon icon={square} />
-                <IonLabel>Set Budget</IonLabel>
+                <IonIcon icon={triangle} />
+                <IonLabel>Budget</IonLabel>
               </IonTabButton>
             </IonTabBar>
           </IonTabs>
