@@ -27,9 +27,9 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
         />
       </span>
       <div className='progress-bar-wrapper'>
-        <h1 style={{ display: "inline" }}>$245</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved</p>
+        <h1 style={{ display: "inline" }}>$245</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved </p>
         <div className='progress-bar-light-grey'>
-          <div className='progress-bar-green' style={{ width: `65%`, color: 'white', textAlign: 'right' }}>10 days left </div>
+          <div className='progress-bar-green' style={{ width: `65%`, color: 'white', textAlign: 'right' }}>10 days left</div>
         </div>
       </div>
     </div>
