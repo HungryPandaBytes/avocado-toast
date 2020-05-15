@@ -30,7 +30,7 @@ transactions = [{ id: 1, amount: 125, description: "Omakase", iconName: "logo-am
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
     transactions: transactions,
-    budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0 },
+    budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 213 },
     addTransaction: (transaction: Transaction) => store.transactions.push(transaction)
   }));
 
