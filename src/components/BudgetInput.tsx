@@ -83,7 +83,7 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
       </IonItem>
 
       <div className="ion-text-center">
-        <IonButton style={{ margin: '5%' }} expand='block' fill='solid' onClick={saveBudgetClickHandler} className="expense-button" >SET BUDGET</IonButton>
+        <IonButton style={{ margin: '5%' }} expand='block' fill='solid' onClick={saveBudgetClickHandler} className="expense-button" >UPDATE BUDGET</IonButton>
       </div>
     </div >
   )
