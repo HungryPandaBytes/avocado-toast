@@ -17,19 +17,18 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
   const [recurringExpenses, setRecurringExpenses] = useState(0);
 
 
-  const budgetPerDay = Math.ceil((income - ((income * savingPercentage / 100)) / 30))
+  const budgetPerDay = Math.ceil((income - recurringExpenses - ((income - recurringExpenses) * savingPercentage / 100)) / 30)
   const savingsPerDay = Math.floor((income - recurringExpenses) * savingPercentage / 100 / 30)
 
   function saveBudgetClickHandler() {
-    const budget = {
-      daily: budgetPerDay,
-      yearly: {
-        yearlyIncome: income,
-        yearlySaving: income * savingPercentage
-      },
-      balance: budgetPerDay
+    const newBudget = {
+      income: income,
+      reoccuringExpenses: recurringExpenses,
+      savingPercentage: savingPercentage,
+      budgetPerDay: budgetPerDay
     }
-    console.log("save budget", { income }, { budgetPerDay })
+    store.setBudget(newBudget)
+    console.log("save budget", store.budget)
   }
 
   return (

@@ -12,6 +12,8 @@ interface stateInterface {
 
 interface dispatchInterface {
   addTransaction(transaction: Transaction): void
+  setBudget(newBudget: Budget): void
+
 }
 
 interface contextInterface extends stateInterface, dispatchInterface { };
@@ -20,7 +22,8 @@ interface contextInterface extends stateInterface, dispatchInterface { };
 const defaultContext: contextInterface = {
   transactions: [],
   budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 2130 },
-  addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction)
+  addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction),
+  setBudget: (newBudget: Budget) => defaultContext.budget = newBudget
 }
 
 export const StoreContext = React.createContext(defaultContext);
@@ -31,7 +34,8 @@ export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
     transactions: transactions,
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 700 },
-    addTransaction: (transaction: Transaction) => store.transactions.push(transaction)
+    addTransaction: (transaction: Transaction) => store.transactions.push(transaction),
+    setBudget: (newBudget: Budget) => store.budget = newBudget
   }));
 
   return (
