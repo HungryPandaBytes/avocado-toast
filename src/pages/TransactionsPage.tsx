@@ -16,7 +16,7 @@ const TransactionsPage: React.FC = () => {
       <IonContent>
         <IonHeader className="ion-no-border" collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Transactions</IonTitle>
+            <IonTitle color='primary' size="large">Transactions</IonTitle>
           </IonToolbar>
           <IonToolbar>
             <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>

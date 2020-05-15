@@ -14,9 +14,9 @@ const BudgetPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense" className="ion-no-border">
-          <IonToolbar >
-            <h1>Budget</h1>
+        <IonHeader className="ion-no-border" collapse="condense">
+          <IonToolbar>
+            <IonTitle color='primary' size="large">Budget</IonTitle>
           </IonToolbar>
         </IonHeader>
         <BudgetHero />

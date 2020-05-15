@@ -8,15 +8,15 @@ import AnalysisCalendar from '../components/AnalysisCalendar';
 const AnalysisPage: React.FC = () => {
   return (
     <IonPage id="analysis-page">
-      <IonHeader className="ion-no-border">
-        <IonToolbar >
+      <IonHeader>
+        <IonToolbar>
           <IonTitle>Analysis</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense" className="ion-no-border">
+        <IonHeader className="ion-no-border" collapse="condense">
           <IonToolbar>
-            <h1>May</h1>
+            <IonTitle color='tertiary' size="large">Analysis</IonTitle>
           </IonToolbar>
         </IonHeader>
         <AnalysisHero />
