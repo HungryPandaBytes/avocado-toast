@@ -10,7 +10,7 @@ const AnalysisPage: React.FC = () => {
     <IonPage id="analysis-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Analysis</IonTitle>
+          <IonTitle>May</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
