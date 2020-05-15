@@ -76,9 +76,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     }
     event.preventDefault();
     store.addTransaction(newTransaction)
-    console.log(store.addTransaction(newTransaction))
-    console.log(store.transactions, 'after saving')
-
     setAmount("");
     setDisplayBalance("");
     setdistributionAmt("")
