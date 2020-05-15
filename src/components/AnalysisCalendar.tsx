@@ -19,10 +19,10 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
     <div id="analysis-calendar">
       <div className="calendar--wrapper">
-        {may.map(day => {
+        {may.map((day, index) => {
           if (day === 'underbudget') {
             return (
-              <span style={{ margin: '0 2% 0 2%' }}>
+              <span key={index} style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
                   icon={water}
@@ -32,7 +32,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
             )
           } else if (day === 'today') {
             return (
-              <span style={{ margin: '0 2% 0 2%' }}>
+              <span key={index} style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
                   icon={waterOutline}
@@ -42,7 +42,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
             )
           } else {
             return (
-              <span style={{ margin: '0 2% 0 2%' }}>
+              <span key={index} style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
                   size="large"
                   icon={waterOutline}
