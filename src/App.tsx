@@ -10,7 +10,7 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle, pricetagOutline } from 'ionicons/icons';
+import { walletOutline, statsChartOutline, cardOutline, calculatorOutline } from 'ionicons/icons';
 import { StoreProvider } from './store';
 import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
@@ -57,20 +57,20 @@ const App: React.FC = () => {
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
-                <IonIcon icon={triangle} />
-                <IonLabel>Home</IonLabel>
+                <IonIcon icon={walletOutline} />
+                <IonLabel>Pocket</IonLabel>
               </IonTabButton>
               <IonTabButton tab="transactions" href="/transactions">
-                <IonIcon icon={ellipse} />
+                <IonIcon icon={cardOutline} />
                 <IonLabel>Transactions</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="analysis" href="/analysis">
-                <IonIcon icon={square} />
-                <IonLabel>Analysis</IonLabel>
-              </IonTabButton>
               <IonTabButton tab="budget" href="/budget">
-                <IonIcon icon={triangle} />
+                <IonIcon icon={calculatorOutline} />
                 <IonLabel>Budget</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="analysis" href="/analysis">
+                <IonIcon icon={statsChartOutline} />
+                <IonLabel>Analysis</IonLabel>
               </IonTabButton>
             </IonTabBar>
           </IonTabs>
