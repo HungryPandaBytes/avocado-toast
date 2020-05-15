@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonList, IonButton, IonListHeader, IonIcon, IonItem, IonLabel, IonFabButton, IonFab, IonModal } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal } from '@ionic/react';
 import './HomePage.scss';
 import { StoreContext } from '../store'
 import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
-import { add } from 'ionicons/icons';
 import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
 
