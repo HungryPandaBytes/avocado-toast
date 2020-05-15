@@ -6,6 +6,7 @@ import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import { add } from 'ionicons/icons';
 import AddTransactionModal from './AddTransactionModal';
+import { useObserver } from 'mobx-react';
 
 const slideOpts = {
   initialSlide: 0,
@@ -18,7 +19,7 @@ const HomePage: React.FC = () => {
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
 
-  return (
+  return useObserver(() => (
     <IonPage id="home-page">
       <IonContent>
         <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
@@ -50,7 +51,7 @@ const HomePage: React.FC = () => {
       </IonModal>
       <IonButton fill='outline' color='medium' style={{ margin: '0 5% 0 5%' }} onClick={() => setShowAddTransactionModal(true)}>Add Transaction</IonButton>
     </IonPage >
-  );
+  ));
 };
 
 export default HomePage;

@@ -71,6 +71,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       category_id: '2',
       ignore: false,
       split: checked,
+      iconName: 'test',
       transaction_type: transactionType,
     }
     event.preventDefault();

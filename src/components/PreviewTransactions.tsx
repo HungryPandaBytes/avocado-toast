@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-
 import {
   IonItem,
   IonLabel,
@@ -26,7 +25,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
   const transactionListRef = useRef<HTMLIonListElement>(null);
-
+  const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
   return (
     <IonList ref={transactionListRef} lines="full" style={{ marginTop: '5%' }}>
       <IonListHeader
@@ -38,9 +37,9 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
       </IonListHeader>
 
-      {transactions.length > 0 &&
-        transactions
-          .slice(0, 5)
+      {sortedTransactions.length > 0 &&
+        sortedTransactions
+          .slice(0, 10)
           .map((transaction: any, index: number) => (
             <TransactionItem
               transaction={transaction}
@@ -48,7 +47,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
             />
           ))}
 
-      {transactions.length === 0 && (
+      {sortedTransactions.length === 0 && (
         <IonItem>
           <IonLabel>Add a transaction</IonLabel>
         </IonItem>
