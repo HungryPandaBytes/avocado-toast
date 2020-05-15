@@ -16,8 +16,15 @@ const slideOpts = {
 
 const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
+
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
+
+  function getDailyBalance(transactions: any) {
+    let todayTotalExpenses = store.budget.budgetPerDay
+    transactions.map((transaction: any) => todayTotalExpenses -= parseInt(transaction.amount));
+    return todayTotalExpenses;
+  }
 
   return useObserver(() => (
     <IonPage id="home-page">
@@ -25,7 +32,7 @@ const HomePage: React.FC = () => {
         <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
           <IonSlide>
             <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
-              <HomePageHero period="Daily" balance={123} spent={233} />
+              <HomePageHero period="Daily" balance={getDailyBalance(store.transactions)} spent={233} />
               <PreviewTransactions transactions={store.transactions} />
             </div>
           </IonSlide>

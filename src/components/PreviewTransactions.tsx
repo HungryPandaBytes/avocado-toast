@@ -25,7 +25,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
   const transactionListRef = useRef<HTMLIonListElement>(null);
-  const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
+  const sortedTransactions = transactions.slice().sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
   return (
     <IonList ref={transactionListRef} lines="full" style={{ marginTop: '5%' }}>
       <IonListHeader

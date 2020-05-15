@@ -5,6 +5,7 @@ import './BudgetPage.scss';
 import BudgetInput from '../components/BudgetInput';
 
 const BudgetPage: React.FC = () => {
+
   return (
     <IonPage id="budget-page">
       <IonHeader className="ion-no-border">

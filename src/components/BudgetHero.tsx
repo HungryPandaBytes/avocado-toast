@@ -14,7 +14,7 @@ const BudgetHero: React.FC<BudgetHeroProps> = () => {
     <div id="budget-hero">
       <div className='hero--wrapper'>
         <p>OK to spend</p>
-        <h3>$189/day</h3>
+        <h3>${store.budget.budgetPerDay}/day</h3>
       </div>
       <img className='image--wrapper' src={avocado} alt="Logo" />
     </div>

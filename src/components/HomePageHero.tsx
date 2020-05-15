@@ -2,6 +2,7 @@ import React from 'react';
 import './HomePageHero.scss';
 import avocadoLogo from '../theme/ketnip.png'
 import burntToastLogo from '../theme/burnt-toast.png'
+import { StoreContext } from '../store';
 
 interface HomePageHeroProps {
   period: string;
@@ -10,6 +11,8 @@ interface HomePageHeroProps {
 }
 
 const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) => {
+  const store = React.useContext(StoreContext);
+
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
   const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-red"
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
