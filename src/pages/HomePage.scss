@@ -1,11 +1,15 @@
 #home-page {
     .swiper-pagination {
-        top: 42%;
+        top: 320px;
     }
 
     .main-slider {
       width: 100%;
       text-align: "left";
       align-self: "flex-start" 
+    }
+
+    #main-display-container {
+        height: 300px;
     }
 }
