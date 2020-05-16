@@ -10,7 +10,8 @@ import { useObserver } from 'mobx-react';
 const slideOpts = {
   initialSlide: 0,
   loop: true,
-  speed: 200
+  speed: 200,
+  spaceBetween: 40
 };
 
 const HomePage: React.FC = () => {
@@ -35,7 +36,7 @@ const HomePage: React.FC = () => {
   return useObserver(() => (
     <IonPage id="home-page">
       <IonContent>
-        <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%" }}>
+        <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}>
           <IonSlide>
             <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
               <HomePageHero period="Daily" balance={getTodayBalance(store.transactions)} spent={getTodayTotalExpenses(store.transactions)} />

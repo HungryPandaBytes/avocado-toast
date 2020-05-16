@@ -28,11 +28,47 @@ const defaultContext: contextInterface = {
 
 export const StoreContext = React.createContext(defaultContext);
 let transactions: Transaction[] = [];
-transactions = [{ id: 1, amount: 125, description: "Omakase", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 25, description: "Gigantic Pea", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 2, description: "Supreme", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 110, description: "Grocery", iconName: "logo-amazon", transaction_time: new Date() }, { id: 1, amount: 4, description: "Silly String", iconName: "logo-amazon", transaction_time: new Date() }]
+transactions = [
+  {
+    id: 1,
+    amount: 125,
+    description: "Omakase",
+    iconName: "logo-amazon",
+    transaction_time: new Date(),
+  },
+  {
+    id: 1,
+    amount: 25,
+    description: "Gigantic Pea",
+    iconName: "logo-amazon",
+    transaction_time: new Date(),
+  },
+  {
+    id: 1,
+    amount: 2,
+    description: "Supreme",
+    iconName: "logo-amazon",
+    transaction_time: new Date(),
+  },
+  {
+    id: 1,
+    amount: 110,
+    description: "Grocery",
+    iconName: "logo-amazon",
+    transaction_time: new Date(),
+  },
+  {
+    id: 1,
+    amount: 4,
+    description: "Silly String",
+    iconName: "logo-amazon",
+    transaction_time: new Date(),
+  },
+];
 
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
-    transactions: transactions,
+    transactions: [...transactions, ...transactions],
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 420 },
     addTransaction: (transaction: Transaction) => store.transactions.push(transaction),
     setBudget: (newBudget: Budget) => store.budget = newBudget
