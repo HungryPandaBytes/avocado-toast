@@ -20,7 +20,7 @@ const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) =
 
 
   return (
-    <div id="main-display-container">
+    <div id="main-display-container" style={{textAlign: "left"}}>
       <h1>{period}</h1>
       <div className={displayStyling}>
         <div className='mascot-wrapper'>

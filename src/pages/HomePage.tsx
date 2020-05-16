@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonRouterLink, IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import './HomePage.scss';
 import { StoreContext } from '../store'
 import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
+import { arrowUpCircle, add } from 'ionicons/icons';
 
 const slideOpts = {
   initialSlide: 0,
@@ -18,6 +19,7 @@ const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
+  const maxCountForTransaction = 5;
   const pageRef = useRef<HTMLElement>(null);
 
   function getTodayBalance(transactions: any) {
@@ -36,24 +38,68 @@ const HomePage: React.FC = () => {
   return useObserver(() => (
     <IonPage id="home-page">
       <IonContent>
-        <IonSlides pager={true} options={slideOpts} style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}>
+        <IonSlides
+          pager={true}
+          options={slideOpts}
+          style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}
+        >
           <IonSlide>
-            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
-              <HomePageHero period="Daily" balance={getTodayBalance(store.transactions)} spent={getTodayTotalExpenses(store.transactions)} />
-              <PreviewTransactions transactions={store.transactions} />
+            <div
+              style={{
+                width: "100%",
+                height: "100%"
+              }}
+            >
+              <HomePageHero
+                period="Daily"
+                balance={getTodayBalance(store.transactions)}
+                spent={getTodayTotalExpenses(store.transactions)}
+              />
+              <PreviewTransactions
+                transactions={store.transactions.slice(
+                  0,
+                  maxCountForTransaction
+                )}
+              />
+              <IonButton
+                fill="outline"
+                color="medium"
+                href="/transactions"
+              >
+                See All Transactions
+              </IonButton>
             </div>
           </IonSlide>
           <IonSlide>
-            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                textAlign: "left",
+                alignSelf: "flex-start",
+              }}
+            >
               <HomePageHero period="Weekly" balance={-234} spent={233} />
             </div>
           </IonSlide>
           <IonSlide>
-            <div style={{ width: "100%", height: "100%", textAlign: "left", alignSelf: "flex-start" }}>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                textAlign: "left",
+                alignSelf: "flex-start",
+              }}
+            >
               <HomePageHero period="Monthly" balance={234} spent={233} />
             </div>
           </IonSlide>
         </IonSlides>
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFabButton onClick={() => setShowAddTransactionModal(true)}>
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
       <IonModal
         isOpen={showAddTransactionModal}
@@ -61,10 +107,11 @@ const HomePage: React.FC = () => {
         swipeToClose={true}
         presentingElement={pageRef.current!}
       >
-        <AddTransactionModal onClose={() => setShowAddTransactionModal(false)} />
+        <AddTransactionModal
+          onClose={() => setShowAddTransactionModal(false)}
+        />
       </IonModal>
-      <IonButton fill='outline' color='medium' style={{ margin: '0 5% 0 5%' }} onClick={() => setShowAddTransactionModal(true)}>Add Transaction</IonButton>
-    </IonPage >
+    </IonPage>
   ));
 };
 

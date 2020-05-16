@@ -1,19 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   IonItem,
   IonLabel,
-  IonIcon,
   IonList,
   IonListHeader,
 } from "@ionic/react";
-import {
-  basketOutline,
-  logoAmazon,
-  carOutline,
-  cafeOutline,
-  chevronUpOutline,
-  chevronDownOutline,
-} from "ionicons/icons";
 import TransactionItem from "./TransactionItem";
 
 interface PreviewTransactionsProps {
