@@ -6,6 +6,7 @@ import AnalysisHero from '../components/AnalysisHero'
 import AnalysisCalendar from '../components/AnalysisCalendar';
 
 const AnalysisPage: React.FC = () => {
+  
   return (
     <IonPage id="analysis-page">
       <IonHeader>

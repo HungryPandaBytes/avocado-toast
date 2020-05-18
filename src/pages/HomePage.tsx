@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
     transactions.map((transaction: any) => todayTotalExpenses += parseInt(transaction.amount));
     return todayTotalExpenses;
   }
-
+  
 
   return useObserver(() => (
     <IonPage id="home-page">
@@ -62,9 +62,11 @@ const HomePage: React.FC = () => {
                 )}
               />
               <IonButton
+                expand='block'
                 fill="outline"
                 color="medium"
                 href="/transactions"
+                style={{ margin: '0 6% 2% 6%' }}
               >
                 See All Transactions
               </IonButton>
