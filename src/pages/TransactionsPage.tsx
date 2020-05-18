@@ -6,8 +6,9 @@ import { StoreContext } from '../store';
 
 
 const TransactionsPage: React.FC = () => {
-  const [searchText, setSearchText] = useState("");
   const store = React.useContext(StoreContext);
+
+  const [searchText, setSearchText] = useState("");
   const groupedTransactions = groupTransactionsByDate(store.transactions);
 
   return (
@@ -32,7 +33,7 @@ const TransactionsPage: React.FC = () => {
             Object.keys(groupedTransactions).map((date: string, index: number) => (
               <IonItemGroup key={`group-${index}`}>
                 <IonItemDivider sticky>
-                  <IonLabel>{date}</IonLabel>
+                  <IonLabel color='medium'>{date}</IonLabel>
                 </IonItemDivider>
                 {groupedTransactions[date].map((transaction: any, index: number) => (
                   <TransactionItem transaction={transaction} key={index} />
@@ -64,6 +65,7 @@ const groupTransactionsByDate = (transactions: any) => {
       groups[dateString] = [transaction]
     }
   })
+
   transactions.sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time))
 
   return groups;
