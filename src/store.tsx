@@ -43,7 +43,7 @@ transactions = [
     iconName: "logo-amazon",
     transaction_time: 'may 18 2020 11:00',
   },
-  {
+  { 
     id: 1,
     amount: 2,
     description: "Supreme",
