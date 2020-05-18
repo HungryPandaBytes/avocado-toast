@@ -3,7 +3,7 @@ import { StringLiteral } from "@babel/types";
 export interface Transaction {
   id?: number;
   amount?: number | string;
-  transaction_time?: Date;
+  transaction_time?: any;
   category_name?: string;
   description?: string;
   category_id?: string;

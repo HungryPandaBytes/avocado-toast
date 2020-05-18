@@ -41,28 +41,28 @@ transactions = [
     amount: 25,
     description: "Gigantic Pea",
     iconName: "logo-amazon",
-    transaction_time: new Date(),
+    transaction_time: 'may 18 2020 11:00',
   },
   {
     id: 1,
     amount: 2,
     description: "Supreme",
     iconName: "logo-amazon",
-    transaction_time: new Date(),
+    transaction_time: 'may 18 2020',
   },
   {
     id: 1,
     amount: 110,
     description: "Grocery",
     iconName: "logo-amazon",
-    transaction_time: new Date(),
+    transaction_time: 'may 17 2020',
   },
   {
     id: 1,
     amount: 4,
     description: "Silly String",
     iconName: "logo-amazon",
-    transaction_time: new Date(),
+    transaction_time: 'may 16 2020',
   },
 ];
 
