@@ -68,7 +68,7 @@ transactions = [
 
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
-    transactions: [...transactions, ...transactions],
+    transactions: transactions,
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 420 },
     addTransaction: (transaction: Transaction) => store.transactions.push(transaction),
     setBudget: (newBudget: Budget) => store.budget = newBudget

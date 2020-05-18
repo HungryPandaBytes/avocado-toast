@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
-  const maxCountForTransaction = 5;
+  const maxCountForTransaction = 10;
   const pageRef = useRef<HTMLElement>(null);
 
   function getTodayBalance(transactions: any) {
@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
     transactions.map((transaction: any) => todayTotalExpenses += parseInt(transaction.amount));
     return todayTotalExpenses;
   }
-  
+
 
   return useObserver(() => (
     <IonPage id="home-page">
