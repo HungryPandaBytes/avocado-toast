@@ -3,6 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, Ion
 import './TransactionsPage.scss';
 import TransactionItem from '../components/TransactionItem';
 import { StoreContext } from '../store';
+import { useObserver } from 'mobx-react';
 
 
 const TransactionsPage: React.FC = () => {
@@ -11,7 +12,7 @@ const TransactionsPage: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const groupedTransactions = groupTransactionsByDate(store.transactions);
 
-  return (
+  return useObserver(() => (
     <IonPage id="transactions-page">
       <IonHeader>
         <IonToolbar>
@@ -48,7 +49,7 @@ const TransactionsPage: React.FC = () => {
         </IonList>
       </IonContent>
     </IonPage>
-  );
+  ));
 };
 
 export default TransactionsPage;
@@ -56,7 +57,9 @@ export default TransactionsPage;
 const groupTransactionsByDate = (transactions: any) => {
   let groups: any = {};
 
-  transactions.map((transaction: any) => {
+  const sortedTransactions = transactions.slice().sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
+
+  sortedTransactions.map((transaction: any) => {
     var date = new Date(transaction.transaction_time)
     var dateString = date.toDateString().slice(4);
     if (groups.hasOwnProperty(dateString)) {
@@ -66,7 +69,6 @@ const groupTransactionsByDate = (transactions: any) => {
     }
   })
 
-  transactions.sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time))
 
   return groups;
 }
