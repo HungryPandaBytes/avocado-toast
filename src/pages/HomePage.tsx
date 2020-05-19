@@ -22,8 +22,8 @@ const HomePage: React.FC = () => {
   const maxCountForTransaction = 10;
   const pageRef = useRef<HTMLElement>(null);
 
-  function getTodayBalance(transactions: any) {
-    let todayDailyBalance = store.budget.budgetPerDay
+  function getTodayBalance(transactions: any, balance: any) {
+    let todayDailyBalance = balance
     transactions.map((transaction: any) => todayDailyBalance -= parseInt(transaction.amount));
     return todayDailyBalance;
   }
@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
             >
               <HomePageHero
                 period="Daily"
-                balance={getTodayBalance(store.transactions)}
+                balance={getTodayBalance(store.transactions, store.budget.budgetPerDay)}
                 spent={getTodayTotalExpenses(store.transactions)}
               />
               <PreviewTransactions
