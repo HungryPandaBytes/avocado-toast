@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import avocado from '../theme/avocado.png'
+import avocado from '../theme/ketnip.png'
 import { StoreContext } from '../store'
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
