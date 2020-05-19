@@ -12,16 +12,37 @@ interface AnalysisCalendarProps {
 const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
-  const daysInCurrentMonth = moment().daysInMonth();
 
-  console.log(daysInCurrentMonth)
-  const may = ["overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", "overbudget", "overbudget", 'underbudget', 'underbudget', 'underbudget', 'underbudget', 'underbudget', "overbudget", 'underbudget', 'underbudget', 'today', 'future', 'future', 'future', "future", "future", "future", 'future', 'future', 'future', 'future', 'future']
+  // To Do: set up overbudgetThisMonth in global state and modify the makeCalendarArray
+  const overbudgetThisMonth = [2, 3, 4, 8, 10]
+
+  function makeCalendarArray() {
+    const daysInCurrentMonth = moment().daysInMonth();
+    const dayOfTheMonth = moment().date()
+    const calendarArray = []
+    let pointer = 0;
+    for (var i = 1; i < daysInCurrentMonth; i++) {
+      if (i > dayOfTheMonth) {
+        calendarArray.push('future')
+      } else if (i === dayOfTheMonth) {
+        calendarArray.push('today')
+      } else if (i === overbudgetThisMonth[pointer]) {
+        calendarArray.push('overbudget')
+        pointer++;
+      } else {
+        calendarArray.push('underbudget')
+      }
+    }
+    return calendarArray;
+  }
+
+  const calendarArray = makeCalendarArray();
 
   return (
 
     <div id="analysis-calendar">
       <div className="calendar--wrapper">
-        {may.map((day, index) => {
+        {calendarArray.map((day, index) => {
           if (day === 'underbudget') {
             return (
               <span key={index} style={{ margin: '0 2% 0 2%' }}>
