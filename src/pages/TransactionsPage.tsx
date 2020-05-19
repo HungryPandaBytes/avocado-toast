@@ -7,7 +7,6 @@ import { useObserver } from 'mobx-react';
 
 
 const TransactionsPage: React.FC = () => {
-  const store = React.useContext(StoreContext);
 
   const [searchText, setSearchText] = useState("");
 
