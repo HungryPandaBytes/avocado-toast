@@ -1,6 +1,5 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import BudgetHero from '../components/BudgetHero';
 import './BudgetPage.scss';
 import BudgetInput from '../components/BudgetInput';
 
@@ -19,7 +18,6 @@ const BudgetPage: React.FC = () => {
             <IonTitle color='primary' size="large">Budget</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <BudgetHero />
         <BudgetInput />
       </IonContent>
     </IonPage>

@@ -28,12 +28,17 @@ const BudgetInput: React.FC<BudgetInputProps> = () => {
       budgetPerDay: budgetPerDay
     }
     store.setBudget(newBudget)
-    console.log("save budget", store.budget)
   }
 
   return (
     <div id="budget-input" style={{ position: 'relative', width: '100%' }}>
-
+      <div id="budget-hero">
+        <div className='hero--wrapper'>
+          <p>OK to spend</p>
+          <h3>${budgetPerDay}/day</h3>
+        </div>
+        <img className='image--wrapper' src={avocado} alt="Logo" />
+      </div>
       <IonItem lines='none'>
         <IonLabel color='medium' slot='start'>Income</IonLabel>
         <IonLabel color='primary' slot='end'>${Math.ceil(income / 30).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day</IonLabel>

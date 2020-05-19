@@ -1,3 +1,39 @@
+#budget-hero{
+  height: 30%;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-evenly; 
+
+
+  .hero--wrapper{
+    margin-top: 10%;
+    height: 120px;
+    width: 120px;
+    border-radius: 45%;
+    background: rgba(39, 174, 96, 0.2);
+    overflow: visible;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+
+    h3{
+      color:var(--ion-color-primary);
+      margin: 0 0 0 10%;
+      white-space: nowrap
+    }
+    p {
+      color:var(--ion-color-primary);
+      margin: 0 0 0 12%;
+    }
+  }
+  .image--wrapper{
+    height: 160px;
+    width: 120px;
+  }
+}
+
+
+
 #budget-input{
   color:var(--ion-color-primary);
 
