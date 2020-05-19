@@ -1,23 +1,24 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import moment from 'moment'
 import './AnalysisPage.scss'
 import AnalysisHero from '../components/AnalysisHero'
 import AnalysisCalendar from '../components/AnalysisCalendar';
 
 const AnalysisPage: React.FC = () => {
+  const currentMonth = moment('date/utc format').format('MMMM');
 
   return (
     <IonPage id="analysis-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>May</IonTitle>
+          <IonTitle>{currentMonth}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonHeader className="ion-no-border" collapse="condense">
           <IonToolbar>
-            <IonTitle color='tertiary' size="large">May</IonTitle>
+            <IonTitle color='tertiary' size="large">{currentMonth}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <AnalysisHero />
