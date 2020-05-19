@@ -15,7 +15,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   const store = React.useContext(StoreContext);
 
   function savingsThisMonth() {
-    const daysInCurrentMonth = moment().daysInMonth();
+    const daysInCurrentMonth = moment().date()
     // ToDo: aggregate all the expenses for the current Month and make totalExpenseThisMonth dynamic
     let totalExpenseThisMonth = 1000
     let budgetPerMonth = store.budget.budgetPerDay * daysInCurrentMonth;
