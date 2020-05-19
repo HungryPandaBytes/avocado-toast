@@ -42,7 +42,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
       <div className='progress-bar-wrapper'>
         <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved this month</p>
         <div className='progress-bar-light-grey'>
-          <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right' }}>{numberOfDaysLeft} days left</div>
+          <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}>{numberOfDaysLeft} days left</div>
         </div>
       </div>
     </div>
