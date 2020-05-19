@@ -6,7 +6,7 @@ import AnalysisHero from '../components/AnalysisHero'
 import AnalysisCalendar from '../components/AnalysisCalendar';
 
 const AnalysisPage: React.FC = () => {
-  
+
   return (
     <IonPage id="analysis-page">
       <IonHeader>
@@ -17,7 +17,7 @@ const AnalysisPage: React.FC = () => {
       <IonContent>
         <IonHeader className="ion-no-border" collapse="condense">
           <IonToolbar>
-            <IonTitle color='tertiary' size="large">Analysis</IonTitle>
+            <IonTitle color='tertiary' size="large">May</IonTitle>
           </IonToolbar>
         </IonHeader>
         <AnalysisHero />

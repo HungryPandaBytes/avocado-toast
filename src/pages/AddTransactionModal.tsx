@@ -60,6 +60,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   }
 
   function saveClickHandler(event: MouseEvent<HTMLIonButtonElement>, callback: any) {
+    event.preventDefault();
     const date = new Date(selectedDate)
 
     const newTransaction = {
@@ -74,15 +75,16 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       iconName: 'test',
       transaction_type: transactionType,
     }
-    event.preventDefault();
-    store.addTransaction(newTransaction)
-    setAmount("");
-    setDisplayBalance("");
-    setdistributionAmt("")
-    callback();
+
+    if (parseInt(amount) > 0) {
+      store.addTransaction(newTransaction)
+      setAmount("");
+      setDisplayBalance("");
+      setdistributionAmt("")
+      callback();
+    }
+
   }
-
-
 
   return (
     <>
