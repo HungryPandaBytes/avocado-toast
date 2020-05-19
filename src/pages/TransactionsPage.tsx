@@ -11,6 +11,8 @@ const TransactionsPage: React.FC = () => {
 
   const [searchText, setSearchText] = useState("");
   const groupedTransactions = groupTransactionsByDate(store.transactions);
+  const filteredTransactionsBySearch = filteredTransactions(store.transactions, searchText);
+  const groupedFilteredTransactions = groupTransactionsByDate(filteredTransactionsBySearch)
 
   return useObserver(() => (
     <IonPage id="transactions-page">
@@ -30,7 +32,19 @@ const TransactionsPage: React.FC = () => {
         </IonHeader>
 
         <IonList lines="full">
-          {store.transactions.length > 0 &&
+          {(store.transactions.length > 0 && searchText !== "") &&
+            Object.keys(groupedFilteredTransactions).map((date: string, index: number) => (
+              <IonItemGroup key={`group-${index}`}>
+                <IonItemDivider sticky>
+                  <IonLabel color='medium'>{date}</IonLabel>
+                </IonItemDivider>
+                {groupedFilteredTransactions[date].map((transaction: any, index: number) => (
+                  <TransactionItem transaction={transaction} key={index} />
+                ))}
+              </IonItemGroup>
+            ))}
+
+          {(store.transactions.length > 0 && searchText === "") &&
             Object.keys(groupedTransactions).map((date: string, index: number) => (
               <IonItemGroup key={`group-${index}`}>
                 <IonItemDivider sticky>
@@ -48,7 +62,7 @@ const TransactionsPage: React.FC = () => {
           )}
         </IonList>
       </IonContent>
-    </IonPage>
+    </IonPage >
   ));
 };
 
@@ -71,4 +85,9 @@ const groupTransactionsByDate = (transactions: any) => {
 
 
   return groups;
+}
+
+
+const filteredTransactions = (transactions: any, searchText: string) => {
+  return transactions.filter((transaction: any) => transaction.description.toLowerCase().indexOf(searchText.toLowerCase()) !== -1)
 }
