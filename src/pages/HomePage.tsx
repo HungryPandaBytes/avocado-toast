@@ -24,7 +24,13 @@ const HomePage: React.FC = () => {
 
   function getTodayBalance(transactions: any, balance: any) {
     let todayDailyBalance = balance
-    transactions.map((transaction: any) => todayDailyBalance -= parseInt(transaction.amount));
+    transactions.map((transaction: any) => {
+      if (transaction.transaction_type == 'Income') {
+        todayDailyBalance += parseInt(transaction.amount)
+      } else {
+        todayDailyBalance -= parseInt(transaction.amount)
+      }
+    });
     return todayDailyBalance;
   }
 
