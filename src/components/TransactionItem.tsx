@@ -53,13 +53,18 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
             </p>
           </IonNote>
         </IonLabel>
-        <IonLabel class="ion-text-right" style={{ marginRight: "10%" }} color='medium'
-        >
-          -$
-          {parseInt(transaction.amount).toLocaleString(navigator.language, {
-            minimumFractionDigits: 0,
-          })}
-        </IonLabel>
+        {transaction.transaction_type !== 'Income' &&
+          <IonLabel class="ion-text-right" style={{ marginRight: "10%" }} color='medium'>
+            -${parseInt(transaction.amount).toLocaleString(navigator.language, {
+              minimumFractionDigits: 0,
+            })}
+          </IonLabel>}
+        {transaction.transaction_type === 'Income' &&
+          <IonLabel class="ion-text-right" style={{ marginRight: "10%" }} color='medium'>
+            +${parseInt(transaction.amount).toLocaleString(navigator.language, {
+              minimumFractionDigits: 0,
+            })}
+          </IonLabel>}
       </IonItem >
       <IonItemOptions>
         <IonItemOption

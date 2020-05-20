@@ -6,7 +6,7 @@ import AnalysisHero from '../components/AnalysisHero'
 import AnalysisCalendar from '../components/AnalysisCalendar';
 
 const AnalysisPage: React.FC = () => {
-  const currentMonth = moment('date/utc format').format('MMMM');
+  const currentMonth = "May";
 
   return (
     <IonPage id="analysis-page">

@@ -21,11 +21,16 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [category, setCategory] = useState("General");
   const [selectedDate, setSelectedDate] = useState<string>(`${todayTimeStamp}`);
   const [checked, setChecked] = useState(false);
+  const [transactionType, setTransactionType] = useState("Expense");
 
-  let transactionType = "Expense"
-  function setTransactionTypeHandler(event: any) {
-    transactionType = event.detail.value
-    console.log(transactionType)
+  function setTransactionTypeHandler(transactionOption: any) {
+    if (transactionOption == 'Expense') {
+      setTransactionType(transactionOption);
+      setCategory("General")
+    } else {
+      setTransactionType(transactionOption);
+      setCategory(transactionOption)
+    }
   }
 
   function numpadClickHandler(event: MouseEvent<HTMLIonButtonElement>) {
@@ -34,7 +39,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   }
 
   function displayAmount(numStr: string) {
-
     let tempAmount: string;
     if (amount.length < 12 && !(amount.length === 0 && numStr === "0")) {
       tempAmount = amount + numStr
@@ -63,6 +67,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     event.preventDefault();
     const date = new Date(selectedDate)
 
+
     const newTransaction = {
       id: 1,
       amount: amount,
@@ -75,6 +80,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       iconName: 'test',
       transaction_type: transactionType,
     }
+    console.log({ newTransaction })
 
     if (parseInt(amount) > 0) {
       store.addTransaction(newTransaction)
@@ -104,7 +110,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             > </IonDatetime>
           </IonChip>
         </IonToolbar>
-        <IonSegment value="Expense" onIonChange={setTransactionTypeHandler}>
+        <IonSegment value={transactionType} onIonChange={e => setTransactionTypeHandler(e.detail.value!)}>
           <IonSegmentButton value="Expense">
             <IonLabel>Expense</IonLabel>
           </IonSegmentButton>
