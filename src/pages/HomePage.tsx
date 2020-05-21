@@ -12,7 +12,12 @@ const slideOpts = {
   initialSlide: 0,
   loop: true,
   speed: 200,
-  spaceBetween: 40
+  spaceBetween: 40,
+  on: {
+    ionSlideTouchEnd() {
+      window.scrollTo(0, 0)
+    }
+  }
 };
 
 const HomePage: React.FC = () => {
@@ -21,6 +26,8 @@ const HomePage: React.FC = () => {
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const maxCountForTransaction = 10;
   const pageRef = useRef<HTMLElement>(null);
+  const slideRef = useRef<HTMLIonSlideElement>(null);
+
 
   function getTodayBalance(transactions: any, balance: any) {
     let todayDailyBalance = balance
@@ -79,7 +86,7 @@ const HomePage: React.FC = () => {
               </IonButton>
             </div>
           </IonSlide>
-          <IonSlide>
+          <IonSlide ref={slideRef}>
             <div
               style={{
                 width: "100%",
@@ -91,7 +98,7 @@ const HomePage: React.FC = () => {
               <HomePageHero period="Weekly" balance={-234} spent={233} />
             </div>
           </IonSlide>
-          <IonSlide>
+          <IonSlide ref={slideRef}>
             <div
               style={{
                 width: "100%",

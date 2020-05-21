@@ -28,8 +28,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   transaction, ignoreTransaction
 }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
-  const transactionColor = transaction.ignore ? "grey" : "default"
-  const transactionIconColor = transaction.ignore ? "grey" : getIconColor('basket-outline')
+  const transactionColor = transaction.ignore ? "grey" : "var(--ion-color-primary)"
+  const transactionIconColor = transaction.ignore ? "medium" : getIconColor('basket-outline')
   const store = React.useContext(StoreContext);
 
   const ignoreHandler = () => {
@@ -56,8 +56,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           icon={getIcon(transaction.iconName)}
           key={transaction.id}
         ></IonIcon>
-        <IonLabel style={{ borderLeft: "2px", paddingLeft: "4%" }}>
-          <h2 style={{ color: 'var(--ion-color-primary)' }} >{transaction.description}</h2>
+        <IonLabel style={{ color: `${transactionColor}`, borderLeft: "2px", paddingLeft: "4%" }}>
+          <h2 style={{ color: `${transactionColor}` }} >{transaction.description}</h2>
           <IonNote>
             <p>
               <Moment fromNow>{transaction.transaction_time}</Moment>
