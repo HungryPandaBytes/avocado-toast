@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import { StoreContext } from '../store';
 import TransactionItem from "./TransactionItem";
+import { useObserver } from "mobx-react";
 
 interface TransactionListProps {
   searchText: string;
@@ -20,7 +21,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
   const filteredTransactionsBySearch = filteredTransactions(store.transactions, searchText);
   const groupedFilteredTransactions = groupTransactionsByDate(filteredTransactionsBySearch)
 
-  return (
+  return useObserver(() => (
     <IonList lines="full">
       {(store.transactions.length > 0 && searchText !== "") &&
         Object.keys(groupedFilteredTransactions).map((date: string, index: number) => (
@@ -29,7 +30,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
               <IonLabel color='medium'>{date}</IonLabel>
             </IonItemDivider>
             {groupedFilteredTransactions[date].map((transaction: any, index: number) => (
-              <TransactionItem transaction={transaction} key={index} />
+              <TransactionItem transaction={transaction} ignoreTransaction={store.ignoreTransaction} key={index} />
             ))}
           </IonItemGroup>
         ))}
@@ -41,7 +42,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
               <IonLabel color='medium'>{date}</IonLabel>
             </IonItemDivider>
             {groupedTransactions[date].map((transaction: any, index: number) => (
-              <TransactionItem transaction={transaction} key={index} />
+              <TransactionItem transaction={transaction} ignoreTransaction={store.ignoreTransaction} key={index} />
             ))}
           </IonItemGroup>
         ))}
@@ -52,7 +53,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
       )}
     </IonList>
 
-  );
+  ));
 };
 
 export default TransactionList;

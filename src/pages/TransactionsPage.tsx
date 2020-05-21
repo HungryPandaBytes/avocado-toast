@@ -3,14 +3,13 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, Ion
 import './TransactionsPage.scss';
 import TransactionList from '../components/TransactionList';
 import { StoreContext } from '../store';
-import { useObserver } from 'mobx-react';
 
 
 const TransactionsPage: React.FC = () => {
 
   const [searchText, setSearchText] = useState("");
 
-  return useObserver(() => (
+  return (
     <IonPage id="transactions-page">
       <IonHeader>
         <IonToolbar>
@@ -29,7 +28,7 @@ const TransactionsPage: React.FC = () => {
         <TransactionList searchText={searchText} />
       </IonContent>
     </IonPage >
-  ));
+  );
 };
 
 export default TransactionsPage;

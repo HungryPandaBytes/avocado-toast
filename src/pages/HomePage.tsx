@@ -66,6 +66,7 @@ const HomePage: React.FC = () => {
                   0,
                   maxCountForTransaction
                 )}
+                ignoreTransaction={store.ignoreTransaction}
               />
               <IonButton
                 expand='block'

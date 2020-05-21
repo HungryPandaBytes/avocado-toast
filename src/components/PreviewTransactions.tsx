@@ -8,10 +8,11 @@ import {
 import TransactionItem from "./TransactionItem";
 
 interface PreviewTransactionsProps {
-  transactions: any
+  transactions: any;
+  ignoreTransaction: any;
 }
 const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
-  transactions
+  transactions, ignoreTransaction
 }) => {
 
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
@@ -34,6 +35,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
           .map((transaction: any, index: number) => (
             <TransactionItem
               transaction={transaction}
+              ignoreTransaction={ignoreTransaction}
               key={index}
             />
           ))}
