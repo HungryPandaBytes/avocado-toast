@@ -1,7 +1,7 @@
 import moment from 'moment';
 import expenseUtils from './expense';
 
-const balanceUtils = {
+const balanceHelpers = {
   getTodayBalance: function (transactions: any, budgetPerDay: any) {
     let todayDailyBalance = budgetPerDay
     todayDailyBalance -= expenseUtils.getTodayTotalExpenses(transactions)
@@ -20,5 +20,5 @@ const balanceUtils = {
   }
 }
 
-export default balanceUtils;
+export default balanceHelpers;
 

@@ -7,8 +7,8 @@ import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
-import balanceUtils from '../utils/balance';
-import expenseUtils from '../utils/expense';
+import balanceHelpers from '../Helpers/balance';
+import expenseHelpers from '../Helpers/expense';
 
 
 const slideOpts = {
@@ -51,8 +51,8 @@ const HomePage: React.FC = () => {
             >
               <HomePageHero
                 period="Daily"
-                balance={balanceUtils.getTodayBalance(allTransactions, budgetPerDay)}
-                spent={expenseUtils.getTodayTotalExpenses(allTransactions)}
+                balance={balanceHelpers.getTodayBalance(allTransactions, budgetPerDay)}
+                spent={expenseHelpers.getTodayTotalExpenses(allTransactions)}
               />
               <PreviewTransactions
                 transactions={store.transactions.slice(
@@ -81,7 +81,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Weekly" balance={balanceUtils.getThisWeekBalance(allTransactions, budgetPerDay)} spent={expenseUtils.getThisWeekTotalExpenses(allTransactions)} />
+              <HomePageHero period="Weekly" balance={balanceHelpers.getThisWeekBalance(allTransactions, budgetPerDay)} spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)} />
             </div>
           </IonSlide>
           <IonSlide ref={slideRef}>
@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Monthly" balance={balanceUtils.getThisMonthBalance(allTransactions, budgetPerDay)} spent={expenseUtils.getThisMonthTotalExpenses(allTransactions)} />
+              <HomePageHero period="Monthly" balance={balanceHelpers.getThisMonthBalance(allTransactions, budgetPerDay)} spent={expenseHelpers.getThisMonthTotalExpenses(allTransactions)} />
             </div>
           </IonSlide>
         </IonSlides>

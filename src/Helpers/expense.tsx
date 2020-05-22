@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const expenseUtils = {
+const expenseHelpers = {
 
   getTodayTotalExpenses: function (transactions: any) {
     let todayTotalExpenses = 0
@@ -39,4 +39,4 @@ const expenseUtils = {
   }
 }
 
-export default expenseUtils;
+export default expenseHelpers;
