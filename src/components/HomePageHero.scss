@@ -35,10 +35,6 @@
       color: white;
      
     }
-    p{
-      text-align: right;
-      margin: 1% 5% 0 0;
-    }
   }
 
   .progress-bar-light-grey{
@@ -63,7 +59,12 @@
     height:24px;
   }
   
-
+  .bottom-display-wrapper{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1% 6% 0 6%;
+  }
 
   
 }
