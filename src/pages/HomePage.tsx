@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonRouterLink, IonFab, IonFabButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import './HomePage.scss';
 import { StoreContext } from '../store'
@@ -31,7 +31,8 @@ const HomePage: React.FC = () => {
   const pageRef = useRef<HTMLElement>(null);
   const slideRef = useRef<HTMLIonSlideElement>(null);
 
-
+  const allTransactions = store.transactions;
+  const budgetPerDay = store.budget.budgetPerDay;
 
   return useObserver(() => (
     <IonPage id="home-page">
@@ -50,8 +51,8 @@ const HomePage: React.FC = () => {
             >
               <HomePageHero
                 period="Daily"
-                balance={balanceUtils.getTodayBalance(store.transactions, store.budget.budgetPerDay)}
-                spent={expenseUtils.getTodayTotalExpenses(store.transactions)}
+                balance={balanceUtils.getTodayBalance(allTransactions, budgetPerDay)}
+                spent={expenseUtils.getTodayTotalExpenses(allTransactions)}
               />
               <PreviewTransactions
                 transactions={store.transactions.slice(
@@ -80,7 +81,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Weekly" balance={balanceUtils.getThisWeekBalance(store.transactions, store.budget.budgetPerDay)} spent={expenseUtils.getThisWeekTotalExpenses(store.transactions)} />
+              <HomePageHero period="Weekly" balance={balanceUtils.getThisWeekBalance(allTransactions, budgetPerDay)} spent={expenseUtils.getThisWeekTotalExpenses(allTransactions)} />
             </div>
           </IonSlide>
           <IonSlide ref={slideRef}>
@@ -92,7 +93,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Monthly" balance={balanceUtils.getThisMonthBalance(store.transactions, store.budget.budgetPerDay)} spent={expenseUtils.getThisMonthTotalExpenses(store.transactions)} />
+              <HomePageHero period="Monthly" balance={balanceUtils.getThisMonthBalance(allTransactions, budgetPerDay)} spent={expenseUtils.getThisMonthTotalExpenses(allTransactions)} />
             </div>
           </IonSlide>
         </IonSlides>
