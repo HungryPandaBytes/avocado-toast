@@ -41,8 +41,7 @@ const defaultContext: contextInterface = {
         return transaction;
       }
     })
-    console.log({ ...defaultContext, transactions: updatedTransactions })
-    console.log(defaultContext.transactions, 'after deleting a transaction')
+
     return { ...defaultContext, transactions: updatedTransactions };
   },
   setBudget: (newBudget: Budget) => defaultContext.budget = newBudget
@@ -107,9 +106,7 @@ export const StoreProvider = ({ children }: any) => {
           return transaction;
         }
       })
-      console.log({ ...store, transactions: updatedTransactions })
-      console.log(store.transactions)
-      return { ...store, transactions: updatedTransactions };
+      store.transactions = updatedTransactions;
     },
     deleteTransaction: (id: any) => {
       const updatedTransactions = store.transactions.filter((transaction: any) => {
@@ -117,9 +114,7 @@ export const StoreProvider = ({ children }: any) => {
           return transaction;
         }
       })
-      console.log({ ...store, transactions: updatedTransactions })
-      console.log(store.transactions, 'after deleting a transaction')
-      return { ...store, transactions: updatedTransactions };
+      store.transactions = updatedTransactions
     },
     setBudget: (newBudget: Budget) => store.budget = newBudget
   }));

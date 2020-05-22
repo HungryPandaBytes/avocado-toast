@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import Moment from 'react-moment';
 import { StoreContext } from '../store';
-
-
 import {
   IonItem,
   IonLabel,
@@ -18,7 +16,6 @@ import {
   carOutline,
   cafeOutline,
 } from "ionicons/icons";
-import { useObserver } from "mobx-react";
 
 interface TransactionItemProps {
   transaction: any;
