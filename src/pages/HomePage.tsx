@@ -42,6 +42,13 @@ const HomePage: React.FC = () => {
     return thisWeekBalance;
   }
 
+  function getThisMonthBalance(transactions: any, budgetPerDay: any) {
+    const daysInMonth = moment().daysInMonth()
+    let thisMonthBalance = budgetPerDay * daysInMonth;
+    thisMonthBalance -= getThisMonthTotalExpenses(transactions);
+    return thisMonthBalance;
+  }
+
   function getTodayTotalExpenses(transactions: any) {
     let todayTotalExpenses = 0
     let today = moment();
@@ -63,8 +70,21 @@ const HomePage: React.FC = () => {
         thisWeekTotalExpenses += parseInt(transaction.amount)
       }
     });
-    console.log(thisWeekTotalExpenses)
     return thisWeekTotalExpenses;
+  }
+
+  function getThisMonthTotalExpenses(transactions: any) {
+    let thisMonthTotalExpenses = 0;
+    const today = moment();
+    const firstDayofMonth = moment().startOf('month');
+    const daysInMonth = moment().daysInMonth()
+
+    transactions.map((transaction: any) => {
+      if (today.diff(firstDayofMonth, 'day') <= daysInMonth) {
+        thisMonthTotalExpenses += parseInt(transaction.amount)
+      }
+    });
+    return thisMonthTotalExpenses;
   }
 
 
@@ -127,7 +147,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Monthly" balance={234} spent={233} />
+              <HomePageHero period="Monthly" balance={getThisMonthBalance(store.transactions, store.budget.budgetPerDay)} spent={getThisMonthTotalExpenses(store.transactions)} />
             </div>
           </IonSlide>
         </IonSlides>
