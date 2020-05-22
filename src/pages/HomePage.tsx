@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonRouterLink, IonFab, IonFabButton, IonIcon } from '@ionic/react';
+import { add } from 'ionicons/icons';
 import './HomePage.scss';
 import { StoreContext } from '../store'
 import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
-import moment from 'moment';
-import { arrowUpCircle, add } from 'ionicons/icons';
+import balanceUtils from '../utils/balance';
+import expenseUtils from '../utils/expense';
+
 
 const slideOpts = {
   initialSlide: 0,
@@ -30,63 +32,6 @@ const HomePage: React.FC = () => {
   const slideRef = useRef<HTMLIonSlideElement>(null);
 
 
-  function getTodayBalance(transactions: any, budgetPerDay: any) {
-    let todayDailyBalance = budgetPerDay
-    todayDailyBalance -= getTodayTotalExpenses(transactions)
-    return todayDailyBalance;
-  }
-
-  function getThisWeekBalance(transactions: any, budgetPerDay: any) {
-    let thisWeekBalance = budgetPerDay * 7;
-    thisWeekBalance -= getThisWeekTotalExpenses(transactions);
-    return thisWeekBalance;
-  }
-
-  function getThisMonthBalance(transactions: any, budgetPerDay: any) {
-    const daysInMonth = moment().daysInMonth()
-    let thisMonthBalance = budgetPerDay * daysInMonth;
-    thisMonthBalance -= getThisMonthTotalExpenses(transactions);
-    return thisMonthBalance;
-  }
-
-  function getTodayTotalExpenses(transactions: any) {
-    let todayTotalExpenses = 0
-    let today = moment();
-    transactions.map((transaction: any) => {
-      if (moment(transaction.transaction_time).isSame(today, 'day')) {
-        todayTotalExpenses += parseInt(transaction.amount)
-      }
-    });
-    return todayTotalExpenses;
-  }
-
-  function getThisWeekTotalExpenses(transactions: any) {
-    let thisWeekTotalExpenses = 0;
-    let today = moment();
-    let lastMonday = moment().startOf('isoWeek');
-
-    transactions.map((transaction: any) => {
-      if (today.diff(lastMonday, 'day') <= 7) {
-        thisWeekTotalExpenses += parseInt(transaction.amount)
-      }
-    });
-    return thisWeekTotalExpenses;
-  }
-
-  function getThisMonthTotalExpenses(transactions: any) {
-    let thisMonthTotalExpenses = 0;
-    const today = moment();
-    const firstDayofMonth = moment().startOf('month');
-    const daysInMonth = moment().daysInMonth()
-
-    transactions.map((transaction: any) => {
-      if (today.diff(firstDayofMonth, 'day') <= daysInMonth) {
-        thisMonthTotalExpenses += parseInt(transaction.amount)
-      }
-    });
-    return thisMonthTotalExpenses;
-  }
-
 
   return useObserver(() => (
     <IonPage id="home-page">
@@ -105,8 +50,8 @@ const HomePage: React.FC = () => {
             >
               <HomePageHero
                 period="Daily"
-                balance={getTodayBalance(store.transactions, store.budget.budgetPerDay)}
-                spent={getTodayTotalExpenses(store.transactions)}
+                balance={balanceUtils.getTodayBalance(store.transactions, store.budget.budgetPerDay)}
+                spent={expenseUtils.getTodayTotalExpenses(store.transactions)}
               />
               <PreviewTransactions
                 transactions={store.transactions.slice(
@@ -135,7 +80,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Weekly" balance={getThisWeekBalance(store.transactions, store.budget.budgetPerDay)} spent={getThisWeekTotalExpenses(store.transactions)} />
+              <HomePageHero period="Weekly" balance={balanceUtils.getThisWeekBalance(store.transactions, store.budget.budgetPerDay)} spent={expenseUtils.getThisWeekTotalExpenses(store.transactions)} />
             </div>
           </IonSlide>
           <IonSlide ref={slideRef}>
@@ -147,7 +92,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Monthly" balance={getThisMonthBalance(store.transactions, store.budget.budgetPerDay)} spent={getThisMonthTotalExpenses(store.transactions)} />
+              <HomePageHero period="Monthly" balance={balanceUtils.getThisMonthBalance(store.transactions, store.budget.budgetPerDay)} spent={expenseUtils.getThisMonthTotalExpenses(store.transactions)} />
             </div>
           </IonSlide>
         </IonSlides>
