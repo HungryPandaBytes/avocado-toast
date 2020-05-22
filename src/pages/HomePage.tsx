@@ -30,10 +30,16 @@ const HomePage: React.FC = () => {
   const slideRef = useRef<HTMLIonSlideElement>(null);
 
 
-  function getTodayBalance(transactions: any, balance: any) {
-    let todayDailyBalance = balance
-    balance -= getTodayTotalExpenses(transactions)
+  function getTodayBalance(transactions: any, budgetPerDay: any) {
+    let todayDailyBalance = budgetPerDay
+    todayDailyBalance -= getTodayTotalExpenses(transactions)
     return todayDailyBalance;
+  }
+
+  function getThisWeekBalance(transactions: any, budgetPerDay: any) {
+    let thisWeekBalance = budgetPerDay * 7;
+    thisWeekBalance -= getThisWeekTotalExpenses(transactions);
+    return thisWeekBalance;
   }
 
   function getTodayTotalExpenses(transactions: any) {
@@ -45,6 +51,20 @@ const HomePage: React.FC = () => {
       }
     });
     return todayTotalExpenses;
+  }
+
+  function getThisWeekTotalExpenses(transactions: any) {
+    let thisWeekTotalExpenses = 0;
+    let today = moment();
+    let lastMonday = moment().startOf('isoWeek');
+
+    transactions.map((transaction: any) => {
+      if (today.diff(lastMonday, 'day') <= 7) {
+        thisWeekTotalExpenses += parseInt(transaction.amount)
+      }
+    });
+    console.log(thisWeekTotalExpenses)
+    return thisWeekTotalExpenses;
   }
 
 
@@ -95,7 +115,7 @@ const HomePage: React.FC = () => {
                 alignSelf: "flex-start",
               }}
             >
-              <HomePageHero period="Weekly" balance={-234} spent={233} />
+              <HomePageHero period="Weekly" balance={getThisWeekBalance(store.transactions, store.budget.budgetPerDay)} spent={getThisWeekTotalExpenses(store.transactions)} />
             </div>
           </IonSlide>
           <IonSlide ref={slideRef}>
