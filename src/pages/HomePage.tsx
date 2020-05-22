@@ -6,6 +6,7 @@ import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
+import moment from 'moment';
 import { arrowUpCircle, add } from 'ionicons/icons';
 
 const slideOpts = {
@@ -31,19 +32,18 @@ const HomePage: React.FC = () => {
 
   function getTodayBalance(transactions: any, balance: any) {
     let todayDailyBalance = balance
-    transactions.map((transaction: any) => {
-      if (transaction.transaction_type == 'Income') {
-        todayDailyBalance += parseInt(transaction.amount)
-      } else {
-        todayDailyBalance -= parseInt(transaction.amount)
-      }
-    });
+    balance -= getTodayTotalExpenses(transactions)
     return todayDailyBalance;
   }
 
   function getTodayTotalExpenses(transactions: any) {
     let todayTotalExpenses = 0
-    transactions.map((transaction: any) => todayTotalExpenses += parseInt(transaction.amount));
+    let today = moment();
+    transactions.map((transaction: any) => {
+      if (moment(transaction.transaction_time).isSame(today, 'day')) {
+        todayTotalExpenses += parseInt(transaction.amount)
+      }
+    });
     return todayTotalExpenses;
   }
 
