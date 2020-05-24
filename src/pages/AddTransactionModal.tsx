@@ -123,6 +123,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
 
       <IonContent className='expense-view'>
+
         <div className='expense-view'>
           <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
             {(amount && checked) && <div className='distribution-amount'>
@@ -139,9 +140,32 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             </IonItem>
           </div>
         </div>
+
         <div className='input-container'>
 
           <div className='expense-typepad-wrapper'>
+            <div className='split-date-picker-wrapper'>
+              <IonItem lines="none" color='primary'>
+                <IonLabel >Split Start Date</IonLabel>
+                <IonDatetime
+                  min="2019-02"
+                  max="2025"
+                  displayFormat="MMM DD YYYY"
+                  monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                  value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}
+                > </IonDatetime>
+              </IonItem>
+              <IonItem lines="none" color='primary'>
+                <IonLabel>Split End Date</IonLabel>
+                <IonDatetime
+                  min="2019-02"
+                  max="2025"
+                  displayFormat="MMM DD YYYY"
+                  monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                  value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}
+                > </IonDatetime>
+              </IonItem>
+            </div>
             <IonItem color="none" lines="none" class='category-picker-container'>
               <IonLabel class="cateory-picker" position='fixed'>Cateogry:</IonLabel>
               <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
