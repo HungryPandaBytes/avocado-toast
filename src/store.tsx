@@ -104,7 +104,7 @@ export const StoreProvider = ({ children }: any) => {
       store.transactions.push(transaction);
       const transactionsCount = store.transactions.length;
 
-      // only sort transaction if th newly added transaction is older than the previous transaction
+      // only sort transaction if the newly added transaction is older than the previous transaction
       if (transactionsCount > 1 && store.transactions[transactionsCount - 2].transaction_time > transaction.transaction_time) {
         store.transactions = store.transactions.sort(compareTransactions)
       }
