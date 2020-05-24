@@ -58,17 +58,16 @@ const HomePage: React.FC = () => {
                 )}
                 ignoreTransaction={store.ignoreTransaction}
               />
-              {store.transactions.length >= maxCountForTransaction && 
-                <IonButton
-                  expand="block"
-                  fill="outline"
-                  color="medium"
-                  href="/transactions"
-                  style={{ margin: "0 6% 2% 6%" }}
-                >
-                  See All Transactions
-                </IonButton>
-              }
+
+              <IonButton
+                expand="block"
+                fill="outline"
+                color="medium"
+                href="/transactions"
+                style={{ margin: "0 6% 2% 6%" }}
+              >
+                See All Transactions
+              </IonButton>
             </div>
           </IonSlide>
           <IonSlide>
