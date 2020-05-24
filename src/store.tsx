@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocalStore } from 'mobx-react'
 import { Budget } from './models/Budget'
 import { Transaction } from './models/Transaction'
+import AddTransactionModal from './pages/AddTransactionModal';
 
 
 interface stateInterface {
@@ -92,11 +93,22 @@ transactions = [
   },
 ];
 
+const compareTransactions =
+  (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
+
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
-    transactions: transactions,
+    transactions: transactions.sort(compareTransactions),
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 420 },
-    addTransaction: (transaction: Transaction) => store.transactions.push(transaction),
+    addTransaction: (transaction: Transaction) => {
+      store.transactions.push(transaction);
+      const transactionsCount = store.transactions.length;
+
+      // only sort transaction if th newly added transaction is older than the previous transaction
+      if (transactionsCount > 1 && store.transactions[transactionsCount - 2].transaction_time > transaction.transaction_time) {
+        store.transactions = store.transactions.sort(compareTransactions)
+      }
+    },
     ignoreTransaction: (id: any) => {
       const updatedTransactions = store.transactions.map((transaction: any) => {
         if (transaction.id === id) {

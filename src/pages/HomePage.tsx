@@ -9,6 +9,7 @@ import AddTransactionModal from './AddTransactionModal';
 import { useObserver } from 'mobx-react';
 import balanceHelpers from '../Helpers/balance';
 import expenseHelpers from '../Helpers/expense';
+import WeeklySlide from '../components/WeeklySlide';
 
 
 const slideOpts = {
@@ -84,6 +85,7 @@ const HomePage: React.FC = () => {
                 spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)}
               />
             </div>
+             <WeeklySlide />
           </IonSlide>
           <IonSlide>
             <div

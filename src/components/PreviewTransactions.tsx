@@ -20,7 +20,6 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
   const transactionListRef = useRef<HTMLIonListElement>(null);
-  const sortedTransactions = transactions.slice().sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
   return (
     <IonList ref={transactionListRef} lines="full" style={{ marginTop: '5%' }}>
       <IonListHeader
@@ -32,18 +31,20 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
       </IonListHeader>
 
-      {sortedTransactions.length > 0 &&
-        sortedTransactions
+      {transactions.length > 0 &&
+        transactions
           .slice(0, maxCountForTransactions)
-          .map((transaction: any, index: number) => (
-            <TransactionItem
+          .map((_: any, index: number) => {
+            const transaction = transactions[transactions.length - 1 - index];
+
+            return (<TransactionItem
               transaction={transaction}
               ignoreTransaction={ignoreTransaction}
               key={index}
-            />
-          ))}
+            />)
+          })}
 
-      {sortedTransactions.length === 0 && (
+      {transactions.length === 0 && (
         <IonItem>
           <IonLabel>Add a transaction</IonLabel>
         </IonItem>
