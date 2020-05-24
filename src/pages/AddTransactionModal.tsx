@@ -3,6 +3,7 @@ import {
   IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonRippleEffect, IonPage
 } from '@ionic/react';
 import './AddTransactionModal.scss';
+import moment from 'moment'
 import { calendar } from 'ionicons/icons';
 import { StoreContext } from '../store';
 
@@ -13,13 +14,18 @@ interface AddTransactionModalProps {
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
   const store = React.useContext(StoreContext);
 
-  const todayTimeStamp = new Date().toISOString();
+  const cuurentTimeStamp = moment();
+  const oneMonthFromNow = moment().add(1, 'month');
+  const numberOfSplitDays = oneMonthFromNow.diff(cuurentTimeStamp, 'days');
 
   const [displayBalance, setDisplayBalance] = useState("");
   const [amount, setAmount] = useState("");
   const [distributionAmt, setdistributionAmt] = useState("");
   const [category, setCategory] = useState("General");
-  const [selectedDate, setSelectedDate] = useState<string>(`${todayTimeStamp}`);
+  const [selectedDate, setSelectedDate] = useState<string>(`${cuurentTimeStamp}`);
+  const [splitStartDate, setSplitStartDate] = useState<string>(`${cuurentTimeStamp}`);
+  const [splitEndDate, setSplitEndDate] = useState<string>(`${oneMonthFromNow}`);
+
   const [checked, setChecked] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
 
@@ -50,7 +56,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   }
 
   function distributionHandler() {
-    var distributionPerDay = (Math.ceil(parseInt(amount) / 30)) + ""
+    var distributionPerDay = (Math.ceil(parseInt(amount) / numberOfSplitDays)) + ""
     setdistributionAmt(distributionPerDay)
   }
 
@@ -127,7 +133,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
         <div className='expense-view'>
           <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
             {(amount && checked) && <div className='distribution-amount'>
-              <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day over 30 days</h5></div>}
+              <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day over {numberOfSplitDays} days</h5></div>}
           </div>
 
           <div className='distribution-toggle'>
@@ -142,30 +148,31 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
         </div>
 
         <div className='input-container'>
-
           <div className='expense-typepad-wrapper'>
-            <div className='split-date-picker-wrapper'>
-              <IonItem lines="none" color='primary'>
-                <IonLabel >Split Start Date</IonLabel>
-                <IonDatetime
-                  min="2019-02"
-                  max="2025"
-                  displayFormat="MMM DD YYYY"
-                  monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-                  value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}
-                > </IonDatetime>
-              </IonItem>
-              <IonItem lines="none" color='primary'>
-                <IonLabel>Split End Date</IonLabel>
-                <IonDatetime
-                  min="2019-02"
-                  max="2025"
-                  displayFormat="MMM DD YYYY"
-                  monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-                  value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}
-                > </IonDatetime>
-              </IonItem>
-            </div>
+            {checked &&
+              <div className='split-date-picker-wrapper'>
+                <IonItem lines="none" color='primary'>
+                  <IonLabel >Split Start Date</IonLabel>
+                  <IonDatetime
+                    min="2019-02"
+                    max="2025"
+                    displayFormat="MMM DD YYYY"
+                    monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                    value={splitStartDate} onIonChange={e => setSplitStartDate(e.detail.value!)}
+                  > </IonDatetime>
+                </IonItem>
+                <IonItem lines="none" color='primary'>
+                  <IonLabel>Split End Date</IonLabel>
+                  <IonDatetime
+                    min="2019-02"
+                    max="2025"
+                    displayFormat="MMM DD YYYY"
+                    monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+                    value={splitEndDate} onIonChange={e => setSplitEndDate(e.detail.value!)}
+                  > </IonDatetime>
+                </IonItem>
+              </div>}
+
             <IonItem color="none" lines="none" class='category-picker-container'>
               <IonLabel class="cateory-picker" position='fixed'>Cateogry:</IonLabel>
               <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
