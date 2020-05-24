@@ -26,7 +26,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [selectedDate, setSelectedDate] = useState<string>(`${cuurentTimeStamp}`);
   const [splitStartDate, setSplitStartDate] = useState<string>(`${cuurentTimeStamp}`);
   const [splitEndDate, setSplitEndDate] = useState<string>(`${oneMonthFromNow}`);
-  const numberOfSplitDays = moment(splitEndDate).diff(moment(splitStartDate), 'days');
 
   const [checked, setChecked] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
@@ -58,8 +57,15 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   }
 
   function distributionHandler() {
-    var distributionPerDay = (Math.ceil(parseInt(amount) / numberOfSplitDays)) + ""
-    setdistributionAmt(distributionPerDay)
+    let numberOfSplitDays = moment(splitEndDate).diff(moment(splitStartDate), 'days');
+    console.log({ splitStartDate, splitEndDate, numberOfSplitDays })
+
+    if (numberOfSplitDays >= 2) {
+      var distributionPerDay = (Math.ceil(parseInt(amount) / numberOfSplitDays)) + ""
+      setdistributionAmt(distributionPerDay)
+    } else {
+      setdistributionAmt(amount)
+    }
   }
 
   function deleteClickHandler() {
@@ -121,7 +127,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
           </IonChip>
         </IonToolbar>
         <IonSegment value={transactionType} onIonChange={e => {
-          setSelectedDate(e.detail.value!);
+          setTransactionTypeHandler(e.detail.value!);
         }}>
           <IonSegmentButton value="Expense">
             <IonLabel>Expense</IonLabel>
@@ -139,7 +145,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
         <div className='expense-view'>
           <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
             {(amount && checked) && <div className='distribution-amount'>
-              <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day over {numberOfSplitDays} days</h5></div>}
+              <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day   </h5></div>}
           </div>
 
           <div className='distribution-toggle'>
@@ -166,7 +172,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                     displayFormat="MMM DD YYYY"
                     monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
                     value={splitStartDate} onIonChange={e => {
-                      e.preventDefault();
                       setSplitStartDate(e.detail.value!);
                       distributionHandler();
                     }}
@@ -180,7 +185,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                     displayFormat="MMM DD YYYY"
                     monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
                     value={splitEndDate} onIonChange={e => {
-                      e.preventDefault();
                       setSplitEndDate(e.detail.value!);
                       distributionHandler();
                     }}
@@ -189,7 +193,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
               </div>}
 
             <IonItem color="none" lines="none" class='category-picker-container'>
-              <IonLabel class="cateory-picker" position='fixed'>Cateogry:</IonLabel>
+              <IonLabel class="cateory-picker" position='fixed'>Category:</IonLabel>
               <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
                 <IonSelectOption value="General">General</IonSelectOption>
                 <IonSelectOption value="Restaurant">Restaurant</IonSelectOption>
