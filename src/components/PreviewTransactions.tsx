@@ -11,6 +11,9 @@ interface PreviewTransactionsProps {
   transactions: any;
   ignoreTransaction: any;
 }
+
+const maxCountForTransactions = 5;
+
 const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
   transactions, ignoreTransaction
 }) => {
@@ -31,7 +34,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
       {sortedTransactions.length > 0 &&
         sortedTransactions
-          .slice(0, 10)
+          .slice(0, maxCountForTransactions)
           .map((transaction: any, index: number) => (
             <TransactionItem
               transaction={transaction}
