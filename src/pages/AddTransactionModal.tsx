@@ -14,17 +14,19 @@ interface AddTransactionModalProps {
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
   const store = React.useContext(StoreContext);
 
-  const cuurentTimeStamp = moment();
-  const oneMonthFromNow = moment().add(1, 'month');
-  const numberOfSplitDays = oneMonthFromNow.diff(cuurentTimeStamp, 'days');
+
 
   const [displayBalance, setDisplayBalance] = useState("");
   const [amount, setAmount] = useState("");
   const [distributionAmt, setdistributionAmt] = useState("");
   const [category, setCategory] = useState("General");
+
+  const cuurentTimeStamp = moment();
+  const oneMonthFromNow = moment().add(1, 'month');
   const [selectedDate, setSelectedDate] = useState<string>(`${cuurentTimeStamp}`);
   const [splitStartDate, setSplitStartDate] = useState<string>(`${cuurentTimeStamp}`);
   const [splitEndDate, setSplitEndDate] = useState<string>(`${oneMonthFromNow}`);
+  const numberOfSplitDays = moment(splitEndDate).diff(moment(splitStartDate), 'days');
 
   const [checked, setChecked] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
@@ -112,11 +114,15 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
               max="2025"
               displayFormat="MMM DD YYYY"
               monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-              value={selectedDate} onIonChange={e => setSelectedDate(e.detail.value!)}
+              value={selectedDate} onIonChange={e => {
+                setSelectedDate(e.detail.value!);
+              }}
             > </IonDatetime>
           </IonChip>
         </IonToolbar>
-        <IonSegment value={transactionType} onIonChange={e => setTransactionTypeHandler(e.detail.value!)}>
+        <IonSegment value={transactionType} onIonChange={e => {
+          setSelectedDate(e.detail.value!);
+        }}>
           <IonSegmentButton value="Expense">
             <IonLabel>Expense</IonLabel>
           </IonSegmentButton>
@@ -140,6 +146,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             <IonItem lines="none">
               <IonLabel slot="end" className="ion-text-end ion-no-margin ">Split</IonLabel>
               <IonToggle slot="end" name="apple" color="primary" checked={checked} onIonChange={e => {
+                e.preventDefault();
                 setChecked(e.detail.checked)
                 distributionHandler();
               }} />
@@ -158,7 +165,11 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                     max="2025"
                     displayFormat="MMM DD YYYY"
                     monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-                    value={splitStartDate} onIonChange={e => setSplitStartDate(e.detail.value!)}
+                    value={splitStartDate} onIonChange={e => {
+                      e.preventDefault();
+                      setSplitStartDate(e.detail.value!);
+                      distributionHandler();
+                    }}
                   > </IonDatetime>
                 </IonItem>
                 <IonItem lines="none" color='primary'>
@@ -168,7 +179,11 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                     max="2025"
                     displayFormat="MMM DD YYYY"
                     monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-                    value={splitEndDate} onIonChange={e => setSplitEndDate(e.detail.value!)}
+                    value={splitEndDate} onIonChange={e => {
+                      e.preventDefault();
+                      setSplitEndDate(e.detail.value!);
+                      distributionHandler();
+                    }}
                   > </IonDatetime>
                 </IonItem>
               </div>}
