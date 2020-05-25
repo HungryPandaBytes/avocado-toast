@@ -83,7 +83,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     event.preventDefault();
     const date = new Date(selectedDate)
 
-
     const newTransaction = {
       id: 1,
       amount: parseInt(amount),
@@ -141,9 +140,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
       </IonHeader>
 
-
       <IonContent className='expense-view'>
-
         <div className='expense-view'>
           <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
             {(amount && split) && <div className='distribution-amount'>
@@ -189,7 +186,8 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                     value={splitEndDate} onIonChange={e => {
                       setSplitEndDate(e.detail.value!);
                       distributionHandler();
-                    }}
+                    }
+                    }
                   > </IonDatetime>
                 </IonItem>
               </div>}
@@ -206,48 +204,31 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 <IonSelectOption value="Leisure">Leisure</IonSelectOption>
               </IonSelect>
             </IonItem>}
+
+            {[1, 4, 7].map((i) => {
+              return (
+                <div className='expense-typepad-container '>
+                  <div >
+                    <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">{i}</IonButton>
+                  </div>
+                  <div>
+                    <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">{i + 1} </IonButton>
+                  </div>
+                  <div>
+                    <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">{i + 2}</IonButton>
+                  </div>
+                </div>
+              )
+            })}
             <div className='expense-typepad-container '>
               <div >
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">1</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">2</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">3</IonButton>
-              </div>
-            </div>
-            <div className='expense-typepad-container'>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">4</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">5</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">6</IonButton>
-              </div>
-            </div>
-            <div className='expense-typepad-container'>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">7</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button" >8</IonButton>
-              </div>
-              <div>
-                <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">9</IonButton>
-              </div>
-            </div>
-            <div className='expense-typepad-container'>
-              <div>
-                <IonButton size="large" fill="clear" onClick={deleteClickHandler} className="expense-button">Del</IonButton>
+                <IonButton size="large" fill="clear" onClick={deleteClickHandler} className="expense-button">delete</IonButton>
               </div>
               <div>
                 <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">0</IonButton>
               </div>
               <div>
-                <IonButton size="large" fill="clear" className="expense-button" onClick={(e) => saveClickHandler(e, onClose)}>Save</IonButton>
+                <IonButton size="large" fill="clear" onClick={(e) => saveClickHandler(e, onClose)} className="expense-button">save</IonButton>
               </div>
             </div>
           </div>
