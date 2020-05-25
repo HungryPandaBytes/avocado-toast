@@ -14,8 +14,6 @@ interface AddTransactionModalProps {
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
   const store = React.useContext(StoreContext);
 
-
-
   const [displayBalance, setDisplayBalance] = useState("");
   const [amount, setAmount] = useState("");
   const [distributionAmt, setdistributionAmt] = useState("");
@@ -29,6 +27,8 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
   const [split, setSplit] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
+
+  const today = new Date().toISOString().split('T')[0];
 
   function setTransactionTypeHandler(transactionOption: any) {
     if (transactionOption == 'Expense') {
@@ -119,7 +119,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             <IonIcon icon={calendar} color="primary" />
             <IonDatetime
               min="2018-02"
-              max="2025"
+              max={today}
               displayFormat="MMM DD YYYY"
               monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
               value={selectedDate} onIonChange={e => {
