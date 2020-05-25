@@ -10,6 +10,7 @@ import { useObserver } from 'mobx-react';
 import balanceHelpers from '../Helpers/balance';
 import expenseHelpers from '../Helpers/expense';
 import WeeklySlide from '../components/WeeklySlide';
+import { currentWeeksTransactions } from '../Helpers/transactionsHelper';
 
 
 const slideOpts = {
@@ -23,6 +24,7 @@ const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
+  const maxCountForTransaction = 5;
   const pageRef = useRef<HTMLElement>(null);
 
   const allTransactions = store.transactions;
@@ -52,7 +54,10 @@ const HomePage: React.FC = () => {
                 spent={expenseHelpers.getTodayTotalExpenses(allTransactions)}
               />
               <PreviewTransactions
-                transactions={store.transactions}
+                transactions={store.transactions.slice(
+                  0,
+                  maxCountForTransaction
+                )}
                 ignoreTransaction={store.ignoreTransaction}
               />
 
@@ -68,12 +73,7 @@ const HomePage: React.FC = () => {
             </div>
           </IonSlide>
           <IonSlide>
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            >
+            <div style={{ width: "100%", height: "100%" }}>
               <HomePageHero
                 period="Weekly"
                 balance={balanceHelpers.getThisWeekBalance(
@@ -82,8 +82,9 @@ const HomePage: React.FC = () => {
                 )}
                 spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)}
               />
+              
+              <WeeklySlide transactions={currentWeeksTransactions(store.transactions)} />
             </div>
-             <WeeklySlide />
           </IonSlide>
           <IonSlide>
             <div
