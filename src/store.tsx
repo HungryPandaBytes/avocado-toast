@@ -7,7 +7,7 @@ import AddTransactionModal from './pages/AddTransactionModal';
 
 
 interface stateInterface {
-  transactions: object[],
+  transactions: Transaction[],
   budget: Budget
 }
 
@@ -55,6 +55,7 @@ transactions = [
     id: 5,
     amount: 125,
     description: "Omakase",
+    category_name: "food",
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: new Date(),
@@ -63,6 +64,7 @@ transactions = [
     id: 4,
     amount: 25,
     description: "Gigantic Pea",
+    category_name: "shopping",
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: 'may 18 2020 11:00',
@@ -70,6 +72,7 @@ transactions = [
   {
     id: 3,
     amount: 2,
+    category_name: "shopping",
     description: "Supreme",
     iconName: "logo-amazon",
     ignore: false,
@@ -79,17 +82,19 @@ transactions = [
     id: 2,
     amount: 110,
     description: "Grocery",
+    category_name: "grocery",
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: 'may 17 2020',
   },
   {
-    id: 1,
-    amount: 4,
-    description: "Silly String",
+    id: 3,
+    amount: 110,
+    description: "leisure",
+    category_name: "grocery",
     iconName: "logo-amazon",
     ignore: false,
-    transaction_time: 'may 16 2020',
+    transaction_time: 'may 17 2020',
   },
 ];
 

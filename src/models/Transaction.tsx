@@ -2,9 +2,9 @@ import { StringLiteral } from "@babel/types";
 
 export interface Transaction {
   id?: number;
-  amount?: number | string;
-  transaction_time?: any;
-  category_name?: string;
+  amount: number;
+  transaction_time: any;
+  category_name: string;
   description?: string;
   category_id?: string;
   split?: boolean;

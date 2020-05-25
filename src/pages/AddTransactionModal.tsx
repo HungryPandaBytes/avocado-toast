@@ -86,7 +86,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
     const newTransaction = {
       id: 1,
-      amount: amount,
+      amount: parseInt(amount),
       transaction_time: date,
       description: category,
       category_name: category,
