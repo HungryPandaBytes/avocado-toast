@@ -27,7 +27,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [splitStartDate, setSplitStartDate] = useState<string>(`${cuurentTimeStamp}`);
   const [splitEndDate, setSplitEndDate] = useState<string>(`${oneMonthFromNow}`);
 
-  const [checked, setChecked] = useState(false);
+  const [split, setSplit] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
 
   function setTransactionTypeHandler(transactionOption: any) {
@@ -37,6 +37,8 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     } else {
       setTransactionType(transactionOption);
       setCategory(transactionOption)
+      setdistributionAmt("")
+      setSplit(false)
     }
   }
 
@@ -60,7 +62,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     let numberOfSplitDays = moment(splitEndDate).diff(moment(splitStartDate), 'days');
     console.log({ splitStartDate, splitEndDate, numberOfSplitDays })
 
-    if (numberOfSplitDays >= 2) {
+    if (numberOfSplitDays >= 1) {
       var distributionPerDay = (Math.ceil(parseInt(amount) / numberOfSplitDays)) + ""
       setdistributionAmt(distributionPerDay)
     } else {
@@ -71,7 +73,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   function deleteClickHandler() {
     const lastIdx = amount.length - 1
     const tempAmount = amount.slice(0, lastIdx)
-    setChecked(false)
+    setSplit(false)
     setdistributionAmt("")
     setAmount(tempAmount)
     setDisplayBalance(parseInt(tempAmount).toLocaleString(navigator.language, { minimumFractionDigits: 0 }) + "")
@@ -90,7 +92,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       category_name: category,
       category_id: '2',
       ignore: false,
-      split: checked,
+      split: split,
       iconName: 'test',
       transaction_type: transactionType,
     }
@@ -144,25 +146,25 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
         <div className='expense-view'>
           <div className='expense-amount'>{amount && <h2>{displayBalance}</h2>}
-            {(amount && checked) && <div className='distribution-amount'>
+            {(amount && split) && <div className='distribution-amount'>
               <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day   </h5></div>}
           </div>
 
-          <div className='distribution-toggle'>
+          {transactionType === 'Expense' && <div className='distribution-toggle'>
             <IonItem lines="none">
               <IonLabel slot="end" className="ion-text-end ion-no-margin ">Split</IonLabel>
-              <IonToggle slot="end" name="apple" color="primary" checked={checked} onIonChange={e => {
+              <IonToggle slot="end" name="apple" color="primary" checked={split} onIonChange={e => {
                 e.preventDefault();
-                setChecked(e.detail.checked)
+                setSplit(e.detail.checked)
                 distributionHandler();
               }} />
             </IonItem>
-          </div>
+          </div>}
         </div>
 
         <div className='input-container'>
           <div className='expense-typepad-wrapper'>
-            {checked &&
+            {(transactionType === 'Expense' && split) &&
               <div className='split-date-picker-wrapper'>
                 <IonItem lines="none" color='primary'>
                   <IonLabel >Split Start Date</IonLabel>
@@ -192,7 +194,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 </IonItem>
               </div>}
 
-            <IonItem color="none" lines="none" class='category-picker-container'>
+            {transactionType === 'Expense' && <IonItem color="none" lines="none" class='category-picker-container'>
               <IonLabel class="cateory-picker" position='fixed'>Category:</IonLabel>
               <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
                 <IonSelectOption value="General">General</IonSelectOption>
@@ -203,7 +205,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 <IonSelectOption value="Transportation">Transportation</IonSelectOption>
                 <IonSelectOption value="Leisure">Leisure</IonSelectOption>
               </IonSelect>
-            </IonItem>
+            </IonItem>}
             <div className='expense-typepad-container '>
               <div >
                 <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">1</IonButton>
