@@ -1,0 +1,30 @@
+#analysis-info-page {
+  margin: 0 6% 0 6%;
+  
+
+  h1{
+    margin: 0;
+    padding: 0;
+  }
+
+  h4{
+    color:  var(--ion-color-primary);
+    margin: 0;
+    padding: 0;
+  }
+
+  h5{
+    color: gray;
+  }
+
+  p{
+    margin: 0;
+    padding: 0;
+    color: gray;
+  }
+
+  .img--wrapper{
+    height: 90px;
+    width: 75px;
+  }
+}

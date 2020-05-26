@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import avocado from '../theme/baby_seed.png'
 import { StoreContext } from '../store'
 import './AnalysisHero.scss';
-import { IonIcon } from '@ionic/react';
+import { IonIcon, IonModal } from '@ionic/react';
 import moment from 'moment'
 import { waterOutline, informationCircle, information, informationOutline } from 'ionicons/icons';
+import AnalysisInfoModal from '../pages/AnalysisInfoModal';
 
 interface AnalysisHeroProps {
 
@@ -18,6 +19,8 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   const dayOfTheMonth = moment().date()
   const daysLeftThisMonth = moment().endOf('month').to(today, true);
 
+  const [showAnalysisInfoModal, setShowAnalysisInfoModal] = useState(false);
+  const pageRef = useRef<HTMLElement>(null);
 
   function savingsThisMonth() {
     // ToDo: aggregate all the expenses for the current Month and make totalExpenseThisMonth dynamic
@@ -26,7 +29,6 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
     budgetPerMonth -= totalExpenseThisMonth
     return budgetPerMonth
   }
-
   const savingsSoFar = savingsThisMonth();
 
   return (
@@ -39,7 +41,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
           size="large"
           icon={informationCircle}
           color="medium"
-
+          onClick={() => setShowAnalysisInfoModal(true)}
         />
       </span>
       <div className='progress-bar-wrapper'>
@@ -48,7 +50,18 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
           <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}>{daysLeftThisMonth} left</div>
         </div>
       </div>
+      <IonModal
+        isOpen={showAnalysisInfoModal}
+        onDidDismiss={() => setShowAnalysisInfoModal(false)}
+        swipeToClose={true}
+        presentingElement={pageRef.current!}
+      >
+        <AnalysisInfoModal
+          onClose={() => setShowAnalysisInfoModal(false)}
+        />
+      </IonModal>
     </div>
+
   )
 }
 
