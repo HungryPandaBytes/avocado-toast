@@ -61,7 +61,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
   function distributionHandler() {
     let numberOfSplitDays = moment(splitEndDate).diff(moment(splitStartDate), 'days');
-    console.log({ splitStartDate, splitEndDate, numberOfSplitDays })
 
     if (numberOfSplitDays >= 1) {
       var distributionPerDay = (Math.ceil(parseInt(amount) / numberOfSplitDays)) + ""
@@ -96,7 +95,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       iconName: 'test',
       transaction_type: transactionType,
     }
-    console.log({ newTransaction })
 
     if (parseInt(amount) > 0) {
       store.addTransaction(newTransaction)
