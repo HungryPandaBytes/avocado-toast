@@ -1,0 +1,24 @@
+#weekly__slide {
+  margin-top: 30px;
+
+  .categories__container {
+    margin-bottom: 10px;
+  }
+
+  .category__item {
+    color: var(--ion-color-medium);
+  }
+
+  .categories__progress-bar {
+    height: 35px;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    border-radius: 8px;
+  }
+
+  .categories__progress-bar--inner {
+    height: 35px;
+    border-radius: 8px;
+    background-color: var(--ion-color-primary);
+  }
+}
