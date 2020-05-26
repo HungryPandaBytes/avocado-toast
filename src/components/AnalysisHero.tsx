@@ -1,5 +1,5 @@
 import React from 'react';
-import avocado from '../theme/ketnip.png'
+import avocado from '../theme/baby_avocado.png'
 import { StoreContext } from '../store'
 import './AnalysisHero.scss';
 import { IonIcon } from '@ionic/react';
