@@ -32,22 +32,24 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   const savingsSoFar = savingsThisMonth();
 
   return (
-    <div id="analysis-hero">
-      <div className='hero--wrapper'>
-        <img className='image--wrapper' src={avocado} alt="Logo" />
-      </div>
-      <span style={{ right: '20%', position: 'absolute' }}>
-        <IonIcon
-          size="large"
-          icon={informationCircle}
-          color="medium"
-          onClick={() => setShowAnalysisInfoModal(true)}
-        />
-      </span>
-      <div className='progress-bar-wrapper'>
-        <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved this month</p>
-        <div className='progress-bar-light-grey'>
-          <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}>{daysLeftThisMonth} left</div>
+    <>
+      <div id="analysis-hero">
+        <div className='hero--wrapper'>
+          <img className='image--wrapper' src={avocado} alt="Logo" />
+        </div>
+        <span style={{ right: '20%', position: 'absolute' }}>
+          <IonIcon
+            size="large"
+            icon={informationCircle}
+            color="medium"
+            onClick={() => setShowAnalysisInfoModal(true)}
+          />
+        </span>
+        <div className='progress-bar-wrapper'>
+          <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved this month</p>
+          <div className='progress-bar-light-grey'>
+            <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}>{daysLeftThisMonth} left</div>
+          </div>
         </div>
       </div>
       <IonModal
@@ -60,8 +62,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
           onClose={() => setShowAnalysisInfoModal(false)}
         />
       </IonModal>
-    </div>
-
+    </>
   )
 }
 
