@@ -38,17 +38,17 @@ const AnalysisInfoModal: React.FC<AnalysisInfoModalProps> = ({ onClose }) => {
           </div>
           <div>
             <h4>The Teen Avocado</h4>
-            <p>40 - 65% water</p>
+            <p>40 - 60% water</p>
             <img className='img--wrapper' src={teenAvocado} alt="teen_avocado" />
           </div>
           <div>
             <h4>The Adult Avocado</h4>
-            <p>65 - 90% water</p>
+            <p>60 - 80% water</p>
             <img className='img--wrapper' src={adultAvocado} alt="adult_avocado" />
           </div>
           <div>
             <h4>The Ultimate Avocado Toast</h4>
-            <p>90 - 100% water</p>
+            <p>80 - 100% water</p>
             <img className='img--wrapper' src={avocadoToast} alt="toast" />
           </div>
         </div>

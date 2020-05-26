@@ -39,13 +39,13 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
     let avocado = babySeed;
     if (underBudgetPercentThisMonth <= 20) {
       avocado = babySeed;
-    } else if (underBudgetPercentThisMonth > 20 && underBudgetPercentThisMonth <= 40) {
+    } else if (underBudgetPercentThisMonth > 20 && underBudgetPercentThisMonth < 40) {
       avocado = babyAvocado;
-    } else if (underBudgetPercentThisMonth > 40 && underBudgetPercentThisMonth <= 65) {
+    } else if (underBudgetPercentThisMonth >= 40 && underBudgetPercentThisMonth < 60) {
       avocado = teenAvocado;
-    } else if (underBudgetPercentThisMonth > 65 && underBudgetPercentThisMonth <= 90) {
+    } else if (underBudgetPercentThisMonth >= 60 && underBudgetPercentThisMonth < 80) {
       avocado = adultAvocado;
-    } else if (underBudgetPercentThisMonth > 90 && underBudgetPercentThisMonth <= 100) {
+    } else if (underBudgetPercentThisMonth >= 80 && underBudgetPercentThisMonth <= 100) {
       avocado = avocadoToast;
     }
     return avocado;
