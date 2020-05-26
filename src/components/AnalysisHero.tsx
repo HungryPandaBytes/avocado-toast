@@ -1,11 +1,16 @@
 import React, { useRef, useState } from 'react';
-import avocado from '../theme/baby_seed.png'
 import { StoreContext } from '../store'
-import './AnalysisHero.scss';
 import { IonIcon, IonModal } from '@ionic/react';
 import moment from 'moment'
-import { waterOutline, informationCircle, information, informationOutline } from 'ionicons/icons';
+import babySeed from '../theme/baby_seed.png'
+import babyAvocado from '../theme/baby_avocado.png'
+import teenAvocado from '../theme/geeky_avocado.png'
+import adultAvocado from '../theme/avocado_teen_cap.png'
+import avocadoToast from '../theme/avo_slice_toast.png'
+import { informationCircle } from 'ionicons/icons';
+import { currentWeeksTransactions } from '../Helpers/transactionsHelper';
 import AnalysisInfoModal from '../pages/AnalysisInfoModal';
+import './AnalysisHero.scss';
 
 interface AnalysisHeroProps {
 
@@ -17,10 +22,33 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   const today = moment()
   const daysInCurrentMonth = moment().daysInMonth();
   const dayOfTheMonth = moment().date()
-  const daysLeftThisMonth = moment().endOf('month').to(today, true);
+  const daysLeftThisMonth = parseInt(moment().endOf('month').to(today, true));
 
   const [showAnalysisInfoModal, setShowAnalysisInfoModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
+
+  function underBudgetPercentThisMonth() {
+    // TODO replace overbudgetThisMonth with global state
+    const overbudgetThisMonth = [2, 3, 4, 8, 10];
+    const numberOfUnderbudgetDays = daysInCurrentMonth - daysLeftThisMonth - overbudgetThisMonth.length;
+    return numberOfUnderbudgetDays / daysInCurrentMonth;
+  }
+
+  function getAvocadoIconBasedOnSavings(underBudgetPercentThisMonth: number) {
+    let avocado = babySeed;
+    if (underBudgetPercentThisMonth <= 20) {
+      avocado = babySeed;
+    } else if (underBudgetPercentThisMonth > 20 && underBudgetPercentThisMonth <= 40) {
+      avocado = babyAvocado;
+    } else if (underBudgetPercentThisMonth > 40 && underBudgetPercentThisMonth <= 65) {
+      avocado = teenAvocado;
+    } else if (underBudgetPercentThisMonth > 65 && underBudgetPercentThisMonth <= 90) {
+      avocado = adultAvocado;
+    } else if (underBudgetPercentThisMonth > 90 && underBudgetPercentThisMonth <= 100) {
+      avocado = avocadoToast;
+    }
+    return avocado;
+  }
 
   function savingsThisMonth() {
     // ToDo: aggregate all the expenses for the current Month and make totalExpenseThisMonth dynamic
@@ -29,13 +57,16 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
     budgetPerMonth -= totalExpenseThisMonth
     return budgetPerMonth
   }
+
+  const underBudgetPercentage = underBudgetPercentThisMonth() * 100;
   const savingsSoFar = savingsThisMonth();
+  const avocadoHero = getAvocadoIconBasedOnSavings(underBudgetPercentage);
 
   return (
     <>
       <div id="analysis-hero">
         <div className='hero--wrapper'>
-          <img className='image--wrapper' src={avocado} alt="Logo" />
+          <img className='image--wrapper' src={avocadoHero} alt="Logo" />
         </div>
         <span style={{ right: '20%', position: 'absolute' }}>
           <IonIcon
