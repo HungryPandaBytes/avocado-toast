@@ -1,11 +1,11 @@
 import React, { useState, MouseEvent } from 'react';
 import {
-  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonRippleEffect, IonPage
-} from '@ionic/react';
+  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton} from '@ionic/react';
 import './AddTransactionModal.scss';
 import moment from 'moment'
 import { calendar } from 'ionicons/icons';
 import { StoreContext } from '../store';
+import { CategoryName } from '../models/CategoryName';
 
 interface AddTransactionModalProps {
   onClose: any
@@ -17,7 +17,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [displayBalance, setDisplayBalance] = useState("");
   const [amount, setAmount] = useState("");
   const [distributionAmt, setdistributionAmt] = useState("");
-  const [category, setCategory] = useState("General");
+  const [category, setCategory] = useState(CategoryName.General);
 
   const cuurentTimeStamp = moment();
   const oneMonthFromNow = moment().add(1, 'month');
@@ -31,9 +31,9 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const today = new Date().toISOString().split('T')[0];
 
   function setTransactionTypeHandler(transactionOption: any) {
-    if (transactionOption == 'Expense') {
+    if (transactionOption === 'Expense') {
       setTransactionType(transactionOption);
-      setCategory("General")
+      setCategory(CategoryName.General)
     } else {
       setTransactionType(transactionOption);
       setCategory(transactionOption)
@@ -87,7 +87,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       id: 1,
       amount: parseInt(amount),
       transaction_time: date,
-      description: category,
+      description: category.toString(),
       category_name: category,
       category_id: '2',
       ignore: false,
@@ -106,6 +106,12 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     }
 
   }
+
+  const categorySelectOptions = Object.keys(CategoryName).map((categoryName) => {
+    if(isNaN(parseInt(categoryName))) {
+      return <IonSelectOption value={categoryName} key={categoryName}>{categoryName}</IonSelectOption>;
+    }
+  });
 
   return (
     <>
@@ -195,19 +201,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             {transactionType === 'Expense' && <IonItem color="none" lines="none" class='category-picker-container'>
               <IonLabel class="cateory-picker" position='fixed'>Category:</IonLabel>
               <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
-                <IonSelectOption value="General">General</IonSelectOption>
-                <IonSelectOption value="Restaurant">Restaurant</IonSelectOption>
-                <IonSelectOption value="Grocery">Grocery</IonSelectOption>
-                <IonSelectOption value="Shopping">Shopping</IonSelectOption>
-                <IonSelectOption value="Household">Household</IonSelectOption>
-                <IonSelectOption value="Transportation">Transportation</IonSelectOption>
-                <IonSelectOption value="Leisure">Leisure</IonSelectOption>
+                {categorySelectOptions}
               </IonSelect>
             </IonItem>}
 
             {[1, 4, 7].map((i) => {
               return (
-                <div className='expense-typepad-container '>
+                <div className='expense-typepad-container ' key={i}>
                   <div >
                     <IonButton size="large" fill="clear" onClick={numpadClickHandler} className="expense-button">{i}</IonButton>
                   </div>

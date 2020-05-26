@@ -3,7 +3,7 @@ import React from 'react';
 import { useLocalStore } from 'mobx-react'
 import { Budget } from './models/Budget'
 import { Transaction } from './models/Transaction'
-import AddTransactionModal from './pages/AddTransactionModal';
+import { CategoryName } from './models/CategoryName';
 
 
 interface stateInterface {
@@ -55,7 +55,7 @@ transactions = [
     id: 5,
     amount: 125,
     description: "Omakase",
-    category_name: "food",
+    category_name: CategoryName.Grocery,
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: new Date(),
@@ -64,7 +64,7 @@ transactions = [
     id: 4,
     amount: 25,
     description: "Gigantic Pea",
-    category_name: "shopping",
+    category_name: CategoryName.Household,
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: 'may 18 2020 11:00',
@@ -72,7 +72,7 @@ transactions = [
   {
     id: 3,
     amount: 2,
-    category_name: "shopping",
+    category_name: CategoryName.Restaurant,
     description: "Supreme",
     iconName: "logo-amazon",
     ignore: false,
@@ -82,7 +82,7 @@ transactions = [
     id: 2,
     amount: 110,
     description: "Grocery",
-    category_name: "grocery",
+    category_name: CategoryName.Grocery,
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: 'may 17 2020',
@@ -91,7 +91,7 @@ transactions = [
     id: 3,
     amount: 110,
     description: "leisure",
-    category_name: "grocery",
+    category_name: CategoryName.Grocery,
     iconName: "logo-amazon",
     ignore: false,
     transaction_time: 'may 17 2020',

@@ -1,10 +1,10 @@
-import { StringLiteral } from "@babel/types";
+import { CategoryName } from "./CategoryName";
 
 export interface Transaction {
   id?: number;
   amount: number;
   transaction_time: any;
-  category_name: string;
+  category_name: CategoryName;
   description?: string;
   category_id?: string;
   split?: boolean;
