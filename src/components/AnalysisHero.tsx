@@ -34,11 +34,12 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
       <div className='hero--wrapper'>
         <img className='image--wrapper' src={avocado} alt="Logo" />
       </div>
-      <span >
+      <span style={{ right: '20%', position: 'absolute' }}>
         <IonIcon
           size="large"
           icon={informationCircle}
           color="medium"
+
         />
       </span>
       <div className='progress-bar-wrapper'>
