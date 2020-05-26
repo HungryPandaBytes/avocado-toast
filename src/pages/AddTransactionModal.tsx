@@ -6,6 +6,7 @@ import moment from 'moment'
 import { calendar } from 'ionicons/icons';
 import { StoreContext } from '../store';
 import { CategoryName } from '../models/CategoryName';
+import { Transaction } from '../models/Transaction';
 
 interface AddTransactionModalProps {
   onClose: any
@@ -33,10 +34,10 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   function setTransactionTypeHandler(transactionOption: any) {
     if (transactionOption === 'Expense') {
       setTransactionType(transactionOption);
-      setCategory(CategoryName.General)
+      setCategory(category)
     } else {
       setTransactionType(transactionOption);
-      setCategory(transactionOption)
+      setCategory(category)
       setdistributionAmt("")
       setSplit(false)
     }
@@ -83,11 +84,11 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     event.preventDefault();
     const date = new Date(selectedDate)
 
-    const newTransaction = {
+    const newTransaction: Transaction = {
       id: 1,
       amount: parseInt(amount),
       transaction_time: date,
-      description: category.toString(),
+      description: category,
       category_name: category,
       category_id: '2',
       ignore: false,

@@ -24,7 +24,6 @@ const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
-  const maxCountForTransaction = 5;
   const pageRef = useRef<HTMLElement>(null);
 
   const allTransactions = store.transactions;
@@ -54,10 +53,7 @@ const HomePage: React.FC = () => {
                 spent={expenseHelpers.getTodayTotalExpenses(allTransactions)}
               />
               <PreviewTransactions
-                transactions={store.transactions.slice(
-                  0,
-                  maxCountForTransaction
-                )}
+                transactions={store.transactions}
                 ignoreTransaction={store.ignoreTransaction}
               />
 
