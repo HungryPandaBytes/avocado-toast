@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePageHero.scss';
-import avocadoLogo from '../theme/avocado_teen.png'
-import burntToastLogo from '../theme/avocado_teen.png'
+import avocadoLogo from '../theme/teen_avocado.png'
+import burntToastLogo from '../theme/Burnt_toast.png'
 import { StoreContext } from '../store';
 import moment from 'moment';
 
