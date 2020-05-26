@@ -16,7 +16,7 @@ import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
 import BudgetPage from './pages/BudgetPage';
 import AnalysisPage from './pages/AnalysisPage';
-import AddTransaction from './pages/AddTransactionModal'
+import AddTransaction from './components/AddTransactionModal'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

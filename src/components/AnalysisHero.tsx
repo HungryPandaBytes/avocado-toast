@@ -9,7 +9,7 @@ import adultAvocado from '../theme/avocado_teen_cap.png'
 import avocadoToast from '../theme/avo_slice_toast.png'
 import { informationCircle } from 'ionicons/icons';
 import { currentWeeksTransactions } from '../Helpers/transactionsHelper';
-import AnalysisInfoModal from '../pages/AnalysisInfoModal';
+import AnalysisInfoModal from './AnalysisInfoModal';
 import './AnalysisHero.scss';
 
 interface AnalysisHeroProps {

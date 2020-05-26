@@ -5,7 +5,7 @@ import './HomePage.scss';
 import { StoreContext } from '../store'
 import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
-import AddTransactionModal from './AddTransactionModal';
+import AddTransactionModal from '../components/AddTransactionModal';
 import { useObserver } from 'mobx-react';
 import balanceHelpers from '../Helpers/balance';
 import expenseHelpers from '../Helpers/expense';
