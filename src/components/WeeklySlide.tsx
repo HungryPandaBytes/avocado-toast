@@ -4,8 +4,8 @@ import { Transaction } from "../models/Transaction";
 import { basketOutline } from "ionicons/icons";
 import './WeeklySlide.scss';
 
-const loadCategories = (transactions: Transaction[]): {[key: string]: number} => {
-  const categories: { [key: string]: number } = {total: 0};
+const loadCategories = (transactions: Transaction[]): { [key: string]: number } => {
+  const categories: { [key: string]: number } = { total: 0 };
 
   transactions.sort((a: Transaction, b: Transaction) => b.amount - a.amount)
 
@@ -26,12 +26,13 @@ interface WeeklySlideProps {
 }
 
 const WeeklySlide: React.FC<WeeklySlideProps> = ({ transactions }) => {
-  const categories: {[key: string]: number} = loadCategories(transactions);
+  const categories: { [key: string]: number } = loadCategories(transactions);
   let categoryTotal = 0;
   let maxWidth = 90;
 
   return (
     <IonList lines="none" id="weekly__slide">
+      <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>This Week</h4>
       {Object.keys(categories).map((category_name: string) => {
         if (category_name === "total") return;
 
@@ -39,7 +40,7 @@ const WeeklySlide: React.FC<WeeklySlideProps> = ({ transactions }) => {
 
         return (
           <div key={category_name} className="categories__container">
-            <IonItem class="category__item">
+            <IonItem class="category__item" style={{ height: '35px' }}>
               <IonIcon icon={basketOutline} slot="start" color="primary"></IonIcon>
               <IonLabel>{category_name}</IonLabel>
 
