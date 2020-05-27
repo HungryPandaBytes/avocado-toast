@@ -12,3 +12,4 @@ export interface Transaction {
   iconName?: string;
   transaction_type?: string
 }
+

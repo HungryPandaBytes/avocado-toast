@@ -54,11 +54,12 @@ transactions = [
   {
     id: 5,
     amount: 125,
-    description: "Omakase",
-    category_name: CategoryName.Grocery,
-    iconName: "logo-amazon",
-    ignore: false,
     transaction_time: new Date(),
+    category_name: CategoryName.Grocery,
+    description: "Omakase",
+    split: false,
+    ignore: false,
+    transaction_type: 'expense'
   },
   {
     id: 4,
