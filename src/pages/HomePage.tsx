@@ -9,8 +9,7 @@ import AddTransactionModal from '../components/AddTransactionModal';
 import { useObserver } from 'mobx-react';
 import balanceHelpers from '../Helpers/balance';
 import expenseHelpers from '../Helpers/expense';
-import WeeklySlide from '../components/WeeklySlide';
-import MonthlySlide from '../components/MonthlySlide';
+import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions } from '../Helpers/transactionsHelper';
 
 
@@ -80,7 +79,7 @@ const HomePage: React.FC = () => {
                 spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)}
               />
 
-              <WeeklySlide transactions={currentWeeksTransactions(store.transactions)} />
+              <AllCategories period='Week' transactions={currentWeeksTransactions(store.transactions)} />
             </div>
           </IonSlide>
           <IonSlide>
@@ -102,7 +101,7 @@ const HomePage: React.FC = () => {
                   allTransactions
                 )}
               />
-              <MonthlySlide transactions={currentMonthsTransactions(store.transactions)} />
+              <AllCategories period='Month' transactions={currentMonthsTransactions(store.transactions)} />
             </div>
           </IonSlide>
         </IonSlides>
