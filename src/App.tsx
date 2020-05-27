@@ -40,45 +40,117 @@ import './theme/variables.css';
 /* Global css */
 import './theme/global.css';
 
+/* Access SQLiteService */
+import { SQLiteService } from './services/SQLiteService';
+import { concatAll } from 'rxjs/operators';
+import { Observable, concat } from 'rxjs';
+
+class App extends React.Component {
+  sqliteService: SQLiteService;
+
+  constructor(props: any) {
+    super(props);
+    this.sqliteService = new SQLiteService();
+  }
+
+  async componentDidMount() {
+    await this.sqliteService.initalizePlugin();
+    await this.fooMethod();
+  }
+
+  async fooMethod(): Promise<void> {
+    console.log('its running fooMethod')
+    console.log(this.sqliteService)
+    if (this.sqliteService.isService) {
+      // open the database
+      this.sqliteService.openDB("fooDB")
+        .subscribe(result => {
+          if (result.result) {
+            console.log(result)
+          }
+        })
+    } else {
+      console.log('CapacitorSQLite Plugin: Initialization Failed');
+    }
+  }
 
 
-const App: React.FC = () => {
-  return (
-    <StoreProvider>
-      <IonApp>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/addtransaction" component={AddTransaction} exact={true} />
-              <Route path="/transactions" component={TransactionsPage} exact={true} />
-              <Route path="/analysis" component={AnalysisPage} exact={true} />
-              <Route path="/budget" component={BudgetPage} exact={true} />
-              <Route path="/" component={HomePage} />
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="home" href="/home">
-                <IonIcon icon={walletOutline} />
-                <IonLabel>Pocket</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="transactions" href="/transactions">
-                <IonIcon icon={cardOutline} />
-                <IonLabel>Transactions</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="budget" href="/budget">
-                <IonIcon icon={calculatorOutline} />
-                <IonLabel>Budget</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="analysis" href="/analysis">
-                <IonIcon icon={statsChartOutline} />
-                <IonLabel>Analysis</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </IonApp>
-    </StoreProvider>
+  render() {
+    return (
+      <StoreProvider>
+        <IonApp>
+          <IonReactRouter>
+            <IonTabs>
+              <IonRouterOutlet>
+                <Route path="/addtransaction" component={AddTransaction} exact={true} />
+                <Route path="/transactions" component={TransactionsPage} exact={true} />
+                <Route path="/analysis" component={AnalysisPage} exact={true} />
+                <Route path="/budget" component={BudgetPage} exact={true} />
+                <Route path="/" component={HomePage} />
+              </IonRouterOutlet>
+              <IonTabBar slot="bottom">
+                <IonTabButton tab="home" href="/home">
+                  <IonIcon icon={walletOutline} />
+                  <IonLabel>Pocket</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="transactions" href="/transactions">
+                  <IonIcon icon={cardOutline} />
+                  <IonLabel>Transactions</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="budget" href="/budget">
+                  <IonIcon icon={calculatorOutline} />
+                  <IonLabel>Budget</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="analysis" href="/analysis">
+                  <IonIcon icon={statsChartOutline} />
+                  <IonLabel>Analysis</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          </IonReactRouter>
+        </IonApp>
+      </StoreProvider>
+    )
+  }
 
-  )
-};
+}
+// const App: React.FC = () => {
+//   return (
+// <StoreProvider>
+//   <IonApp>
+//     <IonReactRouter>
+//       <IonTabs>
+//         <IonRouterOutlet>
+//           <Route path="/addtransaction" component={AddTransaction} exact={true} />
+//           <Route path="/transactions" component={TransactionsPage} exact={true} />
+//           <Route path="/analysis" component={AnalysisPage} exact={true} />
+//           <Route path="/budget" component={BudgetPage} exact={true} />
+//           <Route path="/" component={HomePage} />
+//         </IonRouterOutlet>
+//         <IonTabBar slot="bottom">
+//           <IonTabButton tab="home" href="/home">
+//             <IonIcon icon={walletOutline} />
+//             <IonLabel>Pocket</IonLabel>
+//           </IonTabButton>
+//           <IonTabButton tab="transactions" href="/transactions">
+//             <IonIcon icon={cardOutline} />
+//             <IonLabel>Transactions</IonLabel>
+//           </IonTabButton>
+//           <IonTabButton tab="budget" href="/budget">
+//             <IonIcon icon={calculatorOutline} />
+//             <IonLabel>Budget</IonLabel>
+//           </IonTabButton>
+//           <IonTabButton tab="analysis" href="/analysis">
+//             <IonIcon icon={statsChartOutline} />
+//             <IonLabel>Analysis</IonLabel>
+//           </IonTabButton>
+//         </IonTabBar>
+//       </IonTabs>
+//     </IonReactRouter>
+//   </IonApp>
+// </StoreProvider>
+
+//   )
+// };
 
 export default App;

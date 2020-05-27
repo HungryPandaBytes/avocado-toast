@@ -24,6 +24,7 @@ class SQLiteService {
       this.sqlite = CapacitorSQLite;
       this.isService = true;
     } else {
+      console.log('it realized that its web not mobile')
       this.sqlite = PluginsLibrary.CapacitorSQLite;
     }
   }
