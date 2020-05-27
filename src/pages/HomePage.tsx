@@ -7,8 +7,8 @@ import HomePageHero from '../components/HomePageHero'
 import PreviewTransactions from '../components/PreviewTransactions';
 import AddTransactionModal from '../components/AddTransactionModal';
 import { useObserver } from 'mobx-react';
-import balanceHelpers from '../Helpers/balance';
-import expenseHelpers from '../Helpers/expense';
+import balanceHelpers from '../Helpers/balanceHelper';
+import expenseHelpers from '../Helpers/expenseHelper';
 import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions } from '../Helpers/transactionsHelper';
 

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import expenseUtils from './expense';
+import expenseUtils from './expenseHelper';
 
 const balanceHelpers = {
   getTodayBalance: function (transactions: any, budgetPerDay: any) {
