@@ -42,10 +42,7 @@ import './theme/global.css';
 
 import { StoreContext } from '../src/store'
 
-/* Access SQLiteService */
-import { SQLiteService } from './services/SQLiteService';
-import { concatAll } from 'rxjs/operators';
-import { Observable, concat } from 'rxjs';
+
 
 // class App extends React.Component {
 //   sqliteService: SQLiteService;
