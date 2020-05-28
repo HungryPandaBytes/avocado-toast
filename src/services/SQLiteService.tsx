@@ -49,6 +49,7 @@ class SQLiteService {
     if (this.isService) {
       const encrypted: boolean = _encrypted ? _encrypted : false;
       const mode: string = _mode ? _mode : 'no-encryption';
+      console.log('sqlite open', dbName);
       return from(this.sqlite.open({ database: dbName, encrypted: encrypted, mode: mode }));
     } else {
       return from(Promise.resolve({ result: false }));
