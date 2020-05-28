@@ -9,7 +9,7 @@ interface options {
   mode?: string
 }
 
-class StoreService {
+class DBService {
   _store: any = {};
   _isService: boolean = false;
   _platform: string = "";
@@ -77,7 +77,7 @@ class StoreService {
   async setItem(key: string, value: string) {
     console.log('key', key);
     console.log('value', value);
-    if (this.isService && key.length > 0) {
+    if (this._isService && key.length > 0) {
       await this._store.set({ key, value });
     }
   }
@@ -86,6 +86,16 @@ class StoreService {
     * Get the Value for a given Key
     * @param key string 
     */
+  async getItem(key: string) {
+    if (this._isService && key.length > 0) {
+      const { value } = await this._store.get({ key });
+      console.log("in getItem value ", value)
+      return value;
+    } else {
+      return null;
+    }
+
+  }
   async isKey(key: string) {
     if (this._isService && key.length > 0) {
       const { result } = await this._store.isKey({ key });
@@ -94,11 +104,18 @@ class StoreService {
       return null;
     }
   }
-
+  async getAllKeysValues() {
+    if (this._isService) {
+      const { keysvalues } = await this._store.keysvalues();
+      return keysvalues;
+    } else {
+      return null;
+    }
+  }
   async deleteStore(options: options) {
     const database = options.database || "storage";
     await this.initPlugin();
-    if (this.isService) {
+    if (this._isService) {
       const { result } = await this._store.deleteStore({ database });
       return result;
     }
@@ -108,4 +125,4 @@ class StoreService {
 
 }
 
-export { StoreService };
+export { DBService };
