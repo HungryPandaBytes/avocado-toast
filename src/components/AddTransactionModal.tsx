@@ -1,12 +1,14 @@
 import React, { useState, MouseEvent } from 'react';
 import {
-  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton} from '@ionic/react';
+  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton
+} from '@ionic/react';
 import './AddTransactionModal.scss';
 import moment from 'moment'
 import { calendar } from 'ionicons/icons';
 import { StoreContext } from '../store';
 import { CategoryName } from '../models/CategoryName';
 import { Transaction } from '../models/Transaction';
+import { addNewTransactionToDB } from '../data/dataAPI'
 
 interface AddTransactionModalProps {
   onClose: any
@@ -102,12 +104,14 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       setDisplayBalance("");
       setdistributionAmt("")
       callback();
+      let allTransaction = store.transactions;
+      addNewTransactionToDB(allTransaction);
     }
 
   }
 
   const categorySelectOptions = Object.keys(CategoryName).map((categoryName) => {
-    if(isNaN(parseInt(categoryName))) {
+    if (isNaN(parseInt(categoryName))) {
       return <IonSelectOption value={categoryName} key={categoryName}>{categoryName}</IonSelectOption>;
     }
   });

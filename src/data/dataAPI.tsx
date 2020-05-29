@@ -20,12 +20,29 @@ export const loadTransactions = async () => {
   }
 }
 
+// get transactions from db and populate global state with fetched data 
+export const addNewTransactionToDB = async (allTransactions: Transaction[]) => {
+  const DBstore = new DBService();
+  console.log(DBstore);
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast' });
+
+  if (result) {
+    console.log('Avocado-Toast DB open', result);
+    // persist the updated transactions along with the new transaction
+    const compareTransactions =
+      (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
+    const updatedTransactions = allTransactions.sort(compareTransactions);
+    await DBstore.setItem('testJSON', JSON.stringify(updatedTransactions));
+  }
+}
+
+// seed database one time 
 export const seedDatabase = async () => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
-  let options = { database: 'avocado-toast' }
-  let result = await DBstore.openStore(options);
+  let result = await DBstore.openStore({ database: 'avocado-toast' });
 
   if (result) {
     console.log('Default DB open', result);
@@ -77,6 +94,9 @@ export const seedDatabase = async () => {
         transaction_time: 'may 17 2020',
       },
     ]
+    const compareTransactions =
+      (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
+    const updatedTransactions = mockTransaction.sort(compareTransactions);
     await DBstore.setItem('testJSON', JSON.stringify(mockTransaction));
   }
 }
