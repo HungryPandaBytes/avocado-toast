@@ -9,12 +9,12 @@ export const loadTransactions = async () => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
-  let result = await DBstore.openStore({ database: 'avocado-toast' });
+  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
 
   if (result) {
     console.log('Avocado-Toast DB open', result);
     // get all transactions
-    result = await DBstore.getItem("testJSON");
+    result = await DBstore.getItem("TransactionsJSON");
     let parsedResult = await JSON.parse(result);
     return parsedResult;
   }
@@ -25,15 +25,15 @@ export const addNewTransactionToDB = async (allTransactions: Transaction[]) => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
-  let result = await DBstore.openStore({ database: 'avocado-toast' });
+  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
 
   if (result) {
-    console.log('Avocado-Toast DB open', result);
+    console.log('Transactions table of Avocado-Toast DB', result);
     // persist the updated transactions along with the new transaction
     const compareTransactions =
       (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
     const updatedTransactions = allTransactions.sort(compareTransactions);
-    await DBstore.setItem('testJSON', JSON.stringify(updatedTransactions));
+    await DBstore.setItem('TransactionsJSON', JSON.stringify(updatedTransactions));
   }
 }
 
@@ -43,9 +43,13 @@ export const seedDatabase = async () => {
   console.log(DBstore);
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
-
   if (result) {
-    console.log('Default DB open', result);
+    console.log('avocado-toast DB open', result);
+    /***************************************
+     * Open "avocado-toast" and table "transactions" *
+     ***************************************/
+    // Clear the table "transactions" in case of multiple runs
+    await DBstore.setTable("transactions");
     const mockTransaction = [
       {
         id: 8,
@@ -97,6 +101,6 @@ export const seedDatabase = async () => {
     const compareTransactions =
       (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
     const updatedTransactions = mockTransaction.sort(compareTransactions);
-    await DBstore.setItem('testJSON', JSON.stringify(mockTransaction));
+    await DBstore.setItem('TransactionsJSON', JSON.stringify(updatedTransactions)).then(result => console.log('done seeding'))
   }
 }

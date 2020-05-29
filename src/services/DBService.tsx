@@ -129,7 +129,7 @@ class DBService {
     }
   }
   async removeItem(key: string) {
-    if (this.isService && key.length > 0) {
+    if (this._isService && key.length > 0) {
       const { result } = await this._store.remove({ key });
       return result;
     } else {
@@ -137,7 +137,7 @@ class DBService {
     }
   }
   async clear() {
-    if (this.isService) {
+    if (this._isService) {
       const { result } = await this._store.clear();
       return result;
     } else {
