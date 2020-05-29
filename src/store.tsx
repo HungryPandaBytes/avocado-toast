@@ -49,6 +49,7 @@ const defaultContext: contextInterface = {
 }
 
 export const StoreContext = React.createContext(defaultContext);
+
 let transactions: Transaction[] = [];
 transactions = [
   {
