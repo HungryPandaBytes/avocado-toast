@@ -5,7 +5,7 @@ import { DBService } from '../services/DBService';
 import { v4 as uuidv4 } from 'uuid';
 
 
-// get transactions from db and populate global state with fetched data 
+// get all transactions from db  
 export const loadTransactions = async () => {
   const DBstore = new DBService();
   console.log(DBstore);
@@ -15,13 +15,14 @@ export const loadTransactions = async () => {
   if (result) {
     console.log('Avocado-Toast DB open', result);
     // get all transactions
-    result = await DBstore.getItem("TransactionsJSON");
-    let parsedResult = await JSON.parse(result);
+    const allTransactions = await DBstore.getAllValues();
+    let parsedResult = await allTransactions.map((transaction: string) => JSON.parse(transaction));
+    console.log(parsedResult)
     return parsedResult;
   }
 }
 
-// add new transaction to db
+// add a new transaction to db
 export const addNewTransactionToDB = async (newTransaction: Transaction) => {
   const DBstore = new DBService();
   console.log(DBstore);
@@ -39,23 +40,25 @@ export const seedDatabase = async () => {
   console.log(DBstore);
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
+  await DBstore.clear();
   if (result) {
     console.log('avocado-toast DB open', result);
     /***************************************
      * Open "avocado-toast" and table "transactions" *
      ***************************************/
     await DBstore.setTable("transactions");
-
+    /***************************************
+     * Seed table "transactions" *
+     ***************************************/
     const mockTransaction = [
       {
         id: uuidv4(),
         amount: 300,
-        transaction_time: new Date(),
-        category_name: "Leisure",
         description: "Apple Watch",
-        split: false,
+        category_name: "Grocery",
+        iconName: "logo-amazon",
         ignore: false,
-        transaction_type: 'expense'
+        transaction_time: 'may 29 2020 11:00',
       },
       {
         id: uuidv4(),
@@ -73,7 +76,7 @@ export const seedDatabase = async () => {
         description: "Supreme",
         iconName: "logo-amazon",
         ignore: false,
-        transaction_time: 'may 18 2020',
+        transaction_time: 'may 18 2020 11:00',
       },
       {
         id: uuidv4(),
@@ -82,7 +85,7 @@ export const seedDatabase = async () => {
         category_name: "Grocery",
         iconName: "logo-amazon",
         ignore: false,
-        transaction_time: 'may 17 2020',
+        transaction_time: 'may 15 2020 11:00',
       },
       {
         id: uuidv4(),
@@ -91,7 +94,7 @@ export const seedDatabase = async () => {
         category_name: "Grocery",
         iconName: "logo-amazon",
         ignore: false,
-        transaction_time: 'may 17 2020',
+        transaction_time: 'may 15 2020 11:00',
       },
     ]
     mockTransaction.map(transaction => DBstore.setItem(transaction.id, JSON.stringify(transaction)));
