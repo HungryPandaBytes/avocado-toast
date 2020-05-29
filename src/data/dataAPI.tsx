@@ -2,6 +2,7 @@ import React from 'react';
 import { Transaction } from '../models/Transaction';
 import { StoreContext } from '../store';
 import { DBService } from '../services/DBService';
+import { v4 as uuidv4 } from 'uuid';
 
 
 // get transactions from db and populate global state with fetched data 
@@ -33,7 +34,8 @@ export const addNewTransactionToDB = async (allTransactions: Transaction[]) => {
     const compareTransactions =
       (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
     const updatedTransactions = allTransactions.sort(compareTransactions);
-    await DBstore.setItem('TransactionsJSON', JSON.stringify(updatedTransactions));
+    const newUUID = uuidv4();
+    await DBstore.setItem(newUUID, JSON.stringify(updatedTransactions));
   }
 }
 
@@ -43,6 +45,7 @@ export const seedDatabase = async () => {
   console.log(DBstore);
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
+
   if (result) {
     console.log('avocado-toast DB open', result);
     /***************************************
@@ -50,9 +53,10 @@ export const seedDatabase = async () => {
      ***************************************/
     // Clear the table "transactions" in case of multiple runs
     await DBstore.setTable("transactions");
+
     const mockTransaction = [
       {
-        id: 8,
+        id: uuidv4(),
         amount: 300,
         transaction_time: new Date(),
         category_name: "Leisure",
@@ -62,7 +66,7 @@ export const seedDatabase = async () => {
         transaction_type: 'expense'
       },
       {
-        id: 4,
+        id: uuidv4(),
         amount: 25,
         description: "Gigantic Pea",
         category_name: "Grocery",
@@ -71,7 +75,7 @@ export const seedDatabase = async () => {
         transaction_time: 'may 18 2020 11:00',
       },
       {
-        id: 3,
+        id: uuidv4(),
         amount: 2,
         category_name: "Grocery",
         description: "Supreme",
@@ -80,7 +84,7 @@ export const seedDatabase = async () => {
         transaction_time: 'may 18 2020',
       },
       {
-        id: 2,
+        id: uuidv4(),
         amount: 110,
         description: "Grocery",
         category_name: "Grocery",
@@ -89,7 +93,7 @@ export const seedDatabase = async () => {
         transaction_time: 'may 17 2020',
       },
       {
-        id: 3,
+        id: uuidv4(),
         amount: 110,
         description: "Leisure",
         category_name: "Grocery",
@@ -98,9 +102,6 @@ export const seedDatabase = async () => {
         transaction_time: 'may 17 2020',
       },
     ]
-    const compareTransactions =
-      (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
-    const updatedTransactions = mockTransaction.sort(compareTransactions);
-    await DBstore.setItem('TransactionsJSON', JSON.stringify(updatedTransactions)).then(result => console.log('done seeding'))
+    mockTransaction.map(transaction => DBstore.setItem(transaction.id, JSON.stringify(transaction)));
   }
 }

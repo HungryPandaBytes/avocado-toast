@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
   const budgetPerDay = store.budget.budgetPerDay;
 
   useEffect(() => {
-    // seedDatabase();
+    seedDatabase();
     loadTransactions().then(data => { store.transactions = data });
   }, [])
 
