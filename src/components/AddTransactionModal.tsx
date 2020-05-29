@@ -9,6 +9,7 @@ import { StoreContext } from '../store';
 import { CategoryName } from '../models/CategoryName';
 import { Transaction } from '../models/Transaction';
 import { addNewTransactionToDB } from '../data/dataAPI'
+import { v4 as uuidv4 } from 'uuid';
 
 interface AddTransactionModalProps {
   onClose: any
@@ -84,9 +85,10 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   function saveClickHandler(event: MouseEvent<HTMLIonButtonElement>, callback: any) {
     event.preventDefault();
     const date = new Date(selectedDate)
+    const uuid = uuidv4();
 
     const newTransaction: Transaction = {
-      id: 1,
+      id: uuid,
       amount: parseInt(amount),
       transaction_time: date,
       description: category,
@@ -104,8 +106,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       setDisplayBalance("");
       setdistributionAmt("")
       callback();
-      let allTransaction = store.transactions;
-      addNewTransactionToDB(allTransaction);
+      addNewTransactionToDB(newTransaction);
     }
 
   }

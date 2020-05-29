@@ -75,10 +75,11 @@ class DBService {
      * @param value string
      */
   async setItem(key: string, value: string) {
-    console.log('key', key);
-    console.log('value', value);
+    console.log('set key', key);
+    console.log('set value', value);
     if (this._isService && key.length > 0) {
-      await this._store.set({ key, value });
+      await this._store.set({ key, value })
+        .catch((error: any) => console.log(error))
     }
   }
 

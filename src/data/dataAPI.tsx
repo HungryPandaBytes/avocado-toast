@@ -21,37 +21,29 @@ export const loadTransactions = async () => {
   }
 }
 
-// get transactions from db and populate global state with fetched data 
-export const addNewTransactionToDB = async (allTransactions: Transaction[]) => {
+// add new transaction to db
+export const addNewTransactionToDB = async (newTransaction: Transaction) => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
-
   if (result) {
-    console.log('Transactions table of Avocado-Toast DB', result);
-    // persist the updated transactions along with the new transaction
-    const compareTransactions =
-      (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
-    const updatedTransactions = allTransactions.sort(compareTransactions);
-    const newUUID = uuidv4();
-    await DBstore.setItem(newUUID, JSON.stringify(updatedTransactions));
+    await DBstore.setItem(newTransaction.id, JSON.stringify(newTransaction));
+    console.log(`Added a new transaction of ${newTransaction.category_name} to Avocado-Toast DB`)
   }
 }
 
-// seed database one time 
+// seed database 
 export const seedDatabase = async () => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
-
   if (result) {
     console.log('avocado-toast DB open', result);
     /***************************************
      * Open "avocado-toast" and table "transactions" *
      ***************************************/
-    // Clear the table "transactions" in case of multiple runs
     await DBstore.setTable("transactions");
 
     const mockTransaction = [
