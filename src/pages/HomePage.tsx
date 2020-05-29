@@ -11,7 +11,7 @@ import balanceHelpers from '../Helpers/balanceHelper';
 import expenseHelpers from '../Helpers/expenseHelper';
 import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions } from '../Helpers/transactionsHelper';
-import { loadTransactions } from '../data/dataAPI'
+import { loadTransactions, seedDatabase } from '../data/dataAPI'
 
 
 const slideOpts = {
@@ -24,7 +24,6 @@ const slideOpts = {
 const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
-
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
 
@@ -32,7 +31,8 @@ const HomePage: React.FC = () => {
   const budgetPerDay = store.budget.budgetPerDay;
 
   useEffect(() => {
-    loadTransactions();
+    // seedDatabase();
+    loadTransactions().then(data => { store.transactions = data.reverse() });
   }, [])
 
   return useObserver(() => (

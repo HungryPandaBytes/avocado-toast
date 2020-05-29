@@ -1,9 +1,26 @@
+import React from 'react';
 import { Transaction } from '../models/Transaction';
 import { StoreContext } from '../store';
 import { DBService } from '../services/DBService';
 
+
 // get transactions from db and populate global state with fetched data 
 export const loadTransactions = async () => {
+  const DBstore = new DBService();
+  console.log(DBstore);
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast' });
+
+  if (result) {
+    console.log('Avocado-Toast DB open', result);
+    // get all transactions
+    result = await DBstore.getItem("testJSON");
+    let parsedResult = await JSON.parse(result);
+    return parsedResult;
+  }
+}
+
+export const seedDatabase = async () => {
   const DBstore = new DBService();
   console.log(DBstore);
   await DBstore.initPlugin();
@@ -12,19 +29,13 @@ export const loadTransactions = async () => {
 
   if (result) {
     console.log('Default DB open', result);
-    // store a string in the default store
-    await DBstore.setItem("session", "Session Opened");
-    // read session from the store
-    result = await DBstore.getItem("session");
-    console.log('Get Session ', result);
-    // store a JSON Object in the default store 
     const mockTransaction = [
       {
-        id: 5,
-        amount: 125,
+        id: 8,
+        amount: 300,
         transaction_time: new Date(),
-        category_name: "Grocery",
-        description: "Omakase",
+        category_name: "Leisure",
+        description: "Apple Watch",
         split: false,
         ignore: false,
         transaction_type: 'expense'
@@ -59,7 +70,7 @@ export const loadTransactions = async () => {
       {
         id: 3,
         amount: 110,
-        description: "leisure",
+        description: "Leisure",
         category_name: "Grocery",
         iconName: "logo-amazon",
         ignore: false,
@@ -67,12 +78,5 @@ export const loadTransactions = async () => {
       },
     ]
     await DBstore.setItem('testJSON', JSON.stringify(mockTransaction));
-    result = await DBstore.getItem("testJSON");
-    let parsedResult = await JSON.parse(result);
-    console.log("Get Parsed JSON Object : " + parsedResult[1].id);
-    // Get All Values
-    result = await DBstore.getAllKeysValues();
-    console.log("Get values : " + result);
-    console.log("Values length " + result.length);
   }
 }

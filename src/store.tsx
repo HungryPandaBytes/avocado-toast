@@ -51,54 +51,6 @@ const defaultContext: contextInterface = {
 export const StoreContext = React.createContext(defaultContext);
 
 let transactions: Transaction[] = [];
-transactions = [
-  {
-    id: 5,
-    amount: 125,
-    transaction_time: new Date(),
-    category_name: CategoryName.Grocery,
-    description: "Omakase",
-    split: false,
-    ignore: false,
-    transaction_type: 'expense'
-  },
-  {
-    id: 4,
-    amount: 25,
-    description: "Gigantic Pea",
-    category_name: CategoryName.Household,
-    iconName: "logo-amazon",
-    ignore: false,
-    transaction_time: 'may 18 2020 11:00',
-  },
-  {
-    id: 3,
-    amount: 2,
-    category_name: CategoryName.Restaurant,
-    description: "Supreme",
-    iconName: "logo-amazon",
-    ignore: false,
-    transaction_time: 'may 18 2020',
-  },
-  {
-    id: 2,
-    amount: 110,
-    description: "Grocery",
-    category_name: CategoryName.Grocery,
-    iconName: "logo-amazon",
-    ignore: false,
-    transaction_time: 'may 17 2020',
-  },
-  {
-    id: 3,
-    amount: 110,
-    description: "leisure",
-    category_name: CategoryName.Grocery,
-    iconName: "logo-amazon",
-    ignore: false,
-    transaction_time: 'may 17 2020',
-  },
-];
 
 const compareTransactions =
   (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
