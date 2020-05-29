@@ -104,10 +104,42 @@ class DBService {
       return null;
     }
   }
+  async getAllKeys() {
+    if (this._isService) {
+      const { keys } = await this._store.keys();
+      return keys;
+    } else {
+      return null;
+    }
+  }
+  async getAllValues() {
+    if (this._isService) {
+      const { values } = await this._store.values();
+      return values;
+    } else {
+      return null;
+    }
+  }
   async getAllKeysValues() {
     if (this._isService) {
       const { keysvalues } = await this._store.keysvalues();
       return keysvalues;
+    } else {
+      return null;
+    }
+  }
+  async removeItem(key: string) {
+    if (this.isService && key.length > 0) {
+      const { result } = await this._store.remove({ key });
+      return result;
+    } else {
+      return null;
+    }
+  }
+  async clear() {
+    if (this.isService) {
+      const { result } = await this._store.clear();
+      return result;
     } else {
       return null;
     }
