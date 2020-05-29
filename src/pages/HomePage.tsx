@@ -32,7 +32,9 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     // seedDatabase();
-    loadTransactions().then(data => { store.transactions = data });
+    loadTransactions().then(allTransactions => {
+      store.transactions = allTransactions;
+    });
   }, [])
 
   return useObserver(() => (
