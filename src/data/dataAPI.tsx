@@ -26,7 +26,7 @@ export const addNewTransactionToDB = async (newTransaction: Transaction) => {
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
   if (result) {
     await DBstore.setItem(newTransaction.id, JSON.stringify(newTransaction));
-    console.log(`Added a new transaction of ${newTransaction.category_name} of ${newTransaction.amount} to Avocado-Toast DB`)
+    console.log(`Added a new transaction of $${newTransaction.amount} ${newTransaction.category_name} to Avocado-Toast DB`)
   }
 }
 
