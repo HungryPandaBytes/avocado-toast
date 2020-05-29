@@ -62,7 +62,6 @@ const HomePage: React.FC = () => {
               />
               <PreviewTransactions
                 transactions={store.transactions}
-                ignoreTransaction={store.ignoreTransaction}
               />
 
               <IonButton

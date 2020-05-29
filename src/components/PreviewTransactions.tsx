@@ -9,13 +9,12 @@ import TransactionItem from "./TransactionItem";
 
 interface PreviewTransactionsProps {
   transactions: any;
-  ignoreTransaction: any;
 }
 
 const maxCountForTransactions = 5;
 
 const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
-  transactions, ignoreTransaction
+  transactions
 }) => {
   const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time));
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
@@ -39,7 +38,6 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
             return (<TransactionItem
               transaction={transaction}
-              ignoreTransaction={ignoreTransaction}
               key={index}
             />)
           })}

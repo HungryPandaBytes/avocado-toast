@@ -94,7 +94,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
       description: category,
       category_name: category,
       category_id: '2',
-      ignore: false,
       split: split,
       iconName: 'test',
       transaction_type: transactionType,

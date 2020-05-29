@@ -51,7 +51,6 @@ export const seedDatabase = async () => {
         description: "Apple Watch",
         category_name: "Grocery",
         iconName: "logo-amazon",
-        ignore: false,
         transaction_time: 'may 29 2020 11:00',
       },
       {
@@ -60,7 +59,6 @@ export const seedDatabase = async () => {
         description: "Gigantic Pea",
         category_name: "Grocery",
         iconName: "logo-amazon",
-        ignore: false,
         transaction_time: 'may 18 2020 11:00',
       },
       {
@@ -69,7 +67,6 @@ export const seedDatabase = async () => {
         category_name: "Grocery",
         description: "Supreme",
         iconName: "logo-amazon",
-        ignore: false,
         transaction_time: 'may 18 2020 11:00',
       },
       {
@@ -78,7 +75,6 @@ export const seedDatabase = async () => {
         description: "Grocery",
         category_name: "Grocery",
         iconName: "logo-amazon",
-        ignore: false,
         transaction_time: 'may 15 2020 11:00',
       },
       {
@@ -87,7 +83,6 @@ export const seedDatabase = async () => {
         description: "Leisure",
         category_name: "Grocery",
         iconName: "logo-amazon",
-        ignore: false,
         transaction_time: 'may 15 2020 11:00',
       },
     ]

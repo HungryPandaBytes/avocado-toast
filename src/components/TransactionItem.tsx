@@ -19,20 +19,14 @@ import {
 
 interface TransactionItemProps {
   transaction: any;
-  ignoreTransaction: any;
 }
 const TransactionItem: React.FC<TransactionItemProps> = ({
-  transaction, ignoreTransaction
+  transaction
 }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
   const transactionColor = transaction.ignore ? "grey" : "var(--ion-color-primary)"
   const transactionIconColor = transaction.ignore ? "medium" : getIconColor('basket-outline')
   const store = React.useContext(StoreContext);
-
-  const ignoreHandler = () => {
-    ignoreTransaction(transaction.id)
-    ionItemSlidingRef.current && ionItemSlidingRef.current.close();
-  }
 
   const deleteTransactionHandler = () => {
     store.deleteTransaction(transaction.id)
@@ -75,12 +69,6 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
           </IonLabel>}
       </IonItem >
       <IonItemOptions>
-        <IonItemOption
-          onClick={ignoreHandler}
-          color="medium"
-        >
-          Ignore
-        </IonItemOption>
         {/* TODO: update user id for deleteTransaction  */}
         <IonItemOption
           color="danger"

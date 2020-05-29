@@ -30,7 +30,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
               <IonLabel color='medium'>{date}</IonLabel>
             </IonItemDivider>
             {groupedFilteredTransactions[date].map((transaction: any, index: number) => (
-              <TransactionItem transaction={transaction} ignoreTransaction={store.ignoreTransaction} key={index} />
+              <TransactionItem transaction={transaction} key={index} />
             ))}
           </IonItemGroup>
         ))}
@@ -42,7 +42,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
               <IonLabel color='medium'>{date}</IonLabel>
             </IonItemDivider>
             {groupedTransactions[date].map((transaction: any, index: number) => (
-              <TransactionItem transaction={transaction} ignoreTransaction={store.ignoreTransaction} key={index} />
+              <TransactionItem transaction={transaction} key={index} />
             ))}
           </IonItemGroup>
         ))}

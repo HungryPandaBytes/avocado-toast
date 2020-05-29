@@ -13,7 +13,6 @@ interface stateInterface {
 
 interface dispatchInterface {
   addTransaction(transaction: Transaction): void
-  ignoreTransaction(transactionId: number): void
   deleteTransaction(transactionId: number): void
   setBudget(newBudget: Budget): void
 
@@ -25,17 +24,6 @@ const defaultContext: contextInterface = {
   transactions: [],
   budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 700 },
   addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction),
-  ignoreTransaction: (id: any) => {
-    const updatedTransactions = defaultContext.transactions.map((transaction: any) => {
-      if (transaction.id === id) {
-        transaction.ignore = !transaction.ignore;
-        return transaction;
-      } else {
-        return transaction;
-      }
-    })
-    return { ...defaultContext, transactions: [...updatedTransactions] };
-  },
   deleteTransaction: (id: any) => {
     const updatedTransactions = defaultContext.transactions.filter((transaction: any) => {
       if (transaction.id !== id) {
@@ -67,17 +55,6 @@ export const StoreProvider = ({ children }: any) => {
       if (transactionsCount > 1 && store.transactions[transactionsCount - 2].transaction_time > transaction.transaction_time) {
         store.transactions = store.transactions.sort(compareTransactions)
       }
-    },
-    ignoreTransaction: (id: any) => {
-      const updatedTransactions = store.transactions.map((transaction: any) => {
-        if (transaction.id === id) {
-          transaction.ignore = !transaction.ignore;
-          return transaction;
-        } else {
-          return transaction;
-        }
-      })
-      store.transactions = updatedTransactions;
     },
     deleteTransaction: (id: any) => {
       const updatedTransactions = store.transactions.filter((transaction: any) => {
