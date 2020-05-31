@@ -9,6 +9,7 @@ export enum sortOrderType {
 
 export function currentWeeksTransactions(transactions: Transaction[], sortOrder?: sortOrderType) {
   const startMoment = moment().startOf("isoWeek");
+  console.log(transactions)
   return currentTransactions(transactions, startMoment, sortOrder);
 }
 
@@ -24,14 +25,15 @@ export function currentDaysTransactions(transactions: Transaction[], sortOrder?:
 
 function currentTransactions(transactions: Transaction[], startMoment: moment.Moment, sortOrder?: sortOrderType) {
   let currentTransactions: Transaction[] = [];
-
   for (let i = transactions.length - 1; i >= 0; i--) {
     if (moment(transactions[i].transaction_time) >= startMoment) {
+      console.log((moment(transactions[i].transaction_time) >= startMoment), 'transaction_time')
       currentTransactions.push(transactions[i]);
     } else {
       break;
     }
   }
+  console.log({ startMoment }, { transactions }, { currentTransactions });
 
   return sortOrder === sortOrderType.newestFirst ? currentTransactions : currentTransactions.reverse();
 }
