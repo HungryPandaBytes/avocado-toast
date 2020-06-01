@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePageHero.scss';
-import avocadoLogo from '../theme/teen_avocado.png'
-import burntToastLogo from '../theme/Burnt_toast.png'
+import avocado from '../theme/teen_avocado.png'
+import cryingAvocado from '../theme/Crying_avocado.png'
 import { StoreContext } from '../store';
 import moment from 'moment';
 
@@ -17,7 +17,7 @@ const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) =
   const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
   const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-red"
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
-  const mascot = balance > 0 ? avocadoLogo : burntToastLogo
+  const mascot = balance > 0 ? avocado : cryingAvocado
   const today = moment();
   const timeLeftToday = moment().endOf('day').to(today, true);
   const daysLeftThisWeek = moment().endOf('isoWeek').to(today, true);
