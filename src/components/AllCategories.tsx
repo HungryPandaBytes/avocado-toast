@@ -54,7 +54,7 @@ const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) =
         return (
           <div key={category_name} className="categories__container">
             <IonItem class="category__item" style={{ height: '35px' }}>
-              <IonIcon icon={iconsHashMap[category_name]} slot="start" color="primary" style={{ margin: '0 4% 1% 0' }}></IonIcon>
+              <IonIcon icon={iconsHashMap[category_name]} slot="start" color="primary" style={{ margin: '0 3% 1% 0' }}></IonIcon>
               <IonLabel >{category_name}</IonLabel>
               <IonLabel slot="end" style={{ textAlign: "right" }}>
                 -${categoryTotal}
