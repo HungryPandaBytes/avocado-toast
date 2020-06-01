@@ -25,8 +25,18 @@ interface AllCategoriesProps {
   transactions: Transaction[]
   period: string
 }
-type IconSet = {
+export type IconSet = {
   [key: string]: string
+}
+
+export const iconsHashMap: IconSet = {
+  Grocery: GroceryIcon,
+  Transportation: TransportationIcon,
+  General: GeneralIcon,
+  Restaurant: RestaurantIcon,
+  Leisure: LeisureIcon,
+  Household: HouseholdIcon,
+  Shopping: ShoppingIcon
 }
 
 const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) => {
@@ -41,19 +51,10 @@ const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) =
         if (category_name === "total") return;
         categoryTotal = categories[category_name];
 
-        const iconsHashMap: IconSet = {
-          Grocery: GroceryIcon,
-          Transportation: TransportationIcon,
-          General: GeneralIcon,
-          Restaurant: RestaurantIcon,
-          Leisure: LeisureIcon,
-          Household: HouseholdIcon,
-          Shopping: ShoppingIcon
-        }
         return (
           <div key={category_name} className="categories__container">
             <IonItem class="category__item" style={{ height: '35px' }}>
-              <IonIcon icon={iconsHashMap[category_name]} slot="start" color="primary" style={{ marginRight: '3%' }}></IonIcon>
+              <IonIcon icon={iconsHashMap[category_name]} slot="start" color="primary" style={{ margin: '0 4% 1% 0' }}></IonIcon>
               <IonLabel >{category_name}</IonLabel>
               <IonLabel slot="end" style={{ textAlign: "right" }}>
                 -${categoryTotal}

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Moment from 'react-moment';
 import { StoreContext } from '../store';
-import { Transaction } from '../models/Transaction'
+import { iconsHashMap } from './AllCategories';
 import {
   IonItem,
   IonLabel,
@@ -11,12 +11,7 @@ import {
   IonItemOptions,
   IonItemOption
 } from "@ionic/react";
-import {
-  basketOutline,
-  logoAmazon,
-  carOutline,
-  cafeOutline,
-} from "ionicons/icons";
+
 
 interface TransactionItemProps {
   transaction: any
@@ -35,7 +30,6 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
     ionItemSlidingRef.current && ionItemSlidingRef.current.close();
   }
 
-
   // TODO: need category from backend to map correct icon to the transaction
   transaction = { ...transaction, iconName: "basket-outline" };
 
@@ -46,7 +40,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
       }}>
         < IonIcon
           color={transactionIconColor}
-          icon={getIcon(transaction.iconName)}
+          icon={iconsHashMap[transaction.category_name]}
           key={transaction.id}
         ></IonIcon>
         <IonLabel style={{ color: `${transactionColor}`, borderLeft: "2px", paddingLeft: "4%" }}>
@@ -86,23 +80,12 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
 
 export default TransactionItem;
 
-const getIcon: any = (iconName: string) => {
-  const mapping: any = {
-    "basket-outline": basketOutline,
-    "logo-amazon": logoAmazon,
-    "car-outline": carOutline,
-    "cafe-outline": cafeOutline,
-  };
-
-  return mapping[iconName];
-};
-
 const getIconColor: any = (iconName: string) => {
   const mapping: any = {
     "basket-outline": "danger",
-    "logo-amazon": "success",
-    "car-outline": "warning",
-    "cafe-outline": "tertiary",
+    "logo-amazon": "danger",
+    "car-outline": "danger",
+    "cafe-outline": "danger",
   };
 
   return mapping[iconName];
