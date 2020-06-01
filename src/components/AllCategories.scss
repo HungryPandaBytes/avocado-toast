@@ -1,5 +1,5 @@
 #all_categories {
-  margin: 5% 4% 0 4%;
+  margin: 5% 5% 0 5%;
   
   .categories__container {
     margin-bottom: 3%;
@@ -13,12 +13,12 @@
     height: 18px;
     margin: 0 auto;
     background-color: whitesmoke;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
   .categories__progress-bar--inner {
     height: 18px;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: var(--ion-color-primary);
   }
 }
