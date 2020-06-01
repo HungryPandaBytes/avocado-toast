@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Moment from 'react-moment';
 import { StoreContext } from '../store';
+import { Transaction } from '../models/Transaction'
 import {
   IonItem,
   IonLabel,
@@ -18,10 +19,11 @@ import {
 } from "ionicons/icons";
 
 interface TransactionItemProps {
-  transaction: any;
+  transaction: any
+  preview?: boolean
 }
 const TransactionItem: React.FC<TransactionItemProps> = ({
-  transaction
+  transaction, preview
 }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
   const transactionColor = transaction.ignore ? "grey" : "var(--ion-color-primary)"
@@ -68,7 +70,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
             })}
           </IonLabel>}
       </IonItem >
-      <IonItemOptions>
+      {!preview && <IonItemOptions>
         {/* TODO: update user id for deleteTransaction  */}
         <IonItemOption
           color="danger"
@@ -76,7 +78,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
         >
           Remove
         </IonItemOption>
-      </IonItemOptions>
+      </IonItemOptions>}
     </IonItemSliding >
 
   );

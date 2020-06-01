@@ -38,6 +38,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
 
             return (<TransactionItem
               transaction={transaction}
+              preview={true}
               key={index}
             />)
           })}
