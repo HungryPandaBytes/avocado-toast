@@ -28,13 +28,10 @@ function currentTransactions(transactions: Transaction[], startMoment: moment.Mo
   const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time));
   for (let i = sortedTransactions.length - 1; i >= 0; i--) {
     if (moment(sortedTransactions[i].transaction_time) >= startMoment) {
-      console.log((moment(sortedTransactions[i].transaction_time) >= startMoment), 'transaction_time')
       currentTransactions.push(sortedTransactions[i]);
     } else {
       break;
     }
   }
-  console.log({ startMoment }, { sortedTransactions }, { currentTransactions });
-
   return sortOrder === sortOrderType.newestFirst ? currentTransactions : currentTransactions.reverse();
 }
