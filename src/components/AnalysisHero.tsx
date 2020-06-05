@@ -22,7 +22,8 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
   const today = moment()
   const daysInCurrentMonth = moment().daysInMonth();
   const dayOfTheMonth = moment().date()
-  const daysLeftThisMonth = parseInt(moment().endOf('month').to(today, true));
+  const endOfMonth = moment().endOf('month');
+  const daysLeftThisMonth = today.diff(endOfMonth, 'days') * -1
   const daysLeftThisMonthStr = moment().endOf('month').to(today, true);
 
   const [showAnalysisInfoModal, setShowAnalysisInfoModal] = useState(false);
@@ -30,8 +31,9 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
 
   function underBudgetPercentThisMonth() {
     // TODO replace overbudgetThisMonth with global state
-    const overbudgetThisMonth = [2, 3, 4, 8, 10];
+    const overbudgetThisMonth = [2];
     const numberOfUnderbudgetDays = daysInCurrentMonth - daysLeftThisMonth - overbudgetThisMonth.length;
+    console.log(numberOfUnderbudgetDays / daysInCurrentMonth)
     return numberOfUnderbudgetDays / daysInCurrentMonth;
   }
 
@@ -78,10 +80,13 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
           />
         </span>
         <div className='progress-bar-wrapper'>
-          <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved this month</p>
+          <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved so far</p>
           <div className='progress-bar-light-grey'>
-            <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}>{daysLeftThisMonthStr} left</div>
-
+            <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}></div>
+          </div>
+          <div className='bottom-display-wrapper'>
+            <p>{daysLeftThisMonthStr} left</p>
+            <p>{Math.ceil(underBudgetPercentThisMonth() * 100)}% water</p>
           </div>
         </div>
       </div>
