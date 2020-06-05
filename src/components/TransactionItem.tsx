@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import Moment from 'react-moment';
 import { StoreContext } from '../store';
 import { iconsHashMap } from './AllCategories';
+import { deleteTransactionInDB } from '../data/dataAPI';
+
 import {
   IonItem,
   IonLabel,
@@ -27,6 +29,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
 
   const deleteTransactionHandler = () => {
     store.deleteTransaction(transaction.id)
+    deleteTransactionInDB(transaction.id)
     ionItemSlidingRef.current && ionItemSlidingRef.current.close();
   }
 

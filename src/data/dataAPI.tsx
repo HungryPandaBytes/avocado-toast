@@ -30,6 +30,18 @@ export const addNewTransactionToDB = async (newTransaction: Transaction) => {
   }
 }
 
+// delete a new transaction to db
+export const deleteTransactionInDB = async (transactionId: string) => {
+  const DBstore = new DBService();
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
+  if (result) {
+    await DBstore.removeItem(transactionId);
+    console.log(`Deleted a new transaction of $${transactionId} in DB`)
+  }
+}
+
+
 // seed database 
 export const seedDatabase = async () => {
   const DBstore = new DBService();

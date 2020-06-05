@@ -3,8 +3,6 @@ import React from 'react';
 import { useLocalStore } from 'mobx-react'
 import { Budget } from './models/Budget'
 import { Transaction } from './models/Transaction'
-import { CategoryName } from './models/CategoryName';
-
 
 interface stateInterface {
   transactions: Transaction[],
@@ -62,6 +60,7 @@ export const StoreProvider = ({ children }: any) => {
           return transaction;
         }
       })
+
       store.transactions = updatedTransactions
     },
     setBudget: (newBudget: Budget) => store.budget = newBudget
