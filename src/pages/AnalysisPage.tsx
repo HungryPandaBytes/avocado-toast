@@ -23,13 +23,6 @@ const AnalysisPage: React.FC = () => {
         </IonHeader>
         <AnalysisHero />
         <AnalysisCalendar />
-        <div className='notification-wrapper'>
-          <p style={{
-            margin: '0 2% 0 2%',
-            alignSelf: "center",
-            textAlign: 'center'
-          }}>Good job on growing your avocado! You spent less than what you budgeted on most days and saved $245 so far this month.</p>
-        </div>
       </IonContent>
     </IonPage>
   );

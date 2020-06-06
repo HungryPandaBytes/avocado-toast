@@ -33,7 +33,6 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
     // TODO replace overbudgetThisMonth with global state
     const overbudgetThisMonth = [2];
     const numberOfUnderbudgetDays = daysInCurrentMonth - daysLeftThisMonth - overbudgetThisMonth.length;
-    console.log(numberOfUnderbudgetDays / daysInCurrentMonth)
     return numberOfUnderbudgetDays / daysInCurrentMonth;
   }
 
