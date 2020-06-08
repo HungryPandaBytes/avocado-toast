@@ -42,9 +42,9 @@ import './theme/global.css';
 import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
-  
+
   return (
-    <StoreProvider>
+    < StoreProvider >
       <IonApp>
         <IonReactRouter>
           <IonTabs>
@@ -77,7 +77,7 @@ const App: React.FC = () => {
           </IonTabs>
         </IonReactRouter>
       </IonApp>
-    </StoreProvider>
+    </StoreProvider >
 
   )
 };

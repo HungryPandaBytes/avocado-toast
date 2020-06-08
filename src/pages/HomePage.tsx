@@ -38,6 +38,7 @@ const HomePage: React.FC = () => {
   }, [])
 
   return useObserver(() => (
+
     <IonPage id="home-page">
       <IonContent>
         <IonSlides
@@ -52,6 +53,8 @@ const HomePage: React.FC = () => {
                 height: "100%",
               }}
             >
+              {console.count('home page counter')}
+
               <HomePageHero
                 period="Daily"
                 balance={balanceHelpers.getTodayBalance(

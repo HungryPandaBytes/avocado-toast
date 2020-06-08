@@ -1,4 +1,3 @@
-
 export interface Budget {
   income: number;
   reoccuringExpenses: number;

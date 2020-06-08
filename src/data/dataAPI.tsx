@@ -1,6 +1,7 @@
 import React from 'react';
 import { Transaction } from '../models/Transaction';
 import { StoreContext } from '../store';
+import { Budget } from '../models/Budget'
 import { DBService } from '../services/DBService';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,6 +17,17 @@ export const loadTransactions = async () => {
     let parsedResult = await allTransactions.map((transaction: string) => JSON.parse(transaction));
     console.log('fetching all transactions from db', parsedResult)
     return parsedResult;
+  }
+}
+
+// add a new budget to db
+export const addNewBudgetToDB = async (newBudget: Budget) => {
+  const DBstore = new DBService();
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'budget' });
+  if (result) {
+    await DBstore.setItem("budget", JSON.stringify(newBudget));
+    console.log(`Added a new budget ${newBudget.budgetPerDay} to Avocado-Toast DB`)
   }
 }
 
