@@ -39,6 +39,7 @@ import './theme/variables.css';
 
 /* Global css */
 import './theme/global.css';
+import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
   return (
@@ -47,6 +48,7 @@ const App: React.FC = () => {
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
+              <Route path="/onboarding" component={Onboarding} exact={true} />
               <Route path="/addtransaction" component={AddTransaction} exact={true} />
               <Route path="/transactions" component={TransactionsPage} exact={true} />
               <Route path="/analysis" component={AnalysisPage} exact={true} />

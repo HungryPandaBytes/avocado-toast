@@ -18,7 +18,7 @@ const BudgetPage: React.FC = () => {
             <IonTitle color='primary' size="large">Budget</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <BudgetInput />
+        <BudgetInput onboarding={false} />
       </IonContent>
     </IonPage>
   );
