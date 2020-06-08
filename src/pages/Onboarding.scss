@@ -1,4 +1,5 @@
 #tutorial-page {
+
   ion-toolbar {
     --background: transparent;
     --border-color: transparent;
@@ -14,31 +15,42 @@
   }
 
   .slide-image {
-    max-height: 100%;
+    max-height: 50%;
     max-width: 60%;
+    border-radius: 10%;
     margin: 0;
     pointer-events: none;
   }
 
   .swiper-pagination {
-    top: 300px;
+    top: 100px;
     bottom: auto;
   }
 
+  .first-onboarding-slide h2{
+    text-align: left;
+    margin: 10% 5% 5% 5%;
+    font-size: 26px;
+    color: var(--ion-color-primary);
+  }
+  
   h2{
     color: var(--ion-color-primary);
   }
 
   b {
     font-weight: 500;
+    color: var(--ion-color-primary);
   }
 
   p {
-    font-size: 14px;
-    color: var(--ion-color-primary);
+    text-align: left;
+    margin: 0 5% 0 5%;
+    font-size: 17px;
+    color: grey;
 
     b {
-      color: var(--ion-color-secondary);
+      color: grey;
     }
   }
 

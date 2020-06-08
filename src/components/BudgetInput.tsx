@@ -46,9 +46,13 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         </div>
         <img className='image--wrapper' src={avocado} alt="Logo" />
       </div>
+      {onboarding && <IonItem lines='none' style={{ marginTop: '5%' }}>
+        <h2 color='medium'>Let's figure out your daily budget.</h2>
+      </IonItem>
+      }
       <IonItem lines='none'>
         {!onboarding && <IonLabel color='medium' slot='start'>Income</IonLabel>}
-        {onboarding && <IonLabel color='medium' >What's your monthly income?</IonLabel>}
+        {onboarding && <IonLabel color='medium'>What's your monthly income?</IonLabel>}
         {!onboarding && <IonLabel color='primary' slot='end'>${Math.ceil(income / 30).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day</IonLabel>}
       </IonItem >
       <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
@@ -65,7 +69,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
 
       <IonItem lines='none'>
         {!onboarding && <IonLabel color='medium' slot='start'>Recurring Expenses</IonLabel>}
-        {onboarding && <IonLabel color='medium'>What's your monthly recurring expenses?</IonLabel>}
+        {onboarding && <IonLabel color='medium'>What're your monthly recurring expenses?</IonLabel>}
         {!onboarding && <IonLabel color='primary' slot='end'>${Math.ceil(recurringExpenses / 30)}/day</IonLabel>
         }
       </IonItem >
@@ -89,37 +93,45 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         }
         {onboarding && <IonLabel color='medium' >How much you want to save?</IonLabel>}
       </IonItem>
-      {!onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
-        <IonRange style={{ maxWidth: '50%', marginLeft: '0%' }} color='primary' pin={true} value={savingPercentage} onIonChange={e => {
-          setSavingPercentage(e.detail.value as number)
-        }} />
-        <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
-      </IonItem >}
-      {onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
-        <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
-          if (e.detail.value! === "") {
-            setMonthlySavings(0)
-          } else {
-            setMonthlySavings(parseInt(e.detail.value!, 10))
-          }
-        }} clearInput></IonInput>
-        <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
-      </IonItem>}
+      {
+        !onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
+          <IonRange style={{ maxWidth: '50%', marginLeft: '0%' }} color='primary' pin={true} value={savingPercentage} onIonChange={e => {
+            setSavingPercentage(e.detail.value as number)
+          }} />
+          <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
+        </IonItem >
+      }
+      {
+        onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
+          <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
+            if (e.detail.value! === "") {
+              setMonthlySavings(0)
+            } else {
+              setMonthlySavings(parseInt(e.detail.value!, 10))
+            }
+          }} clearInput></IonInput>
+          <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
+        </IonItem>
+      }
 
 
-      <IonItem lines='none'>
+      {!onboarding && <IonItem lines='none'>
         <IonLabel color='medium' slot='start'>Daily Budget </IonLabel>
         <IonLabel color='primary' slot='end'>${budgetPerDay}/day</IonLabel>
-      </IonItem>
+      </IonItem>}
 
-      {!onboarding && <div className="ion-text-center">
-        <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
-          onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">UPDATE BUDGET</IonButton>
-      </div>}
-      {onboarding && <div className="ion-text-center">
-        <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
-          onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'm ready to track and save money!</IonButton>
-      </div>}
+      {
+        !onboarding && <div className="ion-text-center">
+          <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
+            onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">UPDATE BUDGET</IonButton>
+        </div>
+      }
+      {
+        onboarding && <div className="ion-text-center">
+          <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
+            onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'm ready to track and save money!</IonButton>
+        </div>
+      }
     </div >
   )
 }
