@@ -128,7 +128,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       }
       {
         onboarding && <div className="ion-text-center">
-          <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
+          <IonButton style={{ margin: '10% 5% 5% 5%' }} expand='block' fill='solid'
             onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'm ready to track and save money!</IonButton>
         </div>
       }
