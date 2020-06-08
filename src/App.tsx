@@ -42,6 +42,7 @@ import './theme/global.css';
 import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
+  
   return (
     <StoreProvider>
       <IonApp>

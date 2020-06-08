@@ -1,7 +1,4 @@
 #tutorial-page {
-
-  height: 100%;
-
   ion-toolbar {
     --background: transparent;
     --border-color: transparent;
@@ -17,9 +14,9 @@
   }
 
   .slide-image {
-    max-height: 50%;
+    max-height: 100%;
     max-width: 60%;
-    margin: 36px 0;
+    margin: 0;
     pointer-events: none;
   }
 

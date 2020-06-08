@@ -16,9 +16,14 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
   const [monthlySavings, setMonthlySavings] = useState(0);
   const [income, setIncome] = useState(0);
   const [recurringExpenses, setRecurringExpenses] = useState(0);
+  let budgetPerDay = 0;
 
+  if (onboarding) {
+    budgetPerDay = Math.ceil((income - recurringExpenses - monthlySavings) / 30)
+  } else {
+    budgetPerDay = Math.ceil((income - recurringExpenses - ((income - recurringExpenses) * savingPercentage / 100)) / 30)
 
-  const budgetPerDay = Math.ceil((income - recurringExpenses - ((income - recurringExpenses) * savingPercentage / 100)) / 30)
+  }
   const savingsPerDay = Math.floor((income - recurringExpenses) * savingPercentage / 100 / 30)
 
   function saveBudgetClickHandler() {
@@ -28,7 +33,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       savingPercentage: savingPercentage,
       budgetPerDay: budgetPerDay
     }
-    store.setBudget(newBudget)
+    store.setBudget(newBudget);
   }
 
   return (
@@ -91,11 +96,11 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
       </IonItem >}
       {onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
-        <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={recurringExpenses} placeholder="Rent, Utilities etc." onIonChange={e => {
+        <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
           if (e.detail.value! === "") {
-            setRecurringExpenses(0)
+            setMonthlySavings(0)
           } else {
-            setRecurringExpenses(parseInt(e.detail.value!, 10))
+            setMonthlySavings(parseInt(e.detail.value!, 10))
           }
         }} clearInput></IonInput>
         <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
@@ -107,10 +112,14 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         <IonLabel color='primary' slot='end'>${budgetPerDay}/day</IonLabel>
       </IonItem>
 
-      <div className="ion-text-center">
+      {!onboarding && <div className="ion-text-center">
         <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
           onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">UPDATE BUDGET</IonButton>
-      </div>
+      </div>}
+      {onboarding && <div className="ion-text-center">
+        <IonButton style={{ margin: '5%' }} expand='block' fill='solid'
+          onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'm ready to track and save money!</IonButton>
+      </div>}
     </div >
   )
 }
