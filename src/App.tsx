@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { walletOutline, statsChartOutline, cardOutline, calculatorOutline } from 'ionicons/icons';
-import { StoreProvider } from './store';
+import { StoreProvider, StoreContext } from './store';
 import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/TransactionsPage';
 import BudgetPage from './pages/BudgetPage';
@@ -42,7 +42,9 @@ import './theme/global.css';
 import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
-  
+  const store = React.useContext(StoreContext);
+  const MainPage = (store.newUser ? HomePage : Onboarding);
+
   return (
     <StoreProvider>
       <IonApp>
@@ -54,7 +56,7 @@ const App: React.FC = () => {
               <Route path="/transactions" component={TransactionsPage} exact={true} />
               <Route path="/analysis" component={AnalysisPage} exact={true} />
               <Route path="/budget" component={BudgetPage} exact={true} />
-              <Route path="/" component={HomePage} />
+              <Route path="/" component={MainPage} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">

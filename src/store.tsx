@@ -6,19 +6,21 @@ import { Transaction } from './models/Transaction'
 
 interface stateInterface {
   transactions: Transaction[],
-  budget: Budget
+  budget: Budget,
+  newUser: boolean
 }
 
 interface dispatchInterface {
   addTransaction(transaction: Transaction): void
   deleteTransaction(transactionId: number): void
   setBudget(newBudget: Budget): void
-
+  setReturningUser(): void
 }
 
 interface contextInterface extends stateInterface, dispatchInterface { };
 
 const defaultContext: contextInterface = {
+  newUser: false,
   transactions: [],
   budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 700 },
   addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction),
@@ -31,7 +33,8 @@ const defaultContext: contextInterface = {
 
     return { ...defaultContext, transactions: updatedTransactions };
   },
-  setBudget: (newBudget: Budget) => defaultContext.budget = newBudget
+  setBudget: (newBudget: Budget) => defaultContext.budget = newBudget,
+  setReturningUser: () => defaultContext.newUser = false
 }
 
 export const StoreContext = React.createContext(defaultContext);
@@ -43,6 +46,7 @@ const compareTransactions =
 
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
+    newUser: false,
     transactions: transactions.sort(compareTransactions),
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 420 },
     addTransaction: (transaction: Transaction) => {
@@ -63,7 +67,8 @@ export const StoreProvider = ({ children }: any) => {
 
       store.transactions = updatedTransactions
     },
-    setBudget: (newBudget: Budget) => store.budget = newBudget
+    setBudget: (newBudget: Budget) => store.budget = newBudget,
+    setReturningUser: () => store.newUser = false
   }));
 
   return (
