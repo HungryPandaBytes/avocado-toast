@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonSlides, IonSlide, IonIcon, useIonViewWillEnter, IonTitle } from '@ionic/react';
+import { IonContent, IonPage, IonHeader, IonToolbar, IonSlides, IonSlide, useIonViewWillEnter } from '@ionic/react';
 import './Onboarding.scss';
 import babyAvocado from '../theme/baby_avocado.png'
 import BudgetInput from '../components/BudgetInput';
@@ -13,21 +13,11 @@ const slideOpts = {
 };
 
 const Onboarding: React.FC = () => {
-  const [showSkip, setShowSkip] = useState(true);
-  const slideRef = useRef<HTMLIonSlidesElement>(null);
-
-  useIonViewWillEnter(() => {
-  });
 
   const startApp = async () => {
     // await setHasSeenTutorial(true);
     // await setMenuEnabled(true);
   };
-
-  const handleSlideChangeStart = () => {
-
-  };
-
   return (
     <IonPage id="tutorial-page">
       <IonHeader>
@@ -35,8 +25,12 @@ const Onboarding: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonSlides onIonSlideWillChange={handleSlideChangeStart} options={slideOpts} pager={true}>
+        <IonSlides
+          pager={true}
+          options={slideOpts}
+          style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}>
           <IonSlide className='first-onboarding-slide' style={{ marginTop: '10%' }}>
+            {console.count('onboarding counter')}
             <img src={babyAvocado} alt="" className="slide-image" />
             <h2 className="slide-title" style={{ marginTop: '30%' }}>
               Simply Track Expenses

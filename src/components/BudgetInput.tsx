@@ -3,6 +3,7 @@ import avocado from '../theme/baby_avocado.png'
 import { StoreContext } from '../store'
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
+import { addNewBudgetToDB } from '../data/dataAPI'
 import { findByLabelText } from '@testing-library/dom';
 
 interface BudgetInputProps {
@@ -24,6 +25,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
     budgetPerDay = Math.ceil((income - recurringExpenses - ((income - recurringExpenses) * savingPercentage / 100)) / 30)
 
   }
+
   const savingsPerDay = Math.floor((income - recurringExpenses) * savingPercentage / 100 / 30)
 
   function saveBudgetClickHandler() {
@@ -34,6 +36,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       budgetPerDay: budgetPerDay
     }
     store.setBudget(newBudget);
+    addNewBudgetToDB(newBudget)
   }
 
   return (
@@ -66,10 +69,10 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
       </IonItem>
 
-
-      <IonItem lines='none'>
+      {console.count('budgetInput component count')}
+      <IonItem lines='none' >
         {!onboarding && <IonLabel color='medium' slot='start'>Recurring Expenses</IonLabel>}
-        {onboarding && <IonLabel color='medium'>What're your monthly recurring expenses?</IonLabel>}
+        {onboarding && <IonLabel color='medium' style={{ marginBottom: 0 }}>What're your monthly recurring expenses? </IonLabel>}
         {!onboarding && <IonLabel color='primary' slot='end'>${Math.ceil(recurringExpenses / 30)}/day</IonLabel>
         }
       </IonItem >
@@ -91,7 +94,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
             <IonLabel color='primary' slot='end'>${savingsPerDay}/day</IonLabel>
           </>
         }
-        {onboarding && <IonLabel color='medium' >How much you want to save?</IonLabel>}
+        {onboarding && <IonLabel color='medium' >How much do you want to save?</IonLabel>}
       </IonItem>
       {
         !onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
@@ -107,7 +110,8 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
             if (e.detail.value! === "") {
               setMonthlySavings(0)
             } else {
-              setMonthlySavings(parseInt(e.detail.value!, 10))
+              setMonthlySavings(parseInt(e.detail.value!, 10));
+              setSavingPercentage(monthlySavings / income);
             }
           }} clearInput></IonInput>
           <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
@@ -115,10 +119,12 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       }
 
 
-      {!onboarding && <IonItem lines='none'>
-        <IonLabel color='medium' slot='start'>Daily Budget </IonLabel>
-        <IonLabel color='primary' slot='end'>${budgetPerDay}/day</IonLabel>
-      </IonItem>}
+      {
+        !onboarding && <IonItem lines='none'>
+          <IonLabel color='medium' slot='start'>Daily Budget </IonLabel>
+          <IonLabel color='primary' slot='end'>${budgetPerDay}/day</IonLabel>
+        </IonItem>
+      }
 
       {
         !onboarding && <div className="ion-text-center">
@@ -128,8 +134,8 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       }
       {
         onboarding && <div className="ion-text-center">
-          <IonButton style={{ margin: '10% 5% 5% 5%' }} expand='block' fill='solid'
-            onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'm ready to track and save money!</IonButton>
+          <IonButton style={{ margin: '7% 5% 5% 5%' }} expand='block' fill='solid'
+            onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'M READY TO TRACK AND SAVE!</IonButton>
         </div>
       }
     </div >
