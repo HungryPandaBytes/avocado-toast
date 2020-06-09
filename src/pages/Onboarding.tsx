@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { IonContent, IonPage, IonHeader, IonToolbar, IonSlides, IonSlide, useIonViewWillEnter } from '@ionic/react';
+import { IonContent, IonPage, IonHeader, IonToolbar, IonSlides, IonSlide, useIonViewWillEnter, IonButton } from '@ionic/react';
 import './Onboarding.scss';
 import babyAvocado from '../theme/baby_avocado.png'
 import BudgetInput from '../components/BudgetInput';
+import { StoreContext } from '../store';
 
 
 const slideOpts = {
@@ -13,6 +14,7 @@ const slideOpts = {
 };
 
 const Onboarding: React.FC = () => {
+  const store = React.useContext(StoreContext);
 
   const startApp = async () => {
     // await setHasSeenTutorial(true);
@@ -42,6 +44,7 @@ const Onboarding: React.FC = () => {
           <IonSlide>
             <img src="assets/img/ica-slidebox-img-2.png" alt="" className="slide-image" />
             <BudgetInput onboarding={true} />
+            <IonButton onClick={store.setReturningUser}>continue</IonButton>
           </IonSlide>
         </IonSlides>
       </IonContent>

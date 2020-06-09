@@ -42,11 +42,8 @@ import './theme/global.css';
 import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
-<<<<<<< HEAD
   const store = React.useContext(StoreContext);
-  const MainPage = (store.newUser ? HomePage : Onboarding);
-=======
->>>>>>> 3c0bc634ecbdf386e7dae03c65545b1137760efb
+  // const MainPage = (store.newUser ? HomePage : Onboarding);
 
   return (
     < StoreProvider >
@@ -59,7 +56,7 @@ const App: React.FC = () => {
               <Route path="/transactions" component={TransactionsPage} exact={true} />
               <Route path="/analysis" component={AnalysisPage} exact={true} />
               <Route path="/budget" component={BudgetPage} exact={true} />
-              <Route path="/" component={MainPage} />
+              <Route path="/" component={HomePage} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">

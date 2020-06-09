@@ -4,7 +4,6 @@ import { StoreContext } from '../store'
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
 import { addNewBudgetToDB } from '../data/dataAPI'
-import { findByLabelText } from '@testing-library/dom';
 
 interface BudgetInputProps {
   onboarding: boolean

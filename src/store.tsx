@@ -68,7 +68,7 @@ export const StoreProvider = ({ children }: any) => {
       store.transactions = updatedTransactions
     },
     setBudget: (newBudget: Budget) => store.budget = newBudget,
-    setReturningUser: () => store.newUser = false
+    setReturningUser: () => store.newUser = true
   }));
 
   return (
