@@ -15,27 +15,6 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
-  // const checkOverSpending = () => {
-  //   const thisMonthTransactions = currentMonthsTransactions(store.transactions);
-  //   const groupTransactionsByDateObject = groupTransactionsByDate(thisMonthTransactions)
-  //   let overbudgetThisMonth: number[] = [];
-
-  //   for (let date in groupTransactionsByDateObject) {
-  //     let totalExpensesForThatDay: number = 0;
-  //     for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
-  //       totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
-  //       const thisDate = moment(date).date();
-  //       if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thisDate)) {
-  //         overbudgetThisMonth.push(thisDate);
-  //       }
-  //     }
-  //   }
-  //   console.log({ thisMonthTransactions, groupTransactionsByDateObject })
-  //   const sortedOverbudgetThisMonth = overbudgetThisMonth.sort((a: any, b: any) => a - b);
-  //   console.log({ sortedOverbudgetThisMonth });
-  //   store.overbudgetThisMonth = sortedOverbudgetThisMonth;
-  //   return sortedOverbudgetThisMonth;
-  // }
   function makeCalendarArray() {
     const overbudgetThisMonth = store.overbudgetThisMonth;
     const daysInCurrentMonth = moment().daysInMonth();
