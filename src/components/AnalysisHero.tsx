@@ -31,7 +31,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
 
   function underBudgetPercentThisMonth() {
     // TODO replace overbudgetThisMonth with global state
-    const overbudgetThisMonth = [2];
+    const overbudgetThisMonth = store.overbudgetThisMonth;
     const numberOfUnderbudgetDays = daysInCurrentMonth - daysLeftThisMonth - overbudgetThisMonth.length;
     return numberOfUnderbudgetDays / daysInCurrentMonth;
   }
@@ -79,9 +79,14 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
           />
         </span>
         <div className='progress-bar-wrapper'>
-          <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1><p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved so far</p>
+          {savingsSoFar <= 0 && <h1 style={{ display: "inline" }}>-${(savingsSoFar * -1).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1>
+          }
+          {savingsSoFar > 0 && <h1 style={{ display: "inline" }}>${savingsSoFar.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h1>
+          }
+          <p style={{ display: "inline", color: 'var(--ion-color-tertiary)' }}> saved this month</p>
           <div className='progress-bar-light-grey'>
-            <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}></div>
+            {savingsSoFar <= 0 && <div className='progress-bar-green' style={{ width: `0%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}></div>}
+            {savingsSoFar > 0 && <div className='progress-bar-green' style={{ width: `${dayOfTheMonth / daysInCurrentMonth * 100}%`, color: 'white', textAlign: 'right', padding: '1% 3% 0 0' }}></div>}
           </div>
           <div className='bottom-display-wrapper'>
             <p>{daysLeftThisMonthStr} left</p>
