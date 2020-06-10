@@ -43,7 +43,7 @@ import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
   const store = React.useContext(StoreContext);
-  // const MainPage = (store.newUser ? HomePage : Onboarding);
+  // const MainPage = (store.newUser ? Onboarding : HomePage);
 
   return (
     < StoreProvider >

@@ -44,7 +44,6 @@ const Onboarding: React.FC = () => {
           <IonSlide>
             <img src="assets/img/ica-slidebox-img-2.png" alt="" className="slide-image" />
             <BudgetInput onboarding={true} />
-            <IonButton onClick={store.setReturningUser}>continue</IonButton>
           </IonSlide>
         </IonSlides>
       </IonContent>

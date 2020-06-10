@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import avocado from '../theme/baby_avocado.png'
-import { StoreContext } from '../store'
+import avocado from '../theme/baby_avocado.png';
+import { StoreContext } from '../store';
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
-import { addNewBudgetToDB } from '../data/dataAPI'
+import { addNewBudgetToDB } from '../data/dataAPI';
 
 interface BudgetInputProps {
   onboarding: boolean
@@ -22,7 +22,6 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
     budgetPerDay = Math.ceil((income - recurringExpenses - monthlySavings) / 30)
   } else {
     budgetPerDay = Math.ceil((income - recurringExpenses - ((income - recurringExpenses) * savingPercentage / 100)) / 30)
-
   }
 
   const savingsPerDay = Math.floor((income - recurringExpenses) * savingPercentage / 100 / 30)

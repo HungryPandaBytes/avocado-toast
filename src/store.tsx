@@ -7,7 +7,8 @@ import { Transaction } from './models/Transaction'
 interface stateInterface {
   transactions: Transaction[],
   budget: Budget,
-  newUser: boolean
+  newUser: boolean,
+  overbudgetThisMonth: number[]
 }
 
 interface dispatchInterface {
@@ -15,14 +16,17 @@ interface dispatchInterface {
   deleteTransaction(transactionId: number): void
   setBudget(newBudget: Budget): void
   setReturningUser(): void
+  addOverBudgetDate(date: number): void
 }
 
 interface contextInterface extends stateInterface, dispatchInterface { };
 
 const defaultContext: contextInterface = {
-  newUser: false,
+  newUser: true,
+  overbudgetThisMonth: [],
   transactions: [],
   budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 700 },
+  addOverBudgetDate: (date) => defaultContext.overbudgetThisMonth.push(date),
   addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction),
   deleteTransaction: (id: any) => {
     const updatedTransactions = defaultContext.transactions.filter((transaction: any) => {
@@ -40,15 +44,18 @@ const defaultContext: contextInterface = {
 export const StoreContext = React.createContext(defaultContext);
 
 let transactions: Transaction[] = [];
+let overbudgetThisMonth: number[] = [];
 
 const compareTransactions =
   (a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time);
 
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
-    newUser: false,
+    newUser: true,
     transactions: transactions.sort(compareTransactions),
+    overbudgetThisMonth: overbudgetThisMonth,
     budget: { income: 10000, reoccuringExpenses: 2000, savingPercentage: 0.20, budgetPerDay: 420 },
+    addOverBudgetDate: (date: number) => store.overbudgetThisMonth.push(date),
     addTransaction: (transaction: Transaction) => {
       store.transactions.push(transaction);
       const transactionsCount = store.transactions.length;

@@ -23,6 +23,23 @@ export function currentDaysTransactions(transactions: Transaction[], sortOrder?:
   return currentTransactions(transactions, startMoment, sortOrder);
 }
 
+export function groupTransactionsByDate(transactions: any) {
+  let groups: any = {};
+
+  const sortedTransactions = transactions.slice().sort((a: any, b: any) => Date.parse(b.transaction_time) - Date.parse(a.transaction_time));
+
+  sortedTransactions.map((transaction: any) => {
+    var date = new Date(transaction.transaction_time)
+    var dateString = date.toDateString().slice(4);
+    if (groups.hasOwnProperty(dateString)) {
+      groups[dateString].push(transaction)
+    } else {
+      groups[dateString] = [transaction]
+    }
+  })
+  return groups;
+}
+
 function currentTransactions(transactions: Transaction[], startMoment: moment.Moment, sortOrder?: sortOrderType) {
   let currentTransactions: Transaction[] = [];
   const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time));

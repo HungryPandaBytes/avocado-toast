@@ -4,6 +4,8 @@ import { IonIcon } from '@ionic/react';
 import './AnalysisCalendar.scss'
 import moment from 'moment'
 import { waterOutline, water } from 'ionicons/icons';
+import { useObserver } from 'mobx-react';
+import { groupTransactionsByDate, currentMonthsTransactions } from '../Helpers/transactionsHelper';
 
 interface AnalysisCalendarProps {
 
@@ -13,8 +15,25 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
+  const checkOverSpending = () => {
+    let thisMonthTransactions = currentMonthsTransactions(store.transactions);
+    const groupTransactionsByDateObject = groupTransactionsByDate(thisMonthTransactions)
+    let overbudgetThisMonth: number[] = [];
+    for (let date in groupTransactionsByDateObject) {
+      let totalExpensesForThatDay: number = 0;
+      for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
+        totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
+        const thisDate = moment(date).date();
+        if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thisDate)) {
+          overbudgetThisMonth.push(thisDate);
+        }
+      }
+    }
+    return overbudgetThisMonth.sort((a: any, b: any) => a - b);
+  }
   // To Do: set up overbudgetThisMonth in global state and modify the makeCalendarArray
-  const overbudgetThisMonth = [2, 3, 4, 8, 10]
+  const overbudgetThisMonth = checkOverSpending();
+  console.log('check overbudget in Analysis', overbudgetThisMonth);
 
   function makeCalendarArray() {
     const daysInCurrentMonth = moment().daysInMonth();
@@ -38,7 +57,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const calendarArray = makeCalendarArray();
 
-  return (
+  return useObserver(() => (
 
     <div id="analysis-calendar">
       <div className="calendar--wrapper">
@@ -76,10 +95,8 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
           }
         })}
       </div>
-
-
     </div>
-  )
+  ));
 }
 
 export default AnalysisCalendar;

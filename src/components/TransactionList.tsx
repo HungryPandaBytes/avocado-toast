@@ -72,6 +72,7 @@ const groupTransactionsByDate = (transactions: any) => {
       groups[dateString] = [transaction]
     }
   })
+  console.log({ groups })
   return groups;
 }
 
