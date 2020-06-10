@@ -1,38 +1,42 @@
 import moment from 'moment';
+import { Transaction } from '../models/Transaction';
+import { currentMonthsTransactions, currentDaysTransactions, currentWeeksTransactions } from '../Helpers/transactionsHelper'
 
 const expenseHelpers = {
 
-  getTodayTotalExpenses: function (transactions: any) {
+  getTodayTotalExpenses: function (transactions: Transaction[]) {
     let todayTotalExpenses = 0
     let today = moment();
-    transactions.map((transaction: any) => {
+    currentDaysTransactions(transactions);
+    transactions.map((transaction: Transaction) => {
       if (moment(transaction.transaction_time).isSame(today, 'day')) {
-        todayTotalExpenses += parseInt(transaction.amount)
+        todayTotalExpenses += transaction.amount;
       }
     });
     return todayTotalExpenses;
   },
-  getThisWeekTotalExpenses: function (transactions: any) {
+  getThisWeekTotalExpenses: function (transactions: Transaction[]) {
     let thisWeekTotalExpenses = 0;
     let today = moment();
     let lastMonday = moment().startOf('isoWeek');
-
-    transactions.map((transaction: any) => {
+    currentWeeksTransactions(transactions);
+    transactions.map((transaction: Transaction) => {
       if (today.diff(lastMonday, 'day') <= 7) {
-        thisWeekTotalExpenses += parseInt(transaction.amount)
+        thisWeekTotalExpenses += transaction.amount;
       }
     });
     return thisWeekTotalExpenses;
   },
-  getThisMonthTotalExpenses: function (transactions: any) {
+  getThisMonthTotalExpenses: function (transactions: Transaction[]) {
     let thisMonthTotalExpenses = 0;
+    currentMonthsTransactions(transactions);
     const today = moment();
     const firstDayofMonth = moment().startOf('month');
     const daysInMonth = moment().daysInMonth()
 
-    transactions.map((transaction: any) => {
+    transactions.map((transaction: Transaction) => {
       if (today.diff(firstDayofMonth, 'day') <= daysInMonth) {
-        thisMonthTotalExpenses += parseInt(transaction.amount)
+        thisMonthTotalExpenses += transaction.amount;
       }
     });
     return thisMonthTotalExpenses;

@@ -8,7 +8,7 @@ import teenAvocado from '../theme/geeky_avocado.png'
 import adultAvocado from '../theme/avocado_teen_cap.png'
 import avocadoToast from '../theme/avo_slice_toast.png'
 import { informationCircle } from 'ionicons/icons';
-import { currentWeeksTransactions } from '../Helpers/transactionsHelper';
+import expenseHelpers from '../Helpers/expenseHelper';
 import AnalysisInfoModal from './AnalysisInfoModal';
 import './AnalysisHero.scss';
 
@@ -54,7 +54,7 @@ const AnalysisHero: React.FC<AnalysisHeroProps> = () => {
 
   function savingsThisMonth() {
     // ToDo: aggregate all the expenses for the current Month and make totalExpenseThisMonth dynamic
-    let totalExpenseThisMonth = 1000
+    let totalExpenseThisMonth = expenseHelpers.getThisMonthTotalExpenses(store.transactions);
     let budgetPerMonth = store.budget.budgetPerDay * dayOfTheMonth;
     budgetPerMonth -= totalExpenseThisMonth
     return budgetPerMonth
