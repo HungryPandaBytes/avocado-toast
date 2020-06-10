@@ -5,7 +5,6 @@ import './AnalysisCalendar.scss'
 import moment from 'moment'
 import { waterOutline, water } from 'ionicons/icons';
 import { useObserver } from 'mobx-react';
-import { currentMonthsTransactions, groupTransactionsByDate } from '../Helpers/transactionsHelper';
 
 interface AnalysisCalendarProps {
 
@@ -24,8 +23,6 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
     for (var i = 1; i < daysInCurrentMonth; i++) {
       if (i > dayOfTheMonth) {
         calendarArray.push('future')
-      } else if (i === dayOfTheMonth) {
-        calendarArray.push('today')
       } else if (i === overbudgetThisMonth[pointer]) {
         calendarArray.push('overbudget')
         pointer++;
@@ -37,6 +34,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
   }
 
   const calendarArray = makeCalendarArray();
+  console.log(calendarArray)
   return useObserver(() => (
 
     <div id="analysis-calendar">
@@ -52,7 +50,7 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
                 />
               </span>
             )
-          } else if (day === 'today') {
+          } else if (day === 'overbudget') {
             return (
               <span key={index} style={{ margin: '0 2% 0 2%' }}>
                 <IonIcon
