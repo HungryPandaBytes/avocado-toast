@@ -42,7 +42,6 @@ import './theme/global.css';
 import Onboarding from './pages/Onboarding';
 
 const App: React.FC = () => {
-  const store = React.useContext(StoreContext);
   // const MainPage = (store.newUser ? Onboarding : HomePage);
 
   return (
@@ -80,7 +79,6 @@ const App: React.FC = () => {
         </IonReactRouter>
       </IonApp>
     </StoreProvider >
-
   )
 };
 

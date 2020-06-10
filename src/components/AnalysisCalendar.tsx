@@ -34,7 +34,6 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
   }
 
   const calendarArray = makeCalendarArray();
-  console.log(calendarArray)
   return useObserver(() => (
 
     <div id="analysis-calendar">
