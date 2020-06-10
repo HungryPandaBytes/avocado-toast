@@ -10,8 +10,9 @@ import { useObserver } from 'mobx-react';
 import balanceHelpers from '../Helpers/balanceHelper';
 import expenseHelpers from '../Helpers/expenseHelper';
 import AllCategories from '../components/AllCategories';
-import { currentWeeksTransactions, currentMonthsTransactions } from '../Helpers/transactionsHelper';
+import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsByDate } from '../Helpers/transactionsHelper';
 import { loadTransactions, seedDatabase } from '../data/dataAPI'
+import moment from 'moment';
 
 
 const slideOpts = {
@@ -36,6 +37,8 @@ const HomePage: React.FC = () => {
       store.transactions = allTransactions;
     });
   }, [])
+
+  checkOverSpending();
 
   return useObserver(() => (
 
@@ -136,3 +139,22 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+
+const checkOverSpending = () => {
+  const store = React.useContext(StoreContext);
+  const thisMonthTransactions = currentMonthsTransactions(store.transactions);
+  const groupTransactionsByDateObject = groupTransactionsByDate(thisMonthTransactions)
+  let overbudgetThisMonth: number[] = [];
+  for (let date in groupTransactionsByDateObject) {
+    let totalExpensesForThatDay: number = 0;
+    for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
+      totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
+      const thatDate = moment(date).date();
+      if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thatDate)) {
+        overbudgetThisMonth.push(thatDate);
+      }
+    }
+  }
+  const sortedOverbudgetThisMonth = overbudgetThisMonth.sort((a: any, b: any) => a - b);
+  store.overbudgetThisMonth = sortedOverbudgetThisMonth;
+}

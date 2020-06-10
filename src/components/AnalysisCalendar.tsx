@@ -5,7 +5,7 @@ import './AnalysisCalendar.scss'
 import moment from 'moment'
 import { waterOutline, water } from 'ionicons/icons';
 import { useObserver } from 'mobx-react';
-import { groupTransactionsByDate, currentMonthsTransactions } from '../Helpers/transactionsHelper';
+import { currentMonthsTransactions, groupTransactionsByDate } from '../Helpers/transactionsHelper';
 
 interface AnalysisCalendarProps {
 
@@ -15,27 +15,29 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
 
   const store = React.useContext(StoreContext);
 
-  const checkOverSpending = () => {
-    let thisMonthTransactions = currentMonthsTransactions(store.transactions);
-    const groupTransactionsByDateObject = groupTransactionsByDate(thisMonthTransactions)
-    let overbudgetThisMonth: number[] = [];
-    for (let date in groupTransactionsByDateObject) {
-      let totalExpensesForThatDay: number = 0;
-      for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
-        totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
-        const thisDate = moment(date).date();
-        if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thisDate)) {
-          overbudgetThisMonth.push(thisDate);
-        }
-      }
-    }
-    return overbudgetThisMonth.sort((a: any, b: any) => a - b);
-  }
-  // To Do: set up overbudgetThisMonth in global state and modify the makeCalendarArray
-  const overbudgetThisMonth = checkOverSpending();
-  console.log('check overbudget in Analysis', overbudgetThisMonth);
+  // const checkOverSpending = () => {
+  //   const thisMonthTransactions = currentMonthsTransactions(store.transactions);
+  //   const groupTransactionsByDateObject = groupTransactionsByDate(thisMonthTransactions)
+  //   let overbudgetThisMonth: number[] = [];
 
+  //   for (let date in groupTransactionsByDateObject) {
+  //     let totalExpensesForThatDay: number = 0;
+  //     for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
+  //       totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
+  //       const thisDate = moment(date).date();
+  //       if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thisDate)) {
+  //         overbudgetThisMonth.push(thisDate);
+  //       }
+  //     }
+  //   }
+  //   console.log({ thisMonthTransactions, groupTransactionsByDateObject })
+  //   const sortedOverbudgetThisMonth = overbudgetThisMonth.sort((a: any, b: any) => a - b);
+  //   console.log({ sortedOverbudgetThisMonth });
+  //   store.overbudgetThisMonth = sortedOverbudgetThisMonth;
+  //   return sortedOverbudgetThisMonth;
+  // }
   function makeCalendarArray() {
+    const overbudgetThisMonth = store.overbudgetThisMonth;
     const daysInCurrentMonth = moment().daysInMonth();
     const dayOfTheMonth = moment().date()
     const calendarArray = []
@@ -56,7 +58,6 @@ const AnalysisCalendar: React.FC<AnalysisCalendarProps> = () => {
   }
 
   const calendarArray = makeCalendarArray();
-
   return useObserver(() => (
 
     <div id="analysis-calendar">
