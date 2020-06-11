@@ -40,9 +40,13 @@ import './theme/variables.css';
 /* Global css */
 import './theme/global.css';
 import Onboarding from './pages/Onboarding';
+import { checkIfBudgetExists } from './data/dataAPI';
 
 const App: React.FC = () => {
   // const MainPage = (store.newUser ? Onboarding : HomePage);
+  useEffect(() => {
+    checkIfBudgetExists();
+  }, []);
 
   return (
     < StoreProvider >

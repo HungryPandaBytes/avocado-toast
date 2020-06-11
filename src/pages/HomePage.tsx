@@ -11,7 +11,7 @@ import balanceHelpers from '../Helpers/balanceHelper';
 import expenseHelpers from '../Helpers/expenseHelper';
 import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsByDate } from '../Helpers/transactionsHelper';
-import { loadTransactions, seedDatabase } from '../data/dataAPI'
+import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB } from '../data/dataAPI'
 import moment from 'moment';
 
 
@@ -33,6 +33,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     // seedDatabase();
+    deleteTransactionInDB('budget');
     loadTransactions().then(allTransactions => {
       store.transactions = allTransactions;
     });

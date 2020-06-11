@@ -11,6 +11,7 @@ export const loadTransactions = async () => {
   const DBstore = new DBService();
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
+  await DBstore.setTable('transactions');
   if (result) {
     // get all transactions
     const allTransactions = await DBstore.getAllValues();
@@ -20,11 +21,28 @@ export const loadTransactions = async () => {
   }
 }
 
+// check if budget is set 
+export const checkIfBudgetExists = async () => {
+  const DBstore = new DBService();
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast' });
+  await DBstore.setTable('budget');
+  if (result) {
+    // const data1 = { 'a': 60, 'pi': '3.141516', 'b': 'cool' }
+    // let budget = await DBstore.setItem('budget', JSON.stringify(data1));
+    let budget = await DBstore.getAllKeys();
+    // const parsedResult = await JSON.parse(budget);
+    console.log('checking if budget is set', budget);
+    return budget;
+  }
+}
+
 // add a new budget to db
 export const addNewBudgetToDB = async (newBudget: Budget) => {
   const DBstore = new DBService();
   await DBstore.initPlugin();
-  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'budget' });
+  let result = await DBstore.openStore({ database: 'avocado-toast' });
+  await DBstore.setTable('budget');
   if (result) {
     await DBstore.setItem("budget", JSON.stringify(newBudget));
     console.log(`Added a new budget ${newBudget.budgetPerDay} to Avocado-Toast DB`)
@@ -47,6 +65,7 @@ export const deleteTransactionInDB = async (transactionId: string) => {
   const DBstore = new DBService();
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
+  await DBstore.setTable('transactions');
   if (result) {
     await DBstore.removeItem(transactionId);
     console.log(`Deleted a new transaction of $${transactionId} in DB`)
