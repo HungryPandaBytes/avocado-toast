@@ -61,20 +61,20 @@ const App: React.FC = () => {
               <Route path="/budget" component={BudgetPage} exact={true} />
               <Route path="/" component={HomePage} />
             </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="home" href="/home">
+            <IonTabBar data-testid="navbar" slot="bottom">
+              <IonTabButton data-testid="home-link" tab="home" href="/home">
                 <IonIcon icon={walletOutline} />
                 <IonLabel>Pocket</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="transactions" href="/transactions">
+              <IonTabButton data-testid="transactions-link" tab="transactions" href="/transactions">
                 <IonIcon icon={cardOutline} />
                 <IonLabel>Transactions</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="budget" href="/budget">
+              <IonTabButton data-testid="budget-link" tab="budget" href="/budget">
                 <IonIcon icon={calculatorOutline} />
                 <IonLabel>Budget</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="analysis" href="/analysis">
+              <IonTabButton data-testid="analysis-link" tab="analysis" href="/analysis">
                 <IonIcon icon={statsChartOutline} />
                 <IonLabel>Analysis</IonLabel>
               </IonTabButton>
