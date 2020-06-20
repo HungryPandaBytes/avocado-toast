@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonFab, IonFabButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonFab, IonFabButton, IonIcon, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import './HomePage.scss';
 import { StoreContext } from '../store'
@@ -17,7 +17,7 @@ import moment from 'moment';
 
 const slideOpts = {
   initialSlide: 0,
-  loop: true,
+  loop: false,
   speed: 200,
   spaceBetween: 40
 };
@@ -61,6 +61,9 @@ const HomePage: React.FC = () => {
   return useObserver(() => (
 
     <IonPage id="home-page">
+      <IonHeader className="ion-no-border">
+
+      </IonHeader>
       <IonContent>
         <IonSlides
           pager={true}
@@ -74,8 +77,6 @@ const HomePage: React.FC = () => {
                 height: "100%",
               }}
             >
-              {console.count('home page counter')}
-
               <HomePageHero
                 period="Daily"
                 balance={balanceHelpers.getTodayBalance(
