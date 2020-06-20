@@ -13,10 +13,10 @@ interface HomePageHeroProps {
 
 const HomePageHero: React.FC<HomePageHeroProps> = ({ period, balance, spent }) => {
 
-  const displayStyling = balance > 0 ? "display-container display-container--positive" : "display-container display-container--negative"
-  const progressbarStyling = balance > 0 ? "progress-bar-green" : "progress-bar-red"
+  const displayStyling = balance >= 0 ? "display-container display-container--positive" : "display-container display-container--negative"
+  const progressbarStyling = balance >= 0 ? "progress-bar-green" : "progress-bar-red"
   const progressBarPercentage = Math.ceil(spent / (balance + spent) * 100)
-  const mascot = balance > 0 ? avocado : cryingAvocado
+  const mascot = balance >= 0 ? avocado : cryingAvocado
   const today = moment();
   const timeLeftToday = moment().endOf('day').to(today, true);
   const daysLeftThisWeek = moment().endOf('isoWeek').to(today, true);

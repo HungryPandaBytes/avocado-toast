@@ -17,7 +17,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
   const [income, setIncome] = useState(0);
   const [recurringExpenses, setRecurringExpenses] = useState(0);
   let budgetPerDay = 0;
-
+  
   if (onboarding) {
     budgetPerDay = Math.ceil((income - recurringExpenses - monthlySavings) / 30)
   } else {
