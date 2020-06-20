@@ -44,7 +44,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
           })}
 
       {sortedTransactions.length === 0 && (
-        <IonItem>
+        <IonItem lines='none'>
           <IonLabel>Add a transaction</IonLabel>
         </IonItem>
       )}
