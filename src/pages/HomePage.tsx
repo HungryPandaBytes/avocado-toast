@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
                 fill="outline"
                 color="medium"
                 href="/transactions"
-                style={{ margin: "0 6% 2% 6%" }}
+                style={{ margin: "5% 6% 10% 6%" }}
               >
                 See All Transactions
               </IonButton>
