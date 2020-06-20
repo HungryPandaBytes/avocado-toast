@@ -62,7 +62,7 @@ const HomePage: React.FC = () => {
 
     <IonPage id="home-page">
       <IonHeader className="ion-no-border">
-
+        <IonTitle></IonTitle>
       </IonHeader>
       <IonContent>
         <IonSlides

@@ -32,7 +32,6 @@ const Onboarding: React.FC = () => {
           options={slideOpts}
           style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}>
           <IonSlide className='first-onboarding-slide' style={{ marginTop: '10%' }}>
-            {console.count('onboarding counter')}
             <img src={babyAvocado} alt="" className="slide-image" />
             <h2 className="slide-title" style={{ marginTop: '30%' }}>
               Simply Track Expenses

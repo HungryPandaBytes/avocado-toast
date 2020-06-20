@@ -17,7 +17,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
   const [income, setIncome] = useState(0);
   const [recurringExpenses, setRecurringExpenses] = useState(0);
   let budgetPerDay = 0;
-  
+
   if (onboarding) {
     budgetPerDay = Math.ceil((income - recurringExpenses - monthlySavings) / 30)
   } else {
@@ -66,8 +66,6 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         }} clearInput></IonInput>
         <div style={{ marginRight: '10%', maxWidth: '25%', color: 'grey' }}>/month</div>
       </IonItem>
-
-      {console.count('budgetInput component count')}
       <IonItem lines='none' >
         {!onboarding && <IonLabel color='medium' slot='start'>Recurring Expenses</IonLabel>}
         {onboarding && <IonLabel color='medium' style={{ marginBottom: 0 }}>What're your monthly recurring expenses? </IonLabel>}

@@ -74,10 +74,10 @@ const App: React.FC = () => {
                 <IonIcon icon={calculatorOutline} />
                 <IonLabel>Budget</IonLabel>
               </IonTabButton>
-              <IonTabButton data-testid="analysis-link" tab="analysis" href="/analysis">
+              {/* <IonTabButton data-testid="analysis-link" tab="analysis" href="/analysis">
                 <IonIcon icon={statsChartOutline} />
                 <IonLabel>Analysis</IonLabel>
-              </IonTabButton>
+              </IonTabButton> */}
             </IonTabBar>
           </IonTabs>
         </IonReactRouter>

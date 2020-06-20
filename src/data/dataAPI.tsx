@@ -32,7 +32,6 @@ export const checkIfBudgetExists = async () => {
     // let budget = await DBstore.setItem('budget', JSON.stringify(data1));
     let budget = await DBstore.getAllKeys();
     // const parsedResult = await JSON.parse(budget);
-    console.log('checking if budget is set', budget);
     return budget;
   }
 }
