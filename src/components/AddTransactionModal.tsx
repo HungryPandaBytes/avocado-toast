@@ -136,7 +136,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             > </IonDatetime>
           </IonChip>
         </IonToolbar>
-        <IonSegment value={transactionType} onIonChange={e => {
+        {/* <IonSegment value={transactionType} onIonChange={e => {
           setTransactionTypeHandler(e.detail.value!);
         }}>
           <IonSegmentButton value="Expense">
@@ -145,7 +145,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
           <IonSegmentButton value="Income">
             <IonLabel>Income</IonLabel>
           </IonSegmentButton>
-        </IonSegment>
+        </IonSegment> */}
 
       </IonHeader>
 
@@ -156,7 +156,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
               <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day   </h5></div>}
           </div>
 
-          {transactionType === 'Expense' && <div className='distribution-toggle'>
+          {/* {transactionType === 'Expense' && <div className='distribution-toggle'>
             <IonItem lines="none">
               <IonLabel slot="end" className="ion-text-end ion-no-margin ">Split</IonLabel>
               <IonToggle slot="end" name="apple" color="primary" checked={split} onIonChange={e => {
@@ -165,7 +165,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 distributionHandler();
               }} />
             </IonItem>
-          </div>}
+          </div>} */}
         </div>
 
         <div className='input-container'>
