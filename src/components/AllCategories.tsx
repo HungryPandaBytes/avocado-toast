@@ -1,5 +1,5 @@
 import React from "react";
-import { IonList, IonItem, IonLabel, IonIcon, IonNote, IonItemGroup } from "@ionic/react";
+import { IonList, IonItem, IonLabel, IonIcon, IonNote, IonItemGroup, IonListHeader } from "@ionic/react";
 import { Transaction } from "../models/Transaction";
 import { basketOutline as GroceryIcon, busOutline as TransportationIcon, bodyOutline as GeneralIcon, restaurantOutline as RestaurantIcon, airplaneOutline as LeisureIcon, homeOutline as HouseholdIcon, giftOutline as ShoppingIcon } from "ionicons/icons";
 import './AllCategories.scss';
@@ -51,7 +51,13 @@ const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) =
 
   return (
     <IonList lines="none" id="all_categories">
-      <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>This {period}</h4>
+      <IonListHeader
+        id="transactionListHeader"
+        style={{ borderRadius: "10px 10px 0 0" }}
+      >
+        <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>This {period}</h4>
+
+      </IonListHeader>
       {sortedCategories.map((category: [string, number]) => {
         const categoryName = category[0];
         categoryTotal = category[1];
