@@ -4,6 +4,8 @@ import { StoreContext } from '../store';
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
 import { addNewBudgetToDB, getBudgetFromDB } from '../data/dataAPI';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 interface BudgetInputProps {
   onboarding: boolean
@@ -31,7 +33,8 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       income: income,
       reoccuringExpenses: recurringExpenses,
       savingPercentage: savingPercentage,
-      budgetPerDay: budgetPerDay
+      budgetPerDay: budgetPerDay,
+      timestamp: moment()
     }
     store.setBudget(newBudget);
     addNewBudgetToDB(newBudget);

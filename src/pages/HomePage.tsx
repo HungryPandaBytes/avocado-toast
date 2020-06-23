@@ -13,6 +13,7 @@ import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsByDate, currentDaysTransactions } from '../Helpers/transactionsHelper';
 import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB, getBudgetFromDB } from '../data/dataAPI'
 import moment from 'moment';
+import { Budget } from '../models/Budget';
 
 
 const slideOpts = {
@@ -35,8 +36,8 @@ const HomePage: React.FC = () => {
     await loadTransactions().then(allTransactions => {
       store.transactions = allTransactions;
     });
-    await getBudgetFromDB().then(budget => {
-      console.log(budget)
+    await getBudgetFromDB().then((budget: any) => {
+      store.setBudget(budget);
     });
   }
 

@@ -3,4 +3,5 @@ export interface Budget {
   reoccuringExpenses: number;
   savingPercentage: number;
   budgetPerDay: number;
+  timestamp: any
 }

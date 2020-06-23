@@ -25,7 +25,7 @@ const defaultContext: contextInterface = {
   newUser: true,
   overbudgetThisMonth: [],
   transactions: [],
-  budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0 },
+  budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0, timestamp: null },
   addOverBudgetDate: (date) => defaultContext.overbudgetThisMonth.push(date),
   addTransaction: (transaction: Transaction) => defaultContext.transactions.push(transaction),
   deleteTransaction: (id: any) => {
@@ -54,7 +54,7 @@ export const StoreProvider = ({ children }: any) => {
     newUser: true,
     transactions: transactions.sort(compareTransactions),
     overbudgetThisMonth: overbudgetThisMonth,
-    budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0 },
+    budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0, timestamp: null },
     addOverBudgetDate: (date: number) => store.overbudgetThisMonth.push(date),
     addTransaction: (transaction: Transaction) => {
       store.transactions.push(transaction);
