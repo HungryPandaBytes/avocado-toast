@@ -5,10 +5,10 @@ import { Budget } from '../models/Budget'
 import { DBService } from '../services/DBService';
 import { v4 as uuidv4 } from 'uuid';
 
+const DBstore = new DBService();
 
 // get all transactions from db  
 export const loadTransactions = async () => {
-  const DBstore = new DBService();
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
   await DBstore.setTable('transactions');
@@ -23,7 +23,6 @@ export const loadTransactions = async () => {
 
 // check if budget is set 
 export const checkIfBudgetExists = async () => {
-  const DBstore = new DBService();
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
   await DBstore.setTable('budget');
@@ -38,7 +37,6 @@ export const checkIfBudgetExists = async () => {
 
 // add a new budget to db
 export const addNewBudgetToDB = async (newBudget: Budget) => {
-  const DBstore = new DBService();
   await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast' });
   await DBstore.setTable('budget');
@@ -48,10 +46,19 @@ export const addNewBudgetToDB = async (newBudget: Budget) => {
   }
 }
 
+// add a new budget to db
+export const getBudgetFromDB = async () => {
+  await DBstore.initPlugin();
+  let result = await DBstore.openStore({ database: 'avocado-toast', table: 'budget' });
+  await DBstore.setTable('budget');
+  if (result) {
+    let budget = await DBstore.getItem("budget").then((data: any) => JSON.parse(data)).catch((error: any) => console.log(error))
+    console.log(`Added a new budget ${budget} to Avocado-Toast DB`)
+  }
+}
+
 // add a new transaction to db
 export const addNewTransactionToDB = async (newTransaction: Transaction) => {
-  const DBstore = new DBService();
-  await DBstore.initPlugin();
   let result = await DBstore.openStore({ database: 'avocado-toast', table: 'transactions' });
   if (result) {
     await DBstore.setItem(newTransaction.id, JSON.stringify(newTransaction));

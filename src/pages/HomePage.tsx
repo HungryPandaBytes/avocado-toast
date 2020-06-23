@@ -11,7 +11,7 @@ import balanceHelpers from '../Helpers/balanceHelper';
 import expenseHelpers from '../Helpers/expenseHelper';
 import AllCategories from '../components/AllCategories';
 import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsByDate, currentDaysTransactions } from '../Helpers/transactionsHelper';
-import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB } from '../data/dataAPI'
+import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB, getBudgetFromDB } from '../data/dataAPI'
 import moment from 'moment';
 
 
@@ -31,12 +31,18 @@ const HomePage: React.FC = () => {
   const allTransactions = store.transactions;
   const budgetPerDay = store.budget.budgetPerDay;
 
-  useEffect(() => {
-    // seedDatabase();
-    deleteTransactionInDB('budget');
-    loadTransactions().then(allTransactions => {
+  const populateAppWithData = async () => {
+    await loadTransactions().then(allTransactions => {
       store.transactions = allTransactions;
     });
+    await getBudgetFromDB().then(budget => {
+      console.log(budget)
+    });
+  }
+
+  useEffect(() => {
+    // seedDatabase();
+    populateAppWithData();
   }, [])
 
   const checkOverSpending = () => {

@@ -3,7 +3,7 @@ import avocado from '../theme/baby_avocado.png';
 import { StoreContext } from '../store';
 import './BudgetInput.scss';
 import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
-import { addNewBudgetToDB } from '../data/dataAPI';
+import { addNewBudgetToDB, getBudgetFromDB } from '../data/dataAPI';
 
 interface BudgetInputProps {
   onboarding: boolean
@@ -34,7 +34,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       budgetPerDay: budgetPerDay
     }
     store.setBudget(newBudget);
-    addNewBudgetToDB(newBudget)
+    addNewBudgetToDB(newBudget);
   }
 
   return (
