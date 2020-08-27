@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent } from 'react';
 import {
-  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton
+  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonToast
 } from '@ionic/react';
 import './AddTransactionModal.scss';
 import moment from 'moment'
@@ -31,6 +31,8 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
   const [split, setSplit] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
+
+  const [showSavedMessage, setShowSavedMessage] = useState(false);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -100,6 +102,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     }
 
     if (parseInt(amount) > 0) {
+      setShowSavedMessage(true);
       store.addTransaction(newTransaction)
       setAmount("");
       setDisplayBalance("");
@@ -223,6 +226,12 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 </div>
               )
             })}
+            <IonToast
+              isOpen={showSavedMessage}
+              onDidDismiss={() => setShowSavedMessage(false)}
+              message="You successfully saved a transaction."
+              duration={1000}
+            />
             <div className='expense-typepad-container '>
               <div >
                 <IonButton size="large" fill="clear" onClick={deleteClickHandler} className="expense-button">delete</IonButton>
