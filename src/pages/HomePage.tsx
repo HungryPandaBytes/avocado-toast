@@ -29,10 +29,6 @@ const HomePage: React.FC = () => {
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
 
-  /* NEED TO FIX
-  hardcoded budgetPerDay
-  */
-
   const populateAppWithData = async () => {
     await loadTransactions().then(allTransactions => {
       store.transactions = allTransactions;
@@ -41,17 +37,12 @@ const HomePage: React.FC = () => {
       console.log(budget, 'what im getting from db')
       budget == undefined ? console.log('default') : store.setBudget(budget)
     });
-    await console.log(store.budget)
   }
 
   useEffect(() => {
     // seedDatabase();
     populateAppWithData();
   }, [])
-
-  const allTransactions = store.transactions;
-  const budgetPerDay = store.budget.budgetPerDay;
-
 
   const checkOverSpending = () => {
     const thisMonthTransactions = currentMonthsTransactions(store.transactions);
@@ -62,7 +53,7 @@ const HomePage: React.FC = () => {
       for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
         totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
         const thatDate = moment(date).date();
-        if (totalExpensesForThatDay > budgetPerDay && !overbudgetThisMonth.includes(thatDate)) {
+        if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thatDate)) {
           overbudgetThisMonth.push(thatDate);
         }
       }
@@ -122,7 +113,7 @@ const HomePage: React.FC = () => {
                   store.transactions,
                   store.budget.budgetPerDay
                 )}
-                spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)}
+                spent={expenseHelpers.getThisWeekTotalExpenses(store.transactions)}
               />
 
               <AllCategories period='Week' transactions={currentWeeksTransactions(store.transactions)} />

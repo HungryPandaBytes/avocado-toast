@@ -14,10 +14,10 @@ interface BudgetInputProps {
 const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
 
   const store = React.useContext(StoreContext);
-  const [savingPercentage, setSavingPercentage] = useState(0);
+  const [savingPercentage, setSavingPercentage] = useState(store.budget.savingPercentage);
   const [monthlySavings, setMonthlySavings] = useState(0);
-  const [income, setIncome] = useState(0);
-  const [recurringExpenses, setRecurringExpenses] = useState(0);
+  const [income, setIncome] = useState(store.budget.income);
+  const [recurringExpenses, setRecurringExpenses] = useState(store.budget.reoccuringExpenses);
   let budgetPerDay = 0;
 
   if (onboarding) {
@@ -105,7 +105,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       }
       {
         onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
-          <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
+          <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number"   value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
             if (e.detail.value! === "") {
               setMonthlySavings(0)
             } else {
