@@ -164,7 +164,7 @@ const HomePage: React.FC = () => {
         isOpen={showSavedMessage}
         onDidDismiss={() => setShowSavedMessage(false)}
         message="You successfully saved a transaction."
-        duration={1000}
+        duration={2000}
       />
     </IonPage>
   ));

@@ -144,7 +144,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         isOpen={showSavedMessage}
         onDidDismiss={() => setShowSavedMessage(false)}
         message="Yay, your budget has been saved!"
-        duration={1200}
+        duration={2000}
       />
     </div >
   )
