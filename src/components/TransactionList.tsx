@@ -48,7 +48,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ searchText }) => {
         ))}
       {store.transactions.length === 0 && (
         <IonItem>
-          <IonLabel>Add a transaction</IonLabel>
+          <IonLabel>No transactions yet</IonLabel>
         </IonItem>
       )}
     </IonList>
