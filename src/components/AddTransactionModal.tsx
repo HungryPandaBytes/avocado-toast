@@ -12,10 +12,11 @@ import { addNewTransactionToDB } from '../data/dataAPI'
 import { v4 as uuidv4 } from 'uuid';
 
 interface AddTransactionModalProps {
-  onClose: any
+  onClose: any,
+  setShowSavedMessage: any
 }
 
-const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
+const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setShowSavedMessage }) => {
   const store = React.useContext(StoreContext);
 
   const [displayBalance, setDisplayBalance] = useState("");
@@ -32,21 +33,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [split, setSplit] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
 
-  const [showSavedMessage, setShowSavedMessage] = useState(false);
-
   const today = new Date().toISOString().split('T')[0];
-
-  function setTransactionTypeHandler(transactionOption: any) {
-    if (transactionOption === 'Expense') {
-      setTransactionType(transactionOption);
-      setCategory(category)
-    } else {
-      setTransactionType(transactionOption);
-      setCategory(category)
-      setdistributionAmt("")
-      setSplit(false)
-    }
-  }
 
   function numpadClickHandler(event: MouseEvent<HTMLIonButtonElement>) {
     const numStr: string = event.currentTarget.innerText
@@ -86,6 +73,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
   function saveClickHandler(event: MouseEvent<HTMLIonButtonElement>, callback: any) {
     event.preventDefault();
+
     const date = new Date(selectedDate)
     const uuid = uuidv4();
 
@@ -102,13 +90,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     }
 
     if (parseInt(amount) > 0) {
-      setShowSavedMessage(true);
       store.addTransaction(newTransaction)
       setAmount("");
       setDisplayBalance("");
       setdistributionAmt("")
       callback();
       addNewTransactionToDB(newTransaction);
+      setShowSavedMessage(true);
     }
 
   }
@@ -226,12 +214,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
                 </div>
               )
             })}
-            <IonToast
-              isOpen={showSavedMessage}
-              onDidDismiss={() => setShowSavedMessage(false)}
-              message="You successfully saved a transaction."
-              duration={1000}
-            />
             <div className='expense-typepad-container '>
               <div >
                 <IonButton size="large" fill="clear" onClick={deleteClickHandler} className="expense-button">delete</IonButton>

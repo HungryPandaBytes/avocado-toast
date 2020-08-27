@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonFab, IonFabButton, IonIcon, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
+import { IonContent, IonPage, IonSlides, IonSlide, IonButton, IonModal, IonFab, IonFabButton, IonIcon, IonHeader, IonToolbar, IonTitle, IonToast } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import './HomePage.scss';
 import { StoreContext } from '../store'
@@ -14,7 +14,6 @@ import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsB
 import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB, getBudgetFromDB } from '../data/dataAPI'
 import moment from 'moment';
 import { Budget } from '../models/Budget';
-import { FlashMessage } from '../components/FlashMessage';
 
 
 const slideOpts = {
@@ -28,6 +27,8 @@ const HomePage: React.FC = () => {
   const store = React.useContext(StoreContext);
 
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
+  const [showSavedMessage, setShowSavedMessage] = useState(false);
+
   const pageRef = useRef<HTMLElement>(null);
 
   const populateAppWithData = async () => {
@@ -156,9 +157,16 @@ const HomePage: React.FC = () => {
         presentingElement={pageRef.current!}
       >
         <AddTransactionModal
+          setShowSavedMessage={setShowSavedMessage}
           onClose={() => setShowAddTransactionModal(false)}
         />
       </IonModal>
+      <IonToast
+        isOpen={showSavedMessage}
+        onDidDismiss={() => setShowSavedMessage(false)}
+        message="You successfully saved a transaction."
+        duration={1000}
+      />
     </IonPage>
   ));
 };
