@@ -141,6 +141,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
         </div>
       }
       <IonToast
+        position='top'
         isOpen={showSavedMessage}
         onDidDismiss={() => setShowSavedMessage(false)}
         message="Yay, your budget has been saved!"

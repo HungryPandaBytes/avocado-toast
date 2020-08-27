@@ -161,6 +161,7 @@ const HomePage: React.FC = () => {
         />
       </IonModal>
       <IonToast
+        position='top'
         isOpen={showSavedMessage}
         onDidDismiss={() => setShowSavedMessage(false)}
         message="You successfully saved a transaction."
