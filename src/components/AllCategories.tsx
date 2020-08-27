@@ -20,7 +20,7 @@ const loadCategories = (transactions: Transaction[]): [string, number][] => {
   for (let category in categories) {
     sortedCategories.push([category, categories[category]]);
   }
-  sortedCategories.slice().sort((a: [string, number], b: [string, number]) => b[1] - a[1]);
+  sortedCategories.sort((a: [string, number], b: [string, number]) => b[1] - a[1]);
   return sortedCategories;
 };
 
@@ -44,6 +44,7 @@ export const iconsHashMap: IconSet = {
 
 const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) => {
   const sortedCategories: [string, number][] = loadCategories(transactions);
+  console.log({ sortedCategories })
   let categoryTotal = 0;
   let allCategoryTotal = 0;
   let maxWidth = 90;

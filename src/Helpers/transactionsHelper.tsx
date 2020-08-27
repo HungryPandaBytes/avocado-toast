@@ -10,7 +10,9 @@ export enum sortOrderType {
 
 export function currentWeeksTransactions(transactions: Transaction[], sortOrder?: sortOrderType) {
   const startMoment = moment().startOf("isoWeek");
+  console.log(currentTransactions(transactions, startMoment, sortOrder))
   return currentTransactions(transactions, startMoment, sortOrder);
+
 }
 
 export function currentMonthsTransactions(transactions: Transaction[], sortOrder?: sortOrderType) {
