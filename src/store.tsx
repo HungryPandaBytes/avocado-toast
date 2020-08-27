@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocalStore } from 'mobx-react'
 import { Budget } from './models/Budget'
 import { Transaction } from './models/Transaction'
+/* mobx observer inspector */
 
 interface stateInterface {
   transactions: Transaction[],
@@ -59,7 +60,6 @@ export const StoreProvider = ({ children }: any) => {
     addTransaction: (transaction: Transaction) => {
       store.transactions.push(transaction);
       const transactionsCount = store.transactions.length;
-
       // only sort transaction if the newly added transaction is older than the previous transaction
       if (transactionsCount > 1 && store.transactions[transactionsCount - 2].transaction_time > transaction.transaction_time) {
         store.transactions = store.transactions.sort(compareTransactions)
@@ -77,10 +77,8 @@ export const StoreProvider = ({ children }: any) => {
     setBudget: (newBudget: Budget) => store.budget = newBudget,
     setReturningUser: () => store.newUser = true
   }));
-
   return (
     <StoreContext.Provider value={store}> {children}</StoreContext.Provider >
   )
 }
-
 

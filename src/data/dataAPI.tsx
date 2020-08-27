@@ -31,6 +31,7 @@ export const checkIfBudgetExists = async () => {
     // let budget = await DBstore.setItem('budget', JSON.stringify(data1));
     let budget = await DBstore.getAllKeys();
     // const parsedResult = await JSON.parse(budget);
+    console.log(budget)
     return budget;
   }
 }
@@ -53,7 +54,8 @@ export const getBudgetFromDB = async () => {
   await DBstore.setTable('budget');
   if (result) {
     let budget = await DBstore.getItem("budget").then((data: any) => JSON.parse(data)).catch((error: any) => console.log(error))
-    console.log(`Added a new budget ${budget} to Avocado-Toast DB`)
+    console.log(`Get a new budget ${budget} from Avocado-Toast DB`)
+    return budget;
   }
 }
 

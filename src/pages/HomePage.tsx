@@ -29,22 +29,29 @@ const HomePage: React.FC = () => {
   const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
 
-  const allTransactions = store.transactions;
-  const budgetPerDay = store.budget.budgetPerDay;
+  /* NEED TO FIX
+  hardcoded budgetPerDay
+  */
 
   const populateAppWithData = async () => {
     await loadTransactions().then(allTransactions => {
       store.transactions = allTransactions;
     });
     await getBudgetFromDB().then((budget: any) => {
-      store.setBudget(budget);
+      console.log(budget, 'what im getting from db')
+      budget == undefined ? console.log('default') : store.setBudget(budget)
     });
+    await console.log(store.budget)
   }
 
   useEffect(() => {
     // seedDatabase();
     populateAppWithData();
   }, [])
+
+  const allTransactions = store.transactions;
+  const budgetPerDay = store.budget.budgetPerDay;
+
 
   const checkOverSpending = () => {
     const thisMonthTransactions = currentMonthsTransactions(store.transactions);
@@ -55,7 +62,7 @@ const HomePage: React.FC = () => {
       for (let i = 0; i < groupTransactionsByDateObject[date].length; i++) {
         totalExpensesForThatDay += groupTransactionsByDateObject[date][i].amount;
         const thatDate = moment(date).date();
-        if (totalExpensesForThatDay > store.budget.budgetPerDay && !overbudgetThisMonth.includes(thatDate)) {
+        if (totalExpensesForThatDay > budgetPerDay && !overbudgetThisMonth.includes(thatDate)) {
           overbudgetThisMonth.push(thatDate);
         }
       }
@@ -87,10 +94,10 @@ const HomePage: React.FC = () => {
               <HomePageHero
                 period="Daily"
                 balance={balanceHelpers.getTodayBalance(
-                  allTransactions,
-                  budgetPerDay
+                  store.transactions,
+                  store.budget.budgetPerDay
                 )}
-                spent={expenseHelpers.getTodayTotalExpenses(allTransactions)}
+                spent={expenseHelpers.getTodayTotalExpenses(store.transactions)}
               />
               <PreviewTransactions
                 transactions={currentDaysTransactions(store.transactions)}
@@ -112,8 +119,8 @@ const HomePage: React.FC = () => {
               <HomePageHero
                 period="Weekly"
                 balance={balanceHelpers.getThisWeekBalance(
-                  allTransactions,
-                  budgetPerDay
+                  store.transactions,
+                  store.budget.budgetPerDay
                 )}
                 spent={expenseHelpers.getThisWeekTotalExpenses(allTransactions)}
               />
@@ -133,11 +140,11 @@ const HomePage: React.FC = () => {
               <HomePageHero
                 period="Monthly"
                 balance={balanceHelpers.getThisMonthBalance(
-                  allTransactions,
-                  budgetPerDay
+                  store.transactions,
+                  store.budget.budgetPerDay
                 )}
                 spent={expenseHelpers.getThisMonthTotalExpenses(
-                  allTransactions
+                  store.transactions
                 )}
               />
               <AllCategories period='Month' transactions={currentMonthsTransactions(store.transactions)} />
