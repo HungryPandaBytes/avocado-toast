@@ -20,7 +20,7 @@ const loadCategories = (transactions: Transaction[]): [string, number][] => {
   for (let category in categories) {
     sortedCategories.push([category, categories[category]]);
   }
-  sortedCategories.sort((a: [string, number], b: [string, number]) => b[1] - a[1]);
+  sortedCategories.slice().sort((a: [string, number], b: [string, number]) => b[1] - a[1]);
   return sortedCategories;
 };
 

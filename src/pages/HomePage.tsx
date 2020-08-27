@@ -36,7 +36,6 @@ const HomePage: React.FC = () => {
       store.transactions = allTransactions;
     });
     await getBudgetFromDB().then((budget: any) => {
-      console.log(budget, 'what im getting from db')
       budget == undefined ? console.log('default') : store.setBudget(budget)
     });
   }
@@ -60,7 +59,7 @@ const HomePage: React.FC = () => {
         }
       }
     }
-    const sortedOverbudgetThisMonth = overbudgetThisMonth.sort((a: any, b: any) => a - b);
+    const sortedOverbudgetThisMonth = overbudgetThisMonth.slice().sort((a: any, b: any) => a - b);
     store.overbudgetThisMonth = sortedOverbudgetThisMonth;
   }
   checkOverSpending();

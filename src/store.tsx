@@ -53,7 +53,7 @@ const compareTransactions =
 export const StoreProvider = ({ children }: any) => {
   const store = useLocalStore(() => ({
     newUser: true,
-    transactions: transactions.sort(compareTransactions),
+    transactions: transactions.slice().sort(compareTransactions),
     overbudgetThisMonth: overbudgetThisMonth,
     budget: { income: 0, reoccuringExpenses: 0, savingPercentage: 0, budgetPerDay: 0, timestamp: null },
     addOverBudgetDate: (date: number) => store.overbudgetThisMonth.push(date),
@@ -62,7 +62,7 @@ export const StoreProvider = ({ children }: any) => {
       const transactionsCount = store.transactions.length;
       // only sort transaction if the newly added transaction is older than the previous transaction
       if (transactionsCount > 1 && store.transactions[transactionsCount - 2].transaction_time > transaction.transaction_time) {
-        store.transactions = store.transactions.sort(compareTransactions)
+        store.transactions = store.transactions.slice().sort(compareTransactions)
       }
     },
     deleteTransaction: (id: any) => {

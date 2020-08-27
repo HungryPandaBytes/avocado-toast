@@ -16,7 +16,7 @@ const maxCountForTransactions = 5;
 const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
   transactions
 }) => {
-  const sortedTransactions = transactions.sort((a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time));
+  const sortedTransactions = transactions.slice().sort((a: any, b: any) => Date.parse(a.transaction_time) - Date.parse(b.transaction_time));
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
   const transactionListRef = useRef<HTMLIonListElement>(null);
   return (
