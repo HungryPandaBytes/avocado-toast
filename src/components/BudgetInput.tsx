@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import avocado from '../theme/baby_avocado.png';
 import { StoreContext } from '../store';
 import './BudgetInput.scss';
-import { IonItem, IonLabel, IonInput, IonRange, IonButton } from '@ionic/react';
+import { IonItem, IonLabel, IonInput, IonRange, IonButton, IonToast } from '@ionic/react';
 import { addNewBudgetToDB, getBudgetFromDB } from '../data/dataAPI';
 import Moment from 'react-moment';
 import moment from 'moment';
@@ -18,6 +18,8 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
   const [monthlySavings, setMonthlySavings] = useState(0);
   const [income, setIncome] = useState(store.budget.income);
   const [recurringExpenses, setRecurringExpenses] = useState(store.budget.reoccuringExpenses);
+  const [showSavedMessage, setShowSavedMessage] = useState(false);
+
   let budgetPerDay = 0;
 
   if (onboarding) {
@@ -38,6 +40,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
     }
     store.setBudget(newBudget);
     addNewBudgetToDB(newBudget);
+    setShowSavedMessage(true)
   }
 
   return (
@@ -105,7 +108,7 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
       }
       {
         onboarding && <IonItem color='light' lines='none' style={{ width: '90%', marginLeft: '5%' }}>
-          <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number"   value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
+          <IonInput color='primary' style={{ maxWidth: '50%', color: 'grey' }} className="ion-no-border" type="number" value={monthlySavings} placeholder="monthly savings" onIonChange={e => {
             if (e.detail.value! === "") {
               setMonthlySavings(0)
             } else {
@@ -137,6 +140,12 @@ const BudgetInput: React.FC<BudgetInputProps> = ({ onboarding }) => {
             onClick={saveBudgetClickHandler} className="expense-button" routerLink="/homepage">I'M READY TO TRACK AND SAVE!</IonButton>
         </div>
       }
+      <IonToast
+        isOpen={showSavedMessage}
+        onDidDismiss={() => setShowSavedMessage(false)}
+        message="Yay, your budget has been saved!"
+        duration={1200}
+      />
     </div >
   )
 }

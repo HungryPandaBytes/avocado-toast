@@ -14,6 +14,7 @@ import { currentWeeksTransactions, currentMonthsTransactions, groupTransactionsB
 import { loadTransactions, seedDatabase, checkIfBudgetExists, deleteTransactionInDB, getBudgetFromDB } from '../data/dataAPI'
 import moment from 'moment';
 import { Budget } from '../models/Budget';
+import { FlashMessage } from '../components/FlashMessage';
 
 
 const slideOpts = {
