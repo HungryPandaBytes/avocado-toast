@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     // seedDatabase();
     populateAppWithData();
-  }, [])
+  }, []);
 
   const checkOverSpending = () => {
     const thisMonthTransactions = currentMonthsTransactions(store.transactions);
@@ -68,13 +68,20 @@ const HomePage: React.FC = () => {
 
     <IonPage id="home-page">
       <IonHeader className="ion-no-border">
-        <IonTitle></IonTitle>
+        <IonToolbar >
+          <IonTitle>Pocket</IonTitle>
+        </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonHeader className="ion-no-border" collapse="condense">
+          <IonToolbar>
+            <IonTitle color='primary' size="large">Pocket</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonSlides
           pager={true}
           options={slideOpts}
-          style={{ height: "100%", marginTop: "5%", overflowY: "scroll" }}
+          style={{ height: "100%", overflowY: "scroll" }}
         >
           <IonSlide>
             <div
