@@ -25,7 +25,7 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
         id="transactionListHeader"
         style={{ padding: '0' }}
       >
-        <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>Today</h4>
+        <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>Recent Transactions</h4>
       </IonListHeader>
 
       {sortedTransactions.length > 0 &&

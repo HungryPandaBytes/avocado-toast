@@ -102,15 +102,16 @@ const HomePage: React.FC = () => {
                 transactions={currentDaysTransactions(store.transactions)}
               />
 
-              <IonButton
+              {/* <IonButton
                 expand="block"
                 fill="outline"
                 color="medium"
                 href="/transactions"
+                router-direction
                 style={{ margin: "1% 6% 10% 6%" }}
               >
                 See All Transactions
-              </IonButton>
+              </IonButton> */}
             </div>
           </IonSlide>
           <IonSlide>
