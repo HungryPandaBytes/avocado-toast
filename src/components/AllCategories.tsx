@@ -44,7 +44,6 @@ export const iconsHashMap: IconSet = {
 
 const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) => {
   const sortedCategories: [string, number][] = loadCategories(transactions);
-  console.log({ sortedCategories })
   let categoryTotal = 0;
   let allCategoryTotal = 0;
   let maxWidth = 90;
@@ -54,11 +53,11 @@ const AllCategories: React.FC<AllCategoriesProps> = ({ period, transactions }) =
     <IonList lines="none" id="all_categories">
       <IonListHeader
         id="transactionListHeader"
-        style={{ borderRadius: "10px 10px 0 0" }}
+        style={{ padding: '0' }}
       >
         <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>This {period}</h4>
-
       </IonListHeader>
+
       {sortedCategories.map((category: [string, number]) => {
         const categoryName = category[0];
         categoryTotal = category[1];

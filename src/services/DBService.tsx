@@ -90,7 +90,6 @@ class DBService {
   async getItem(key: string) {
     if (this._isService && key.length > 0) {
       const { value } = await this._store.get({ key });
-      console.log("in getItem value ", value)
       return value;
     } else {
       return null;
@@ -132,7 +131,6 @@ class DBService {
   async removeItem(key: string) {
     if (this._isService && key.length > 0) {
       const { result } = await this._store.remove({ key });
-      console.log(result);
       return result;
     } else {
       return null;

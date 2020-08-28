@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
       store.transactions = allTransactions;
     });
     await getBudgetFromDB().then((budget: any) => {
-      budget == undefined ? console.log('default') : store.setBudget(budget)
+      budget == undefined ? console.log('default budget') : store.setBudget(budget)
     });
   }
 

@@ -20,14 +20,12 @@ const PreviewTransactions: React.FC<PreviewTransactionsProps> = ({
   const headerRef = useRef<HTMLIonListHeaderElement>(null);
   const transactionListRef = useRef<HTMLIonListElement>(null);
   return (
-    <IonList ref={transactionListRef} lines="full" style={{ marginTop: '5%' }}>
+    <IonList ref={transactionListRef} lines="full" style={{ marginTop: '5%', paddingLeft: '0' }}>
       <IonListHeader
-        ref={headerRef}
         id="transactionListHeader"
-        style={{ borderRadius: "10px 10px 0 0" }}
+        style={{ padding: '0' }}
       >
-        <h4 style={{ width: '90%', textAlign: "center", color: 'var(--ion-color-primary)' }}>Today </h4>
-
+        <h4 style={{ width: '100%', textAlign: "center", color: 'var(--ion-color-primary)' }}>Today</h4>
       </IonListHeader>
 
       {sortedTransactions.length > 0 &&
