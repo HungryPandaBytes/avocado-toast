@@ -1,14 +1,15 @@
 # Avocado Toast Budgeting App 
 
-Avocado Toast is a mobile app that builds positive spending habits. I made this app to stop compulsive spending and to reward willpower.
+Avocado Toast Budgeting App is a mobile app that builds positive spending habits. I made this app to stop compulsive spending and to reward willpower.
 
 Implemented the cross-platform app using Ionic with React for the UI and SQLite database for offline data storage.
   
 Tech Stack: React, Ionic, Typescript, SCSS, Mobx, Ionic, Capacitor, SQLite Database
 
-![Daily View](https://imgur.com/C02lJGm)
-![Weekly View](https://imgur.com/MfTpX37)
-![Budgeting Page](https://i.imgur.com/HV8eQLW.png)
+![Daily View](https://i.imgur.com/lM5Sxwt.png)
+![Weekly View](https://i.imgur.com/YNuXAk0.png)
+![Transaction View](https://i.imgur.com/C3GOFBf.png)
+![Budgeting Page](https://i.imgur.com/U1IzgjH.png)
 
 
 ## Table of Contents
@@ -65,3 +66,14 @@ npm install
 npm run start
 
 ```
+### Run the app on iOS simulator
+
+```
+ionic build 
+
+ionic cap copy
+
+ionic cap open ios
+
+```
+
