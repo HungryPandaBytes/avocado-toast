@@ -8,6 +8,7 @@ Tech Stack: React, Ionic, Typescript, SCSS, Mobx, Ionic, Capacitor, SQLite Datab
 
 ![Daily View](https://i.imgur.com/lM5Sxwt.png)
 ![Weekly View](https://i.imgur.com/YNuXAk0.png)
+![Add Transaction](https://i.imgur.com/YAhBeNx.png)
 ![Transaction View](https://i.imgur.com/C3GOFBf.png)
 ![Budgeting Page](https://i.imgur.com/U1IzgjH.png)
 
