@@ -7,7 +7,7 @@ const expenseHelpers = {
   getTodayTotalExpenses: function (transactions: Transaction[]) {
     let todayTotalExpenses = 0
     let today = moment();
-    currentDaysTransactions(transactions);
+    transactions = currentDaysTransactions(transactions);
     transactions.map((transaction: Transaction) => {
       if (moment(transaction.transaction_time).isSame(today, 'day')) {
         todayTotalExpenses += transaction.amount;
@@ -18,8 +18,8 @@ const expenseHelpers = {
   getThisWeekTotalExpenses: function (transactions: Transaction[]) {
     let thisWeekTotalExpenses = 0;
     let today = moment();
-    let lastMonday = moment().startOf('isoWeek');
-    currentWeeksTransactions(transactions);
+    let lastMonday = moment().startOf('week');
+    transactions = currentWeeksTransactions(transactions);
     transactions.map((transaction: Transaction) => {
       if (today.diff(lastMonday, 'day') <= 7) {
         thisWeekTotalExpenses += transaction.amount;
@@ -29,7 +29,7 @@ const expenseHelpers = {
   },
   getThisMonthTotalExpenses: function (transactions: Transaction[]) {
     let thisMonthTotalExpenses = 0;
-    currentMonthsTransactions(transactions);
+    transactions = currentMonthsTransactions(transactions);
     const today = moment();
     const firstDayofMonth = moment().startOf('month');
     const daysInMonth = moment().daysInMonth()
