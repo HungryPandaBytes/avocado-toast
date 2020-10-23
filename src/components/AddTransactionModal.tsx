@@ -1,7 +1,8 @@
 import React, { useState, MouseEvent } from 'react';
 import {
-  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonToast
+  IonHeader, IonToolbar, IonButtons, IonDatetime, IonButton, IonPicker,IonIcon, IonChip, IonContent, IonLabel, IonSelect, IonItem, IonToggle, IonSelectOption, IonSegment, IonSegmentButton, IonToast
 } from '@ionic/react';
+import { PickerColumn } from "@ionic/core";
 import './AddTransactionModal.scss';
 import moment from 'moment'
 import { calendar } from 'ionicons/icons';
@@ -10,6 +11,7 @@ import { CategoryName } from '../models/CategoryName';
 import { Transaction } from '../models/Transaction';
 import { addNewTransactionToDB } from '../data/dataAPI'
 import { v4 as uuidv4 } from 'uuid';
+import CategoryPicker from './CategoryPicker';
 
 interface AddTransactionModalProps {
   onClose: any,
@@ -32,6 +34,8 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
 
   const [split, setSplit] = useState(false);
   const [transactionType, setTransactionType] = useState("Expense");
+
+  const [pickerIsOpen, setPickerIsOpen] = useState(false);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -101,12 +105,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
 
   }
 
-  const categorySelectOptions = Object.keys(CategoryName).map((categoryName) => {
-    if (isNaN(parseInt(categoryName))) {
-      return <IonSelectOption value={categoryName} key={categoryName}>{categoryName}</IonSelectOption>;
-    }
-  });
-
   return (
     <>
       <IonHeader translucent={true}>
@@ -127,16 +125,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
             > </IonDatetime>
           </IonChip>
         </IonToolbar>
-        {/* <IonSegment value={transactionType} onIonChange={e => {
-          setTransactionTypeHandler(e.detail.value!);
-        }}>
-          <IonSegmentButton value="Expense">
-            <IonLabel>Expense</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="Income">
-            <IonLabel>Income</IonLabel>
-          </IonSegmentButton>
-        </IonSegment> */}
 
       </IonHeader>
 
@@ -147,16 +135,6 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
               <h5>${parseInt(distributionAmt).toLocaleString(navigator.language, { minimumFractionDigits: 0 })}/day   </h5></div>}
           </div>
 
-          {/* {transactionType === 'Expense' && <div className='distribution-toggle'>
-            <IonItem lines="none">
-              <IonLabel slot="end" className="ion-text-end ion-no-margin ">Split</IonLabel>
-              <IonToggle slot="end" name="apple" color="primary" checked={split} onIonChange={e => {
-                e.preventDefault();
-                setSplit(e.detail.checked)
-                distributionHandler();
-              }} />
-            </IonItem>
-          </div>} */}
         </div>
 
         <div className='input-container'>
@@ -191,14 +169,21 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
                   > </IonDatetime>
                 </IonItem>
               </div>}
-
-            {transactionType === 'Expense' && <IonItem color="none" lines="none" class='category-picker-container'>
-              <IonLabel class="cateory-picker" position='fixed'>Category:</IonLabel>
-              <IonSelect class="cateory-picker" value={category} interface="popover" onIonChange={e => setCategory(e.detail.value)}>
-                {categorySelectOptions}
-              </IonSelect>
-            </IonItem>}
-
+                  
+              <IonButton onClick={() => { setPickerIsOpen(true); }} >
+              Category:&nbsp;&nbsp;{category}
+               </IonButton>
+              <CategoryPicker
+                isOpen={pickerIsOpen}
+                onCancel={() => {
+                  setPickerIsOpen(false);
+                }}
+                onSave={(_value: any) => {
+                  setCategory(_value.category.value)
+                  console.log(_value.category.value)
+                  setPickerIsOpen(false);
+                }}
+              />         
             {[1, 4, 7].map((i) => {
               return (
                 <div className='expense-typepad-container ' key={i}>
@@ -234,3 +219,4 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, setS
 
 
 export default AddTransactionModal;
+
